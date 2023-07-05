@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/propriete', function () {
+    return view('propriete');
+});
+
 Route::get('/profil', function () {
     return view('profil');
 });
