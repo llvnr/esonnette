@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/inscription', function () {
     return view('inscription');
+});
+
+Route::get('/connexion', function () {
+    return view('connexion');
+});
+
+Route::get('/', function () {
+    return view('dashboard');
 });
