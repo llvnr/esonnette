@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard - Votre sonnette virtuel connecté</title>
+    <title>Profil - Votre sonnette virtuel connecté</title>
     <link rel="stylesheet" href="{{ asset("css/style.css") }}">
     <link rel="stylesheet" href="{{ asset("css/responsive.css") }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -37,7 +37,7 @@
                 <div class="ContentHeader">
 
                     <div class="ContentHeader__colonneLeft">
-                        <div class="ContentHeader__colonneLeft-title">DASHBOARD</div>
+                        <div class="ContentHeader__colonneLeft-title">PROFIL</div>
                     </div>
                     <div class="ContentHeader__colonneRight">
 
@@ -51,7 +51,30 @@
                 </div>
 
             </div>
-            <div class="ShellDashboard__content-body">TEST DASHBOARD</div>
+            <div class="ShellDashboard__content-body">
+
+                <div class="ContentBody">
+
+                    <div class="ContentBody__colonneUn">
+
+                        <div class="ContentBody__colonneUn-label-username">Nom d'utilisateur *</div>
+                        <input type="text" class="ContentBody__colonneUn-input-username" placeholder="Nom d'utilisateur">
+    
+                        <button class="ContentBody__colonneUn-btnmdf">Modifier</button>
+
+                    </div>
+                    <div class="ContentBody__colonneDeux">
+    
+                        <div class="ContentBody__colonneDeux-label-email">Adresse email * <small class="ContentBody__colonneDeux-confirmation account-status-success">Non confirmé</small></div>
+                        <input type="email" class="ContentBody__colonneDeux-input-email" placeholder="Votre adresse email">
+    
+                        <button class="ContentBody__colonneDeux-btnmdf">Modifier</button>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
