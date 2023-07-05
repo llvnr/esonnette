@@ -28,12 +28,6 @@ html, body {
     margin-bottom: 1.2em;
 }
 
-.Shellogin__password {
-    height: 2.5em;
-    border: 2px solid #204646;
-    margin-bottom: 1.2em;
-}
-
 .Shellogin__btnlogin {
     height: 3em;
     /* background-color: #CEE8E8; */
@@ -67,25 +61,13 @@ html, body {
     color: #204646;
 }
 
-.Shellregister__name {
-    height: 2.5em;
-    border: 2px solid #204646;
-    margin-bottom: 1.2em;
-}
-
-.Shellregister__surname {
+.Shellregister__username {
     height: 2.5em;
     border: 2px solid #204646;
     margin-bottom: 1.2em;
 }
 
 .Shellregister__email {
-    height: 2.5em;
-    border: 2px solid #204646;
-    margin-bottom: 1.2em;
-}
-
-.Shellregister__password {
     height: 2.5em;
     border: 2px solid #204646;
     margin-bottom: 1.2em;

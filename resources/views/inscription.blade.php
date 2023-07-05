@@ -14,13 +14,9 @@
 
         <div class="Shellregister__title">ESONNETTE</div>
 
-        <input type="text" class="Shellregister__name" placeholder="Votre nom...">
-
-        <input type="text" class="Shellregister__surname" placeholder="Votre prénom...">
+        <input type="text" class="Shellregister__username" placeholder="Votre nom d'utilisateur...">
 
         <input type="email" class="Shellregister__email" placeholder="Votre adresse email...">
-
-        <input type="password" class="Shellregister__password" placeholder="Mot de passe...">
 
         <button class="Shellregister__btnregister">Inscription</button>
 

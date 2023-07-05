@@ -16,8 +16,6 @@
 
         <input type="email" class="Shellogin__email" placeholder="Votre adresse email...">
 
-        <input type="password" class="Shellogin__password" placeholder="Mot de passe...">
-
         <button class="Shellogin__btnlogin">Connexion</button>
 
     </div>
