@@ -56,14 +56,12 @@
                 <div class="ContentBodyADDPropriete">
 
                     <div class="ContentBodyADDPropriete__label-name">Nom du propriétaire</div>
-                    <input type="text" class="ContentBodyADDPropriete__label-name" placeholder="Nom du propriétaire">
+                    <input type="text" class="ContentBodyADDPropriete__input-name" placeholder="Nom du propriétaire">
 
                     <div class="ContentBodyADDPropriete__label-surname">Prénom du propriétaire</div>
-                    <input type="text" class="ContentBodyADDPropriete__label-surname" placeholder="Prénom du propriétaire">
+                    <input type="text" class="ContentBodyADDPropriete__input-surname" placeholder="Prénom du propriétaire">
 
-                    <hr>
-
-                    <div class="ContentBodyADDPropriete__label-type">Adresse de la propriété</div>
+                    <div class="ContentBodyADDPropriete__label-type">Type de propriété</div>
                     <select class="ContentBodyADDPropriete__select-type">
                         <option value="Maison">Maison</option>
                         <option value="Appartement">Appartement</option>
@@ -75,10 +73,10 @@
                     <div class="ContentBodyADDPropriete__label-codepostal">Code postal</div>
                     <input type="text" class="ContentBodyADDPropriete__input-codepostal" placeholder="Code postal">
 
-                    <div class="ContentBodyADDPropriete__label-codepostal">Ville</div>
-                    <input type="text" class="ContentBodyADDPropriete__input-codepostal" placeholder="Ville">
+                    <div class="ContentBodyADDPropriete__label-ville">Ville</div>
+                    <input type="text" class="ContentBodyADDPropriete__input-ville" placeholder="Ville">
 
-
+                    <button class="ContentBodyADDPropriete__btnadd">Créer</button>
 
 
                 </div>
