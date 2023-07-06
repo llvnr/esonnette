@@ -21,10 +21,10 @@
             <div class="ShellDashboard__sidebar-content">
                 
                 <ul class="SidebarContent__navigation">
-                    <li class="SidebarContent__navigation-element">Dashboard</li>
-                    <li class="SidebarContent__navigation-element">Mes propriétés</li>
-                    <li class="SidebarContent__navigation-element">Mes QRCodes</li>
-                    <li class="SidebarContent__navigation-element">Déconnexion</li>
+                    <a href="/" class="noDecor"><li class="SidebarContent__navigation-element">Dashboard</li></a>
+                    <a href="/propriete" class="noDecor"><li class="SidebarContent__navigation-element">Mes propriétés</li></a>
+                    <a href="/qrcode" class="noDecor"><li class="SidebarContent__navigation-element">Mes QRCodes</li></a>
+                    <a href="/" class="noDecor"><li class="SidebarContent__navigation-element">Déconnexion</li></a>
                 </ul>
 
             </div>
@@ -42,7 +42,7 @@
                     <div class="ContentHeader__colonneRight">
 
                         <ul class="ContentHeader__colonneRight-navigation">
-                            <li class="ContentHeader__colonneRight-navigation-element">Mon profil</li>
+                            <a href="/profil" class="noDecor"><li class="ContentHeader__colonneRight-navigation-element">Mon profil</li></a>
                             <li class="ContentHeader__colonneRight-navigation-element"><i class="bi bi-brightness-high-fill"></i></li>
                         </ul>
 
@@ -56,7 +56,7 @@
                 <div class="ContentBodyPropriete">
 
                     <div class="ContentBodyPropriete__colonneUn">
-                        <button class="ContentBodyPropriete__colonneUn-btnPropriete">Nouveau</button>
+                        <a href="/nouvelle-propriete" class="noDecor"><button class="ContentBodyPropriete__colonneUn-btnPropriete">Nouveau</button></a>
                     </div>
                     <div class="ContentBodyPropriete__colonneDeux">
                         

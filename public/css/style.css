@@ -130,6 +130,10 @@ html, body {
     padding: 0;
 }
 
+.noDecor {
+    text-decoration: none;
+}
+
 .SidebarContent__navigation-element {
     cursor: pointer;
     color: #204646;
