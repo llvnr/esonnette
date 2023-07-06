@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/qrcode', function () {
+    return view('qrcode');
+});
+
 Route::get('/propriete', function () {
     return view('propriete');
 });
