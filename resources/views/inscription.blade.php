@@ -12,7 +12,7 @@
     
     <div class="Shellregister">
 
-        <div class="Shellregister__title">ESONNETTE</div>
+        <div class="Shellregister__title">YAKK</div>
 
         <input type="text" class="Shellregister__username" placeholder="Votre nom d'utilisateur...">
 

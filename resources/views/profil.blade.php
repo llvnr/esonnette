@@ -16,7 +16,7 @@
         <div class="ShellDashboard__sidebar">
 
             <div class="ShellDashboard__sidebar-header">
-                <div class="ShellDashboard__sidebar-header-title">ESONNETTE</div>
+                <div class="ShellDashboard__sidebar-header-title">YAKK</div>
             </div>
             <div class="ShellDashboard__sidebar-content">
                 

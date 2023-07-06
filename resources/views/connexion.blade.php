@@ -12,7 +12,7 @@
     
     <div class="Shellogin">
 
-        <div class="Shellogin__title">ESONNETTE</div>
+        <div class="Shellogin__title">YAKK</div>
 
         <input type="email" class="Shellogin__email" placeholder="Votre adresse email...">
 
