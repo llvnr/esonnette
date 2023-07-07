@@ -449,6 +449,29 @@ html, body {
 
 /* PAGE ADD PROPRIETE */
 
+/* PAGE VOIR PROPRIETE */
+
+.ContentBodyVoirPropriete {
+    padding: 1em;
+}
+
+.ContentBodyVoirPropriete__content {
+    display: flex;
+    flex-direction: row;
+}
+
+.ContentBodyVoirPropriete__content-colonneUn {
+    flex: 1;
+    display: flex;
+}
+
+.ContentBodyVoirPropriete__content-colonneDeux {
+    flex: 1;
+}
+
+
+/* PAGE VOIR PROPRIETE */
+
 /* PAGE QRCODE */
 
 .ContentBodyQrcode {

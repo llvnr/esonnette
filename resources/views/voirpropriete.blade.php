@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mes propriétés - Votre sonnette virtuel connecté</title>
+    <title>Nouvelle propriété - Votre sonnette virtuel connecté</title>
     <link rel="stylesheet" href="{{ asset("css/style.css") }}">
     <link rel="stylesheet" href="{{ asset("css/responsive.css") }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -37,7 +37,7 @@
                 <div class="ContentHeader">
 
                     <div class="ContentHeader__colonneLeft">
-                        <div class="ContentHeader__colonneLeft-title">MES PROPRIETES</div>
+                        <div class="ContentHeader__colonneLeft-title">VOIR UNE PROPRIETE</div>
                     </div>
                     <div class="ContentHeader__colonneRight">
 
@@ -53,30 +53,37 @@
             </div>
             <div class="ShellDashboard__content-body">
 
-                <div class="ContentBodyPropriete">
+                <div class="ContentBodyVoirPropriete">
 
-                    <div class="ContentBodyPropriete__colonneUn">
-                        <a href="/nouvelle-propriete" class="noDecor"><button class="ContentBodyPropriete__colonneUn-btnPropriete">Nouveau</button></a>
+                    <div class="ContentBodyVoirPropriete__content">
+                        <div class="ContentBodyVoirPropriete__content-colonneUn">
+
+                            <div class="ContentColonneUn__label-image">
+                                <img src="https://img.icons8.com/?size=100&id=np6r5nc6uNNj&format=png" alt="">
+                            </div>
+                            <div>
+                                <div class="ContentColonneUn__label-fullname">Ludovic LEVENEUR</div>
+                                <div class="ContentColonneUn__label-adresse">56 bis chemin du ruisseau</div>
+                                <div class="ContentColonneUn__label-codepostal">97421</div>
+                                <div class="ContentColonneUn__label-ville">La rivière</div>
+                            </div>
+
+                        </div>
+                        <div class="ContentBodyVoirPropriete__content-colonneDeux">qsdqsd 2</div>
                     </div>
-                    <div class="ContentBodyPropriete__colonneDeux">
-                        
-                        @for ($i = 0; $i < 15; $i++)
-                            <a href="/voir-propriete" class="noDecor">
-                                <div class="cardPropriete">
 
-                                    <div class="cardPropriete__label-id">1</div>
-                                    <div class="cardPropriete__label-name">Ludovic</div>
-                                    <div class="cardPropriete__label-surname">LEVENEUR</div>
-                                    <div class="cardPropriete__label-adresse">56 Bis chemin du ruisseau</div>
-                                    <div class="cardPropriete__label-codepostal">97421</div>
-                                    <div class="cardPropriete__label-ville">LA RIVIERE</div>
-                                    <div class="cardPropriete__label-visite">3 Visite(s)</div>
 
-                                </div>
-                            </a>
-                        @endfor
-                        
-                    </div>
+                    {{-- <div class="ContentBodyADDPropriete__label-name">Nom du propriétaire</div>
+
+                    <div class="ContentBodyADDPropriete__label-surname">Prénom du propriétaire</div>
+
+                    <div class="ContentBodyADDPropriete__label-type">Type de propriété</div>
+                    
+                    <div class="ContentBodyADDPropriete__label-adresse">Adresse de la propriété</div>
+
+                    <div class="ContentBodyADDPropriete__label-codepostal">Code postal</div>
+
+                    <div class="ContentBodyADDPropriete__label-ville">Ville</div> --}}
 
                 </div>
 

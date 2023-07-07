@@ -17,6 +17,10 @@ Route::get('/qrcode', function () {
     return view('qrcode');
 });
 
+Route::get('/voir-propriete', function() {
+    return view("voirpropriete");
+});
+
 Route::get('/nouvelle-propriete', function() {
     return view("addpropriete");
 });
