@@ -61,7 +61,7 @@
                             <div class="ContentColonneUn__label-image">
                                 <img src="https://img.icons8.com/?size=100&id=np6r5nc6uNNj&format=png" alt="">
                             </div>
-                            <div>
+                            <div class="ContentColonneUn__label-content">
                                 <div class="ContentColonneUn__label-fullname">Ludovic LEVENEUR</div>
                                 <div class="ContentColonneUn__label-adresse">56 bis chemin du ruisseau</div>
                                 <div class="ContentColonneUn__label-codepostal">97421</div>
@@ -69,7 +69,14 @@
                             </div>
 
                         </div>
-                        <div class="ContentBodyVoirPropriete__content-colonneDeux">qsdqsd 2</div>
+                        <div class="ContentBodyVoirPropriete__content-colonneDeux">
+
+                            <div class="ContentColonneDeux__label-visite-total"><b>3</b> Visite(s) totale(s)</div>
+                            <div class="ContentColonneDeux__label-visite-manquer"><b>2</b> Visite(s) manqué</div>
+                            <button class="ContentColonneDeux__btn-enableqr">Activer le QrCode</button>
+                            <button class="ContentColonneDeux__btn-disableqr">Désactiver le QrCode</button>
+
+                        </div>
                     </div>
 
 

@@ -348,13 +348,61 @@ html, body {
     margin-bottom: 0.5em;
     display: flex;
     flex-direction: row;
-    gap: 9.5%;
+    gap: 8%;
     cursor: pointer;
     color:#204646;
 }
 
 .cardPropriete:hover {
     background-color: #CEE8E8;
+}
+
+.cardPropriete__label-id {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardPropriete__label-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;     
+}
+
+.cardPropriete__label-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+.cardPropriete__label-surname {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardPropriete__label-adresse {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardPropriete__label-codepostal {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardPropriete__label-ville {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardPropriete__label-visite {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
 }
 
 /* PAGE MES PROPRIETES */
@@ -467,8 +515,16 @@ html, body {
 
 .ContentBodyVoirPropriete__content-colonneDeux {
     flex: 1;
+    padding: 2.5em;
 }
 
+.ContentColonneUn__label-content {
+    padding: 1.5em;
+}
+
+.ContentColonneUn__label-fullname {
+    padding-bottom: 0.5em;
+}
 
 /* PAGE VOIR PROPRIETE */
 

@@ -65,6 +65,7 @@
                                 <div class="cardPropriete">
 
                                     <div class="cardPropriete__label-id">1</div>
+                                    <div class="cardPropriete__label-image"><img src="https://img.icons8.com/?size=40&id=13019&format=png" alt=""></div>
                                     <div class="cardPropriete__label-name">Ludovic</div>
                                     <div class="cardPropriete__label-surname">LEVENEUR</div>
                                     <div class="cardPropriete__label-adresse">56 Bis chemin du ruisseau</div>
