@@ -23,7 +23,6 @@
                 <ul class="SidebarContent__navigation">
                     <a href="/" class="noDecor"><li class="SidebarContent__navigation-element">Dashboard</li></a>
                     <a href="/propriete" class="noDecor"><li class="SidebarContent__navigation-element">Mes propriétés</li></a>
-                    <a href="/qrcode" class="noDecor"><li class="SidebarContent__navigation-element">Mes QRCodes</li></a>
                     <a href="/" class="noDecor"><li class="SidebarContent__navigation-element">Déconnexion</li></a>
                 </ul>
 
