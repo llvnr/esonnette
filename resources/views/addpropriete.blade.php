@@ -16,7 +16,7 @@
         <div class="ShellDashboard__sidebar">
 
             <div class="ShellDashboard__sidebar-header">
-                <div class="ShellDashboard__sidebar-header-title">YAKK</div>
+                <img src="{{ asset("assets/images/logo.png") }}" width="150" class="ShellDashboard__sidebar-header-title" />
             </div>
             <div class="ShellDashboard__sidebar-content">
                 
