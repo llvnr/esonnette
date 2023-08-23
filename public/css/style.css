@@ -202,6 +202,37 @@ html, body {
     background-color: #F2F8FE;
 }
 
+.ContentBody__row {
+    display: grid;
+    /* define the number of grid columns */
+    grid-template-columns: repeat(auto-fill, 24.5%);
+    padding: 0.5em;
+    gap: 0.5em;
+}
+
+.ContentBody__row-card {
+    background-color: white;
+    border: 2px solid #E5E9F0;
+    min-height: 150px;
+    height: auto;
+    max-height: 250px;
+    padding: 0.5em;
+}
+
+.ContentBody__row-card-counter {
+    font-size: 3em;
+}
+
+.ContentBody__row-card-title {
+    font-size: 2em;
+}
+
+.ContentBody__row-card-infos {
+    margin-top: 1em;
+    text-align: justify;
+    margin-right: 3em;
+}
+
 /* PAGE DASHBOARD */
 
 /* PAGE PROFIL */
