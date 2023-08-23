@@ -12,7 +12,9 @@
     
     <div class="Shellogin">
 
-        <div class="Shellogin__title">YAKK</div>
+        <div style="text-align: center;">
+            <img src="{{ asset("assets/images/logo_color.png") }}" width="350" class="Shellogin__title" />
+        </div>
 
         <input type="email" class="Shellogin__email" placeholder="Votre adresse email...">
 

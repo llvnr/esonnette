@@ -12,7 +12,9 @@
     
     <div class="Shellregister">
 
-        <div class="Shellregister__title">YAKK</div>
+        <div style="text-align: center;">
+            <img src="{{ asset("assets/images/logo_color.png") }}" width="350" class="Shellregister__title" />
+        </div>
 
         <input type="text" class="Shellregister__username" placeholder="Votre nom d'utilisateur...">
 
