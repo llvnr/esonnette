@@ -1,23 +1,7 @@
 <template>
     <div class="ShellDashboard">
 
-        <div class="ShellDashboard__sidebar">
-
-            <div class="ShellDashboard__sidebar-header">
-                <img src="assets/images/logo.png" width="150" class="ShellDashboard__sidebar-header-title" />
-            </div>
-            <div class="ShellDashboard__sidebar-content">
-                
-                <ul class="SidebarContent__navigation">
-                    <a href="/" class="noDecor"><li class="SidebarContent__navigation-element">Dashboard</li></a>
-                    <a href="/propriete" class="noDecor"><li class="SidebarContent__navigation-element">Mes propriétés</li></a>
-                    <a href="/parametres" class="noDecor"><li class="SidebarContent__navigation-element">Paramètres</li></a>
-                    <a href="/" class="noDecor"><li class="SidebarContent__navigation-element">Déconnexion</li></a>
-                </ul>
-
-            </div>
-
-        </div>
+        <Sidebar />
 
         <Dashboard />
         <!-- <Propriete /> -->
@@ -35,6 +19,8 @@ import Propriete from "./views/Propriete.vue";
 import Profil from "./views/Profil.vue";
 import VoirPropriete from "./views/Voirpropriete.vue";
 import AddPropriete from "./views/Addpropriete.vue";
+
+import Sidebar from "./components/Sidebar.vue";
 
 import { onMounted } from 'vue';
 
