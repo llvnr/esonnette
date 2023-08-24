@@ -19,11 +19,11 @@
 
         </div>
 
-        <!-- <Dashboard /> -->
+        <Dashboard />
         <!-- <Propriete /> -->
         <!-- <Profil /> -->
         <!-- <VoirPropriete /> -->
-        <AddPropriete />
+        <!-- <AddPropriete /> -->
 
     </div>
 
