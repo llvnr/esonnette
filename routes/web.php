@@ -13,34 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/voir-propriete', function() {
-    return view("voirpropriete");
-});
+// Route::get('/inscription', function () {
+//     return view('inscription');
+// });
 
-Route::get('/nouvelle-propriete', function() {
-    return view("addpropriete");
-});
+// Route::get('/connexion', function () {
+//     return view('connexion');
+// });
 
-Route::get('/propriete', function () {
-    return view('propriete');
-});
-
-Route::get('/profil', function () {
-    return view('profil');
-});
-
-Route::get('/inscription', function () {
-    return view('inscription');
-});
-
-Route::get('/connexion', function () {
-    return view('connexion');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-
-Route::get('/', function() {
+Route::get('/{any}', function() {
     return view('welcome');
-});
+})->where('any', '.*');

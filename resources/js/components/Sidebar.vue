@@ -8,10 +8,10 @@
         <div class="ShellDashboard__sidebar-content">
             
             <ul class="SidebarContent__navigation">
-                <a href="/" class="noDecor"><li class="SidebarContent__navigation-element">Dashboard</li></a>
-                <a href="/propriete" class="noDecor"><li class="SidebarContent__navigation-element">Mes propriétés</li></a>
-                <a href="/parametres" class="noDecor"><li class="SidebarContent__navigation-element">Paramètres</li></a>
-                <a href="/" class="noDecor"><li class="SidebarContent__navigation-element">Déconnexion</li></a>
+                <router-link to="/" class="noDecor"><li class="SidebarContent__navigation-element">Dashboard</li></router-link>
+                <router-link to="/propriete" class="noDecor"><li class="SidebarContent__navigation-element">Mes propriétés</li></router-link>
+                <router-link to="/parametres" class="noDecor"><li class="SidebarContent__navigation-element">Paramètres</li></router-link>
+                <router-link to="/" class="noDecor"><li class="SidebarContent__navigation-element">Déconnexion</li></router-link>
             </ul>
 
         </div>

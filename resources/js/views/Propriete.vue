@@ -12,11 +12,11 @@
             <div class="ContentBodyPropriete">
 
                 <div class="ContentBodyPropriete__colonneUn">
-                    <a href="/nouvelle-propriete" class="noDecor"><button class="ContentBodyPropriete__colonneUn-btnPropriete">Nouveau</button></a>
+                    <router-link to="/addpropriete" class="noDecor"><button class="ContentBodyPropriete__colonneUn-btnPropriete">Nouveau</button></router-link>
                 </div>
                 <div class="ContentBodyPropriete__colonneDeux">
                     
-                    <a href="/voir-propriete" class="noDecor">
+                    <router-link to="/voir-propriete" class="noDecor">
                         <div class="cardPropriete">
 
                             <div class="cardPropriete__label-id">1</div>
@@ -29,7 +29,7 @@
                             <div class="cardPropriete__label-visite">3 Visite(s)</div>
 
                         </div>
-                    </a>
+                    </router-link>
                     
                 </div>
 
