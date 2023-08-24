@@ -37,6 +37,10 @@ Route::get('/connexion', function () {
     return view('connexion');
 });
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('dashboard');
+});
+
+Route::get('/', function() {
+    return view('welcome');
 });
