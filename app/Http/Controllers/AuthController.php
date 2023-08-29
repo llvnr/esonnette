@@ -60,13 +60,16 @@ class AuthController extends Controller
      */
     public function login(Request $request){
     	$validator = Validator::make($request->all(), [
-            'email' => 'required|email'
+            'email' => 'required|email',
+            'code' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)
+        ->where('code', $request->code)
+        ->first();
 
         if (!$user) {
             return response()->json(['error' => 'User not found'], 404);
@@ -74,12 +77,12 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        // if (! $token = auth()->attempt($validator->validated())) {
-        //     return response()->json(['error' => 'Unauthorized'], 401);
-        // }
-
         // Authentifiez l'utilisateur manuellement
         Auth::login($user);
+
+        $resetCode = $user->update([
+            "code" => null
+        ]);
 
         return $this->createNewToken($token);
     }
