@@ -4,7 +4,7 @@
 
         <div class="ShellDashboard__content-header">
 
-            <Header title="Mes propriétés" :isLogging="true" />
+            <Header title="Mes propriétés" />
 
         </div>
         <div class="ShellDashboard__content-body">

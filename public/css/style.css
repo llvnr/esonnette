@@ -20,6 +20,11 @@ html, body {
     text-align: center;
 }
 
+.Shellogin__form {
+    display: flex;
+    flex-direction: column;
+}
+
 .Shellogin__title {
     font-size: 3.5em;
     text-align: center;

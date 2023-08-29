@@ -10,7 +10,7 @@
                 <router-link to="/"  class="noDecor"><li class="SidebarContent__navigation-element">Dashboard</li></router-link>
                 <router-link to="/propriete" class="noDecor"><li class="SidebarContent__navigation-element">Mes propriétés</li></router-link>
                 <router-link to="/qrcodeditor" class="noDecor"><li class="SidebarContent__navigation-element">Editeur QRCode</li></router-link>
-                <router-link to="/" class="noDecor"><li class="SidebarContent__navigation-element">Déconnexion</li></router-link>
+                <li class="SidebarContent__navigation-element noDecor" @click="Logout">Déconnexion</li>
             </ul>
             <ul v-else class="SidebarContent__navigation">
                 <router-link to="/connexion"  class="noDecor"><li class="SidebarContent__navigation-element">Connexion</li></router-link>
@@ -23,9 +23,80 @@
 
 </template>
 
-<script setup>
-const props = defineProps(['isLogging'])
-// Déclaration des variables data réactives
-// const isLogging = ref(false)
+<script>
+export default {
+    data() {
+        return {
+            isLogging: false
+        }
+    },
+    mounted() {
+        this.checkIsLogging()
+    },
+    methods: {
+        checkIsLogging() {
+
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/user-profile', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                console.log(data)
+                if(data == undefined){
+                    this.isLogging = false
+                } else {
+                    this.isLogging = true
+                }
+
+            })
+            .catch(error => console.log(error));
+
+        },
+        Logout() {
+
+            let token = localStorage.getItem("token");
+
+            fetch('/api/auth/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                
+                localStorage.removeItem("token")
+                localStorage.removeItem("email")
+
+                // this.$router.push('/connexion')
+                window.location.assign('/connexion');
+                
+            })
+            .catch(error => console.log(error));
+
+        }
+    }
+};
 
 </script>
