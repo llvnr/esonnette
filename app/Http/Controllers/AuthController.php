@@ -14,8 +14,45 @@ class AuthController extends Controller
      * @return void
      */
     public function __construct() {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['CAAGC', 'login', 'register']]);
     }
+
+    /**
+     * Generate confirm account code. (CAAGC = CheckAccountAndGenerateCode)
+     *
+     * @return \Illuminate\Http\JsonResponse
+    */
+    public function CAAGC(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $checkUser = User::where('email', $request->email)->first();
+        if (!$checkUser) {
+            return response()->json(['error' => 'User not found'], 404);
+        } else {
+            $generateCode = rand(100000, 999999);
+
+            $updateUser = $checkUser->update([
+                "code" => $generateCode
+            ]);
+
+            // NE PAS OUBLIER L'ENVOIE DE MAIL PLUS TARD
+
+            return response()->json([
+                "status" => true,
+                "message" => "L'utilisateur existe et un code d'authentification a été générer.",
+                "code" => $generateCode
+            ], 201);
+
+        }
+
+    }
+
     /**
      * Get a JWT via given credentials.
      *
