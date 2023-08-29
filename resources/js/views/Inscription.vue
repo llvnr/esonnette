@@ -4,7 +4,7 @@
 
         <div class="ShellDashboard__content-header">
 
-            <Header title="Inscription" />
+            <Header title="Inscription" :isLogging="false" />
 
         </div>
         <div class="ShellDashboard__content-body">

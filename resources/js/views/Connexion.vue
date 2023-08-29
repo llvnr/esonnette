@@ -4,7 +4,7 @@
 
         <div class="ShellDashboard__content-header">
 
-            <Header title="Connexion" />
+            <Header title="Connexion" :isLogging="false" />
 
         </div>
         <div class="ShellDashboard__content-body">

@@ -4,7 +4,7 @@
 
         <div class="ShellDashboard__content-header">
 
-            <Header title="Code de confirmation" />
+            <Header title="Code de confirmation" :isLogging="false" />
 
         </div>
         <div class="ShellDashboard__content-body">

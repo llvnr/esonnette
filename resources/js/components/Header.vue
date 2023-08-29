@@ -22,11 +22,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 
-const props = defineProps(['title'])
-
-// Déclaration des variables data réactives
-const isLogging = ref(false)
+const props = defineProps(['title', 'isLogging'])
 
 </script>
