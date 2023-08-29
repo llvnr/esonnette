@@ -9,15 +9,15 @@
         </div>
         <div class="ShellDashboard__content-body">
 
-            <div class="Shellogin">
+            <div class="ShellCode">
 
-                <div class="Shellogin__image">
-                    <img src="assets/images/logo_color.png" width="350" class="Shellogin__title" />
+                <div class="ShellCode__image">
+                    <img src="assets/images/logo_color.png" width="350" class="ShellCode__title" />
                 </div>
 
-                <input type="number" step="1" class="Shellogin__email" placeholder="Votre code de confirmation...">
+                <input type="number" step="1" class="ShellCode__email" placeholder="Votre code de confirmation...">
 
-                <button class="Shellogin__btnlogin">Connexion</button>
+                <button class="ShellCode__btnlogin">Connexion</button>
 
             </div>
 

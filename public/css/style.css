@@ -48,6 +48,48 @@ html, body {
 
 /* PAGE LOGIN */
 
+/* PAGE CODE */
+
+.ShellCode {
+    display: flex;
+    flex-direction: column;
+    margin: 12em;
+    padding-left: 25em;
+    padding-right: 25em;
+}
+
+.ShellCode__image {
+    text-align: center;
+}
+
+.ShellCode__title {
+    font-size: 3.5em;
+    text-align: center;
+    margin-bottom: 0.5em;
+    color: #204646;
+}
+
+.ShellCode__email {
+    height: 2.5em;
+    border: 2px solid black;
+    margin-bottom: 1.2em;
+}
+
+.ShellCode__btnlogin {
+    height: 2.5em;
+    font-size: 1.3em;
+    background-color: #3056D3;
+    border: 2px solid #3056D3;
+    color: white;
+    cursor: pointer;
+}
+
+.ShellCode__btnlogin:hover {
+    background-color: #3056D3;
+}
+
+/* PAGE CODE */
+
 /* PAGE INSCRIPTION */
 
 .Shellregister {
