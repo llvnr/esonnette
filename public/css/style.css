@@ -11,15 +11,19 @@ html, body {
 .Shellogin {
     display: flex;
     flex-direction: column;
-    margin: 16em;
+    margin: 12em;
     padding-left: 25em;
     padding-right: 25em;
+}
+
+.Shellogin__image {
+    text-align: center;
 }
 
 .Shellogin__title {
     font-size: 3.5em;
     text-align: center;
-    margin-bottom: 1.2em;
+    margin-bottom: 0.5em;
     color: #204646;
 }
 
@@ -30,16 +34,16 @@ html, body {
 }
 
 .Shellogin__btnlogin {
-    height: 3em;
+    height: 2.5em;
     font-size: 1.3em;
-    background-color: #F3F9FF;
-    border: 2px solid #F3F9FF;
-    color: #204646;
+    background-color: #3056D3;
+    border: 2px solid #3056D3;
+    color: white;
     cursor: pointer;
 }
 
 .Shellogin__btnlogin:hover {
-    background-color: #F3F9FF;
+    background-color: #3056D3;
 }
 
 /* PAGE LOGIN */

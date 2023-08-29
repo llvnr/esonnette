@@ -4,6 +4,7 @@ import Propriete from "./views/Propriete.vue";
 import Profil from "./views/Profil.vue";
 import VoirPropriete from "./views/Voirpropriete.vue";
 import AddPropriete from "./views/Addpropriete.vue";
+import Connexion from "./views/Connexion.vue";
 
 const routes = [
     {
@@ -30,6 +31,11 @@ const routes = [
         path: '/addpropriete',
         name: 'AddPropriete',
         component: AddPropriete
+    },
+    {
+        path: '/connexion',
+        name: 'Connexion',
+        component: Connexion
     }
 ];
 
