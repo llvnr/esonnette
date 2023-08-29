@@ -10,7 +10,9 @@
             <ul class="SidebarContent__navigation">
                 <router-link to="/" class="noDecor"><li class="SidebarContent__navigation-element">Dashboard</li></router-link>
                 <router-link to="/propriete" class="noDecor"><li class="SidebarContent__navigation-element">Mes propriétés</li></router-link>
-                <router-link to="/parametres" class="noDecor"><li class="SidebarContent__navigation-element">Paramètres</li></router-link>
+                <router-link to="/qrcodeditor" class="noDecor"><li class="SidebarContent__navigation-element">Editeur QRCode</li></router-link>
+                <router-link to="/connexion" class="noDecor"><li class="SidebarContent__navigation-element">Connexion</li></router-link>
+                <router-link to="/inscription" class="noDecor"><li class="SidebarContent__navigation-element">Inscription</li></router-link>
                 <router-link to="/" class="noDecor"><li class="SidebarContent__navigation-element">Déconnexion</li></router-link>
             </ul>
 
