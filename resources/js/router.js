@@ -5,6 +5,7 @@ import Profil from "./views/Profil.vue";
 import VoirPropriete from "./views/Voirpropriete.vue";
 import AddPropriete from "./views/Addpropriete.vue";
 import Connexion from "./views/Connexion.vue";
+import Inscription from "./views/Inscription.vue";
 
 const routes = [
     {
@@ -36,6 +37,11 @@ const routes = [
         path: '/connexion',
         name: 'Connexion',
         component: Connexion
+    },
+    {
+        path: '/inscription',
+        name: 'inscription',
+        component: Inscription
     }
 ];
 
