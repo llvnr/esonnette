@@ -540,16 +540,76 @@ html, body {
 .ContentBodyVoirPropriete__content {
     display: flex;
     flex-direction: row;
+    gap: 1em;
 }
 
 .ContentBodyVoirPropriete__content-colonneUn {
     flex: 1;
+}
+
+.ContentColonneUn__Card {
     display: flex;
+    background-color: white;
+}
+
+.ContentColonneUn__label-image {
+    padding-top: 0.5em;
+    padding-left: 1em;
+}
+
+.ContentColonneUn__btn-enableqr {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    width: 100%;
+    padding: 0.5em;
+    cursor: pointer;
+    background-color: #204646;
+    border: 1px solid #204646;
+    color: white;
 }
 
 .ContentBodyVoirPropriete__content-colonneDeux {
     flex: 1;
-    padding: 2.5em;
+}
+
+.ContentColonneDeux__Card {
+    display: flex;
+    background-color: white;
+}
+
+.ContentColonneDeux__label-image {
+    padding-left: 1.2em;
+    padding-top: 1.5em;
+}
+
+.ContentColonneDeux__label-content {
+    padding-top: 3em;
+    padding-left: 2.5em;
+}
+
+.ContentColonneDeux__label-etat-qrcode {
+    padding: 0.5em;
+}
+
+.state-activate {
+    background-color: #204646;
+    color: white;
+}
+
+.state-desactivate {
+    background-color: red;
+    color: white;
+}
+
+.ContentColonneDeux__btn-disableqr {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    width: 100%;
+    padding: 0.5em;
+    cursor: pointer;
+    background-color: red;
+    border: 1px solid red;
+    color: white;
 }
 
 .ContentColonneUn__label-content {
@@ -558,6 +618,71 @@ html, body {
 
 .ContentColonneUn__label-fullname {
     padding-bottom: 0.5em;
+}
+
+.ContentBodyDataVisite {
+    padding-top: 1em;
+    min-height: 65vh;
+    max-height: 65vh;
+    overflow-y: auto;
+}
+
+.cardVisite {
+    background-color: white;
+    border: 2px solid #E5E9F0;
+    padding: 1.5em;
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: row;
+    gap: 8%;
+    cursor: pointer;
+    color:black;
+}
+
+.cardVisite:hover {
+    background-color: #F3F9FF;
+}
+
+.cardVisite__label-id {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardVisite__label-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;     
+}
+
+.cardVisite__label-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+.cardVisite__label-heure {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardVisite__label-name {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardVisite__label-type {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardVisite__label-status {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
 }
 
 /* PAGE VOIR PROPRIETE */
