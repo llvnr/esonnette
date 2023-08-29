@@ -248,11 +248,17 @@ html, body {
 
 .ContentBody__colonneUn {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 5em;
+    padding: 2.5em;
     border-right: 2px solid #F3F9FF;
     /* background-color: #204646; */
+}
+
+.ContentBody__colonneUn-card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 1.5em;
+    margin-bottom: 1.5em;
 }
 
 .ContentBody__colonneUn-label-username {
@@ -278,18 +284,39 @@ html, body {
     margin-bottom: 1.2em; 
 }
 
+.ContentBody__colonneUn-label-email {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    color: #204646;
+}
+
+.ContentBody__colonneUn-input-email {
+    height: 2.5em;
+    border: 2px solid #204646;
+    margin-bottom: 1.2em; 
+}
+
 .ContentBody__colonneUn-btnmdf {
     height: 3em;
     /* background-color: #F3F9FF; */
     font-size: 1.3em;
-    background-color: #EEF7F7;
-    border: 2px solid #F3F9FF;
-    color: #204646;
+    background-color: #3056D3;
+    border: 2px solid #3056D3;
+    color: white;
     cursor: pointer;
 }
 
 .ContentBody__colonneUn-btnmdf:hover {
-    background-color: #F3F9FF;
+    background-color: #3056D3;
+}
+
+.ContentBody__colonneUn-btndelete {
+    background-color: red;
+    border: 1px solid red;
+    padding: 1.5em;
+    font-size: 1em;
+    color: white;
+    cursor: pointer;
 }
 
 .ContentBody__colonneDeux {
@@ -297,32 +324,6 @@ html, body {
     display: flex;
     flex-direction: column;
     padding: 5em;
-}
-
-.ContentBody__colonneDeux-label-email {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    color: #204646;
-}
-
-.ContentBody__colonneDeux-input-email {
-    height: 2.5em;
-    border: 2px solid #204646;
-    margin-bottom: 1.2em; 
-}
-
-.ContentBody__colonneDeux-btnmdf {
-    height: 3em;
-    /* background-color: #F3F9FF; */
-    font-size: 1.3em;
-    background-color: #EEF7F7;
-    border: 2px solid #F3F9FF;
-    color: #204646;
-    cursor: pointer;
-}
-
-.ContentBody__colonneDeux-btnmdf:hover {
-    background-color: #F3F9FF;
 }
 
 .ContentBody__colonneDeux-confirmation {
@@ -337,7 +338,7 @@ html, body {
 
 .account-status-success {
     border-radius: 15px;
-    background-color: #204646;
+    background-color: #3056D3;
     color: white;
 }
 
