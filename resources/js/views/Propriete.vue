@@ -4,7 +4,7 @@
 
         <div class="ShellDashboard__content-header">
 
-            <Header />
+            <Header title="Mes propriétés" />
 
         </div>
         <div class="ShellDashboard__content-body">
