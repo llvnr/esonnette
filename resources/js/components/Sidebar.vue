@@ -6,7 +6,6 @@
             <img src="assets/images/logo.png" width="150" class="ShellDashboard__sidebar-header-title" />
         </div>
         <div class="ShellDashboard__sidebar-content">
-            
             <ul v-if="isLogging" class="SidebarContent__navigation">
                 <router-link to="/"  class="noDecor"><li class="SidebarContent__navigation-element">Dashboard</li></router-link>
                 <router-link to="/propriete" class="noDecor"><li class="SidebarContent__navigation-element">Mes propriétés</li></router-link>
@@ -25,9 +24,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
+const props = defineProps(['isLogging'])
 // Déclaration des variables data réactives
-const isLogging = ref(false)
+// const isLogging = ref(false)
 
 </script>
