@@ -23,6 +23,7 @@
 
 <script>
 export default {
+    props: ['title'],
     data() {
         return {
             isLogging: false
