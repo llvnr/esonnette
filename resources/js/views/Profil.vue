@@ -32,6 +32,9 @@
                 <div class="ContentBody__colonneDeux">
 
                     <div class="ContentBody__colonneDeux-card">
+
+                        <button v-if="accountConfirmed === null" class="ContentBody__colonneUn-btnconfirmed" @click="sendMailConfirmation" >Renvoyer l'email de confirmation</button>
+
                         <button class="ContentBody__colonneUn-btndelete">Supprimer mon compte</button>
                     </div>
 
@@ -60,7 +63,9 @@ export default {
         this.getProfile()
     },
     methods: {
-
+        sendMailConfirmation() {
+            alert("L'email de confirmation a bien été renvoyer.")
+        },          
         getProfile() {
             const token = localStorage.getItem('token');
 

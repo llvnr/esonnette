@@ -365,6 +365,16 @@ html, body {
     background-color: #3056D3;
 }
 
+.ContentBody__colonneUn-btnconfirmed {
+    background-color: #3056D3;
+    border: 1px solid #3056D3;
+    padding: 1.5em;
+    font-size: 1em;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 0.5em;
+}
+
 .ContentBody__colonneUn-btndelete {
     background-color: red;
     border: 1px solid red;
