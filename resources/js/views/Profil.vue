@@ -28,14 +28,12 @@
 
                     </div>
 
-                    <div class="ContentBody__colonneUn-card">
-                        <button class="ContentBody__colonneUn-btndelete">Supprimer mon compte</button>
-                    </div>
-
                 </div>
                 <div class="ContentBody__colonneDeux">
 
-
+                    <div class="ContentBody__colonneDeux-card">
+                        <button class="ContentBody__colonneUn-btndelete">Supprimer mon compte</button>
+                    </div>
 
                 </div>
 
