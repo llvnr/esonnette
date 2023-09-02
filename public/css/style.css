@@ -316,6 +316,11 @@ html, body {
     margin-bottom: 1.5em;
 }
 
+.UpdateAccountForm {
+    display: flex;
+    flex-direction: column;
+}
+
 .ContentBody__colonneUn-label-username {
     margin-bottom: 0.5em;
     color: #204646;

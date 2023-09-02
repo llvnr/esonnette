@@ -15,16 +15,21 @@
 
                     <div class="ContentBody__colonneUn-card">
 
-                        <div class="ContentBody__colonneUn-label-username">Nom d'utilisateur *</div>
-                        <input type="text" class="ContentBody__colonneUn-input-username" v-model="username" placeholder="Nom d'utilisateur">
+                        <form class="UpdateAccountForm" @submit.prevent="updateAccount">
 
-                        <div class="ContentBody__colonneUn-label-email">Adresse email * 
-                            <small v-if="accountConfirmed === null" class="ContentBody__colonneDeux-confirmation account-status-danger">Non confirmé</small>
-                            <small v-else class="ContentBody__colonneDeux-confirmation account-status-success">Confirmé</small>
-                        </div>
-                        <input type="email" class="ContentBody__colonneUn-input-email" v-model="email" placeholder="Votre adresse email">
+                            <input type="hidden" v-model="id" /> 
 
-                        <button class="ContentBody__colonneUn-btnmdf">Modifier</button>
+                            <div class="ContentBody__colonneUn-label-username">Nom d'utilisateur *</div>
+                            <input type="text" class="ContentBody__colonneUn-input-username" v-model="username" placeholder="Nom d'utilisateur">
+
+                            <div class="ContentBody__colonneUn-label-email">Adresse email * 
+                                <small v-if="accountConfirmed === null" class="ContentBody__colonneDeux-confirmation account-status-danger">Non confirmé</small>
+                                <small v-else class="ContentBody__colonneDeux-confirmation account-status-success">Confirmé</small>
+                            </div>
+                            <input type="email" class="ContentBody__colonneUn-input-email" v-model="email" placeholder="Votre adresse email">
+
+                            <button class="ContentBody__colonneUn-btnmdf">Modifier</button>
+                        </form>
 
                     </div>
 
@@ -54,6 +59,7 @@ export default {
 
     data() {
         return {
+            id: null,
             username: null,
             email: null,
             accountConfirmed: null
@@ -63,6 +69,49 @@ export default {
         this.getProfile()
     },
     methods: {
+        updateAccount(){
+            let id = this.id
+            let username = this.username 
+            let email = this.email 
+
+            if(username.length == 0) return alert('Le champ [Nom d\'utilisateur] est obligatoire.')
+            if(email.length == 0) return alert('Le champ [Email] est obligatoire.')
+
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    id: id,
+                    username: username,
+                    email: email
+                })
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                console.log(data)
+                if(data.status){
+                    this.username = data.data.username
+                    this.email = data.data.email
+                    this.accountConfirmed = data.data.email_verified_at
+                    alert(data.message)
+                } else {
+                    alert(data.message)
+                }
+            })
+            .catch(error => console.log(error));
+        },  
         sendMailConfirmation() {
             alert("L'email de confirmation a bien été renvoyer.")
         },          
@@ -87,6 +136,7 @@ export default {
             .then(data => {
                 console.log(data)
                 if(data !== undefined){
+                    this.id = data.id
                     this.username = data.username
                     this.email = data.email
                     this.accountConfirmed = data.email_verified_at
