@@ -3,6 +3,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GeneralController;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,10 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
+
+    // Gestion Dashboard
+    Route::post('/getDashboard', [GeneralController::class, 'Index']);
+    // Gestion Dashboard
 
     // Gestion Profil 
     Route::post('/update', [UserController::class, 'UpdateProfil']);
