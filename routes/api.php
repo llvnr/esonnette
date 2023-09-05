@@ -1,10 +1,13 @@
 <?php
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\ProprieteController;
 use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +27,10 @@ Route::group([
     // Gestion Dashboard
     Route::post('/getDashboard', [GeneralController::class, 'Index']);
     // Gestion Dashboard
+
+    // Gestion Propriete
+    Route::post('/createPropriete', [ProprieteController::class, 'testQrcode']);
+    // Gestion Propriete
 
     // Gestion Profil 
     Route::post('/update', [UserController::class, 'UpdateProfil']);
