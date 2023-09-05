@@ -19,10 +19,18 @@
                 </div>
 
                 <div class="ContentBody__row-card">
-                    <div class="ContentBody__row-card-counter">10</div>
-                    <div class="ContentBody__row-card-title">Utilisateurs</div>
+                    <div class="ContentBody__row-card-counter">{{ utilisateur }}</div>
+                    <div class="ContentBody__row-card-title">Utilisateur(s)</div>
                     <div class="ContentBody__row-card-infos">
-                        Comptabilise le nombre d'utilisateurs qui gère cette instance.
+                        Comptabilise le nombre d'utilisateurs qui sont dans cette instance.
+                    </div>
+                </div>
+
+                <div class="ContentBody__row-card">
+                    <div class="ContentBody__row-card-counter">{{ role }}</div>
+                    <div class="ContentBody__row-card-title">Rôle(s)</div>
+                    <div class="ContentBody__row-card-infos">
+                        Comptabilise le nombre de rôle qui sont dans cette instance.
                     </div>
                 </div>
 
@@ -82,8 +90,54 @@
 
 </template>
 
-<script setup>
+<script>
 
-import Header from "../components/Header.vue";
+import Header from '../components/Header.vue';
+
+export default {
+    data(){
+        return {
+            utilisateur: null,
+            role: null
+        }
+    },
+    mounted() {
+        this.initDashboard()
+    },
+    methods: {
+        initDashboard() {
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/getDashboard', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                console.log(data)
+                if(data !== undefined){
+                    if(data.status){
+                        this.utilisateur = data.data.utilisateur
+                        this.role = data.data.role
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+        }
+    },
+    components: { Header }
+}
 
 </script>
