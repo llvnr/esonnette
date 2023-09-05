@@ -74,7 +74,44 @@ export default {
             if(codepostal.length == 0) return alert('Le champ [CODE POSTAL] est obligatoire.')
             if(ville.length == 0) return alert('Le champ [VILLE] est obligatoire.')
 
-            alert('AJOUT PROPRIETE')
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/createPropriete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    nom: nom,
+                    prenom: prenom,
+                    typepropriete: typepropriete,
+                    adresse: adresse,
+                    codepostal: codepostal,
+                    ville: ville
+                })
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        console.log(data)
+                        alert(data.message)
+                        this.$router.push('/propriete')
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+ 
         }
     },
     components: { Header }

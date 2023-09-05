@@ -597,14 +597,14 @@ html, body {
     height: 2.5em;
     /* background-color: #F3F9FF; */
     font-size: 1.3em;
-    background-color: #EEF7F7;
-    border: 2px solid #F3F9FF;
-    color: #204646;
+    background-color: #3056D3;
+    border: 2px solid #3056D3;
+    color: white;
     cursor: pointer;
 }
 
 .ContentBodyADDPropriete__btnadd:hover {
-    background-color: #F3F9FF;
+    background-color: #3056D3;
 }
 
 /* PAGE ADD PROPRIETE */
