@@ -28,7 +28,7 @@ const routes = [
         meta: { requiresAuth: true } // Marquer la route comme nécessitant une authentification
     },
     {
-        path: '/voir-propriete',
+        path: '/voir-propriete/:id',
         name: 'VoirPropriete',
         component: VoirPropriete,
         meta: { requiresAuth: true } // Marquer la route comme nécessitant une authentification

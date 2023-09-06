@@ -16,7 +16,7 @@
                 </div>
                 <div class="ContentBodyPropriete__colonneDeux">
                     
-                    <router-link to="/voir-propriete" v-for="(item, index) in proprietes" class="cardPropriete noDecor">
+                    <router-link :to="'/voir-propriete/' + item.id" v-for="(item, index) in proprietes" class="cardPropriete noDecor">
 
                         <div class="cardPropriete__label-id">{{ item.id }}</div>
                         <div class="cardPropriete__label-image"><img :src="item.qrcode" /></div>
