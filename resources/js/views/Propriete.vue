@@ -25,7 +25,7 @@
                         <div class="cardPropriete__label-adresse">{{ item.adresse }}</div>
                         <div class="cardPropriete__label-codepostal">{{ item.codepostal }}</div>
                         <div class="cardPropriete__label-ville">{{ item.ville }}</div>
-                        <div class="cardPropriete__label-visite">3 Visite(s)</div>
+                        <div class="cardPropriete__label-visite">0 Visite(s)</div>
 
                     </router-link>
                     
