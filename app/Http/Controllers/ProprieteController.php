@@ -22,7 +22,7 @@ class ProprieteController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function testQrcode(Request $request) {
+    public function create(Request $request) {
 
         try {
             //code...

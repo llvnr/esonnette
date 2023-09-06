@@ -29,7 +29,7 @@ Route::group([
     // Gestion Dashboard
 
     // Gestion Propriete
-    Route::post('/createPropriete', [ProprieteController::class, 'testQrcode']);
+    Route::post('/createPropriete', [ProprieteController::class, 'create']);
     // Gestion Propriete
 
     // Gestion Profil 
