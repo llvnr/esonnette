@@ -16,19 +16,17 @@
                 </div>
                 <div class="ContentBodyPropriete__colonneDeux">
                     
-                    <router-link to="/voir-propriete" class="noDecor">
-                        <div v-for="(item, index) in proprietes" class="cardPropriete">
+                    <router-link to="/voir-propriete" v-for="(item, index) in proprietes" class="cardPropriete noDecor">
 
-                            <div class="cardPropriete__label-id">{{ item.id }}</div>
-                            <div class="cardPropriete__label-image"><img :src="item.qrcode" /></div>
-                            <div class="cardPropriete__label-name">{{ item.nom }}</div>
-                            <div class="cardPropriete__label-surname">{{ item.prenom }}</div>
-                            <div class="cardPropriete__label-adresse">{{ item.adresse }}</div>
-                            <div class="cardPropriete__label-codepostal">{{ item.codepostal }}</div>
-                            <div class="cardPropriete__label-ville">{{ item.ville }}</div>
-                            <div class="cardPropriete__label-visite">3 Visite(s)</div>
+                        <div class="cardPropriete__label-id">{{ item.id }}</div>
+                        <div class="cardPropriete__label-image"><img :src="item.qrcode" /></div>
+                        <div class="cardPropriete__label-name">{{ item.nom }}</div>
+                        <div class="cardPropriete__label-surname">{{ item.prenom }}</div>
+                        <div class="cardPropriete__label-adresse">{{ item.adresse }}</div>
+                        <div class="cardPropriete__label-codepostal">{{ item.codepostal }}</div>
+                        <div class="cardPropriete__label-ville">{{ item.ville }}</div>
+                        <div class="cardPropriete__label-visite">3 Visite(s)</div>
 
-                        </div>
                     </router-link>
                     
                 </div>
