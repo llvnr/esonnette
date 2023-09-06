@@ -14,10 +14,38 @@ class ProprieteController extends Controller
     //
 
     /**
+     * Get All Propriete
+     *
+     * @return void
+    */
+
+    public function index(Request $request) {
+
+        try {
+            //code...
+
+            $all = Propriete::all();
+
+            return response()->json([
+                "status" => true,
+                "result" => $all
+            ]);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                "status" => false,
+                "message" => $th->getMessage()
+            ], 500);
+        }
+
+    }
+
+    /**
      * Create a new AuthController instance.
      *
      * @return void
-     */
+    */
     public function __construct() {
         $this->middleware('auth:api');
     }
