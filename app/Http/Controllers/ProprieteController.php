@@ -108,7 +108,7 @@ class ProprieteController extends Controller
                 } else {
 
                     $addPropriete = Propriete::create([
-                        "qrcode" => $qrCode,
+                        "qrcode" => "data:image/png;base64,".$qrCode,
                         "nom" => $nom,
                         "prenom" => $prenom,
                         "typepropriete" => $typepropriete,

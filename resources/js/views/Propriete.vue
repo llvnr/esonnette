@@ -17,15 +17,15 @@
                 <div class="ContentBodyPropriete__colonneDeux">
                     
                     <router-link to="/voir-propriete" class="noDecor">
-                        <div class="cardPropriete">
+                        <div v-for="(item, index) in proprietes" class="cardPropriete">
 
-                            <div class="cardPropriete__label-id">1</div>
-                            <div class="cardPropriete__label-image"><img src="https://img.icons8.com/?size=40&id=13019&format=png" alt=""></div>
-                            <div class="cardPropriete__label-name">Ludovic</div>
-                            <div class="cardPropriete__label-surname">LEVENEUR</div>
-                            <div class="cardPropriete__label-adresse">56 Bis chemin du ruisseau</div>
-                            <div class="cardPropriete__label-codepostal">97421</div>
-                            <div class="cardPropriete__label-ville">LA RIVIERE</div>
+                            <div class="cardPropriete__label-id">{{ item.id }}</div>
+                            <div class="cardPropriete__label-image"><img :src="item.qrcode" /></div>
+                            <div class="cardPropriete__label-name">{{ item.nom }}</div>
+                            <div class="cardPropriete__label-surname">{{ item.prenom }}</div>
+                            <div class="cardPropriete__label-adresse">{{ item.adresse }}</div>
+                            <div class="cardPropriete__label-codepostal">{{ item.codepostal }}</div>
+                            <div class="cardPropriete__label-ville">{{ item.ville }}</div>
                             <div class="cardPropriete__label-visite">3 Visite(s)</div>
 
                         </div>
@@ -41,8 +41,54 @@
 
 </template>
 
-<script setup>
+<script>
 
-import Header from "../components/Header.vue";
+import Header from '../components/Header.vue';
+
+export default {
+    data() {
+        return {
+            proprietes: null
+        }
+    },
+    mounted() {
+        this.getPropriete()
+    },
+    methods: {
+        getPropriete() {
+            
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/allPropriete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        // console.log(data)
+                        this.proprietes = data.result
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+
+        }
+    },  
+    components: { Header }
+}
 
 </script>

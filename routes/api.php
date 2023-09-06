@@ -29,6 +29,7 @@ Route::group([
     // Gestion Dashboard
 
     // Gestion Propriete
+    Route::post('/allPropriete', [ProprieteController::class, 'index']);
     Route::post('/createPropriete', [ProprieteController::class, 'create']);
     // Gestion Propriete
 
