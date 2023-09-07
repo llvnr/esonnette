@@ -14,6 +14,15 @@ class ProprieteController extends Controller
     //
 
     /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+    */
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
+
+    /**
      * Get All Propriete
      *
      * @return void
@@ -39,15 +48,6 @@ class ProprieteController extends Controller
             ], 500);
         }
 
-    }
-
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-    */
-    public function __construct() {
-        $this->middleware('auth:api');
     }
 
     public function create(Request $request) {
@@ -129,6 +129,44 @@ class ProprieteController extends Controller
             ]);
 
         } catch (\Throwable $th) {
+            return response()->json([
+                "status" => false,
+                "message" => $th->getMessage()
+            ], 500);
+        }
+
+    }
+
+    /**
+     * Show One By ID
+     *
+     * @return void
+    */
+
+    public function show(Request $request){
+
+        try {
+            //code...
+
+            $validator = Validator::make($request->all(), [
+                'id' => 'required'
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
+            $id = $request->id;
+
+            $getPropriete = Propriete::find($id);
+
+            return response()->json([
+                "status" => true,
+                "result" => $getPropriete
+            ]);
+
+        } catch (\Throwable $th) {
+            //throw $th;
             return response()->json([
                 "status" => false,
                 "message" => $th->getMessage()
