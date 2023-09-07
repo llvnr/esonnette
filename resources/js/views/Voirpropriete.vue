@@ -27,8 +27,8 @@
                             </div>
                         </div>
 
-                        <button v-if="infoPropriete.status" class="ContentColonneUn__btn-disableqr">Désactiver le QrCode</button>
-                        <button v-else class="ContentColonneUn__btn-enableqr">Activer le QrCode</button>
+                        <button v-if="infoPropriete.status" class="ContentColonneUn__btn-disableqr" @click="changeStateQrcode(0)">Désactiver le QrCode</button>
+                        <button v-else class="ContentColonneUn__btn-enableqr" @click="changeStateQrcode(1)">Activer le QrCode</button>
 
                     </div>
                     <div class="ContentBodyVoirPropriete__content-colonneDeux">
@@ -94,6 +94,44 @@ export default {
         this.getOnePropriete()
     },
     methods: {
+        changeStateQrcode(state) {
+ 
+            let etat = state
+            let idPropriete = this.$route.params.id
+
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/updatePropriete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    id: idPropriete,
+                    status: etat
+                })
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        this.infoPropriete = data.result
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+
+        },
         getOnePropriete() {
 
             let idPropriete = this.$route.params.id

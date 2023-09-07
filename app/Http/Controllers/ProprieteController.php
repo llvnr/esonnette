@@ -175,4 +175,60 @@ class ProprieteController extends Controller
 
     }
 
+    /**
+     * Update One By ID
+     *
+     * @return void
+    */
+
+    public function update(Request $request){
+
+        try {
+            //code...
+
+            $validator = Validator::make($request->all(), [
+                'id' => 'required'
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
+            $id = $request->id;
+
+            $propriete = Propriete::find($id);
+            
+            $nom = $request->nom !== null ? $request->nom : $propriete->nom;
+            $prenom = $request->prenom !== null ? $request->prenom : $propriete->prenom;
+            $adresse = $request->adresse !== null ? $request->adresse : $propriete->adresse;
+            $codepostal = $request->codepostal !== null ? $request->codepostal : $propriete->codepostal;
+            $ville = $request->ville !== null ? $request->ville : $propriete->ville;
+            $status = $request->status !== null ? $request->status : $propriete->status;
+
+            $updatePropriete = $propriete->update([
+                "nom" => $nom,
+                "prenom" => $prenom,
+                "adresse" => $adresse,
+                "codepostal" => $codepostal,
+                "ville" => $ville,
+                "status" => $status
+            ]);
+
+            $propriete = Propriete::find($id);
+
+            return response()->json([
+                "status" => true,
+                "result" => $propriete
+            ]);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                "status" => false,
+                "message" => $th->getMessage()
+            ], 500);
+        }
+
+    }
+
 }
