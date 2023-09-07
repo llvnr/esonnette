@@ -8,6 +8,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Propriete;
 
 class GeneralController extends Controller
 {
@@ -35,12 +36,14 @@ class GeneralController extends Controller
 
             $utilisateur = User::count();
             $role = Role::count();
+            $propriete = Propriete::count();
 
             return response()->json([
                 "status" => true,
                 "data" => [
                     "utilisateur" => $utilisateur,
-                    "role" => $role
+                    "role" => $role,
+                    "propriete" => $propriete
                 ]
             ]);
 

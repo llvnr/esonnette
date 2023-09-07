@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="ContentBody__row-card">
-                    <div class="ContentBody__row-card-counter">5</div>
+                    <div class="ContentBody__row-card-counter">{{ propriete }}</div>
                     <div class="ContentBody__row-card-title">Propriétés</div>
                     <div class="ContentBody__row-card-infos">
                         Comptabilise le nombre de propriétés associé à cette instance.
@@ -98,7 +98,8 @@ export default {
     data(){
         return {
             utilisateur: null,
-            role: null
+            role: null,
+            propriete: null
         }
     },
     mounted() {
@@ -129,6 +130,7 @@ export default {
                     if(data.status){
                         this.utilisateur = data.data.utilisateur
                         this.role = data.data.role
+                        this.propriete = data.data.propriete
                     } else {
                         alert(data.message)
                     }
