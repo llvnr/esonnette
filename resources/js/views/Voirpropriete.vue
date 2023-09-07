@@ -50,8 +50,9 @@
 
                         </div>
 
-                        <button class="ContentColonneDeux__btn-alerte">Gérer les alertes</button>
-
+                        <router-link :to="'/alerte/show/one/' + getID">
+                            <button class="ContentColonneDeux__btn-alerte">Gérer les alertes</button>
+                        </router-link>
 
                     </div>
                 </div>
@@ -87,10 +88,12 @@ import Header from '../components/Header.vue';
 export default {
     data() {
         return {
-            infoPropriete: {}
+            infoPropriete: {},
+            getID: null
         }
     },
     mounted() {
+        this.getID = this.$route.params.id
         this.getOnePropriete()
     },
     methods: {

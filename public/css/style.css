@@ -776,3 +776,115 @@ html, body {
 }
 
 /* PAGE VOIR PROPRIETE */
+
+/* PAGE GESTION DES ALERTES */
+
+.ContentBodyAlerte {
+    height: calc(100% - 2em);
+}
+
+.ContentBodyAlerte__colonneUn {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    padding: 0.5em;
+}
+
+.ContentBodyAlerte__colonneUn-cUn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.ContentBodyAlerte__colonneUn-btnBack {
+    margin-left: 0.5em; 
+    padding: 0.5em;
+    font-size: 1.2em;
+    background-color: #3056D3;
+    border: 1px solid #3056D3;
+    color: white;
+    cursor: pointer;
+}
+
+.ContentBodyAlerte__colonneUn-cDeux {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.ContentBodyAlerte__select-type {
+    padding: 0.9em;
+}
+
+.ContentBodyAlerte__colonneUn-btn {
+    margin-right: 0.5em; 
+    padding: 0.5em;
+    font-size: 1.2em;
+    background-color: #3056D3;
+    border: 1px solid #3056D3;
+    color: white;
+    cursor: pointer;
+}
+
+.ContentBodyAlerte__colonneDeux {
+    flex: 10;
+    padding: 1em;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.cardAlerte {
+    background-color: white;
+    border: 2px solid #E5E9F0;
+    padding: 1.5em;
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: row;
+    gap: 15%;
+    cursor: pointer;
+    color:black;
+}
+
+.cardAlerte:hover {
+    background-color: #F3F9FF;
+}
+
+.cardAlerte__label-id {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardAlerte__label-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardAlerte__label-type {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardAlerte__label-informations {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardAlerte__label-etat {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.cardAlerte__label-action {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+/* PAGE GESTION DES ALERTES */
