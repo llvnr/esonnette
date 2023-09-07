@@ -70,7 +70,7 @@ class ProprieteController extends Controller
 
             $appURL = env('APP_URL');
 
-            $qrCode = base64_encode(QrCode::format('png')->generate($appURL));
+            $qrCode = base64_encode(QrCode::format('png')->size(500)->generate($appURL));
             $nom = $request->nom;
             $prenom = $request->prenom;
             $typepropriete = $request->typepropriete;

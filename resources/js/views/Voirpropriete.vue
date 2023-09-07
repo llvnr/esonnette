@@ -16,17 +16,19 @@
 
                         <div class="ContentColonneUn__Card">
                             <div class="ContentColonneUn__label-image">
-                                <img src="https://img.icons8.com/?size=100&id=np6r5nc6uNNj&format=png" alt="">
+                                <img v-if="infoPropriete.typepropriete === 'Maison'" src="https://img.icons8.com/?size=100&id=np6r5nc6uNNj&format=png" alt="">
+                                <img v-else-if="infoPropriete.typepropriete === 'Appartement'" src="https://img.icons8.com/?size=100&id=FrBSkVzw5GE_&format=png" />
                             </div>
                             <div class="ContentColonneUn__label-content">
-                                <div class="ContentColonneUn__label-fullname">Ludovic LEVENEUR</div>
-                                <div class="ContentColonneUn__label-adresse">56 bis chemin du ruisseau</div>
-                                <div class="ContentColonneUn__label-codepostal">97421</div>
-                                <div class="ContentColonneUn__label-ville">La rivière</div>
+                                <div class="ContentColonneUn__label-fullname">{{ infoPropriete.prenom + ' ' + infoPropriete.nom }}</div>
+                                <div class="ContentColonneUn__label-adresse">{{ infoPropriete.adresse }}</div>
+                                <div class="ContentColonneUn__label-codepostal">{{ infoPropriete.codepostal  }}</div>
+                                <div class="ContentColonneUn__label-ville">{{ infoPropriete.ville }}</div>
                             </div>
                         </div>
 
-                        <button class="ContentColonneUn__btn-enableqr">Activer le QrCode</button>
+                        <button v-if="infoPropriete.status" class="ContentColonneUn__btn-disableqr">Désactiver le QrCode</button>
+                        <button v-else class="ContentColonneUn__btn-enableqr">Activer le QrCode</button>
 
                     </div>
                     <div class="ContentBodyVoirPropriete__content-colonneDeux">
@@ -34,18 +36,22 @@
                         <div class="ContentColonneDeux__Card">
 
                             <div class="ContentColonneDeux__label-image">
-                                <img src="https://img.icons8.com/?size=100&id=13019&format=png" alt="">
+                                <img :src="infoPropriete.qrcode" width="100" alt="">
                             </div>
                             <div class="ContentColonneDeux__label-content">
-                                <div class="ContentColonneDeux__label-visite-total"><b>3</b> Visite(s) totale(s)</div>
-                                <div class="ContentColonneDeux__label-visite-manquer"><b>2</b> Visite(s) manqué</div>
-                                <div class="ContentColonneDeux__label-qrcode">Etat du QRCODE : <span class="ContentColonneDeux__label-etat-qrcode state-activate">Activé</span></div> 
+                                <div class="ContentColonneDeux__label-visite-total"><b>0</b> Visite(s) totale(s)</div>
+                                <div class="ContentColonneDeux__label-visite-manquer"><b>0</b> Visite(s) manqué</div>
+                                <div class="ContentColonneDeux__label-qrcode">Etat du QRCODE : 
+                                    <span v-if="infoPropriete.status" class="ContentColonneDeux__label-etat-qrcode state-activate">Activé</span>
+                                    <span v-else class="ContentColonneDeux__label-etat-qrcode state-desactivate">Désactivé</span>
+                                </div> 
                                 
                             </div>
 
                         </div>
 
-                        <button class="ContentColonneDeux__btn-disableqr">Désactiver le QrCode</button>
+                        <button class="ContentColonneDeux__btn-alerte">Gérer les alertes</button>
+
 
                     </div>
                 </div>
@@ -74,8 +80,59 @@
 
 </template>
 
-<script setup>
+<script>
 
-import Header from "../components/Header.vue";
+import Header from '../components/Header.vue';
+
+export default {
+    data() {
+        return {
+            infoPropriete: {}
+        }
+    },
+    mounted() {
+        this.getOnePropriete()
+    },
+    methods: {
+        getOnePropriete() {
+
+            let idPropriete = this.$route.params.id
+
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/showPropriete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    id: idPropriete
+                })
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        this.infoPropriete = data.result
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+
+        }
+    },
+    components: { Header }
+
+}
 
 </script>

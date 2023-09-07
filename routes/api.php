@@ -31,6 +31,7 @@ Route::group([
     // Gestion Propriete
     Route::post('/allPropriete', [ProprieteController::class, 'index']);
     Route::post('/createPropriete', [ProprieteController::class, 'create']);
+    Route::post('/showPropriete', [ProprieteController::class, 'show']);
     // Gestion Propriete
 
     // Gestion Profil 

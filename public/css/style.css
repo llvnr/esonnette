@@ -635,8 +635,12 @@ html, body {
     padding-left: 1em;
 }
 
+.ContentBodyVoirPropriete__content-colonneDeux {
+    flex: 1;
+}
+
 .ContentColonneUn__btn-enableqr {
-    margin-top: 0.5em;
+    margin-top: 1em;
     margin-bottom: 0.5em;
     width: 100%;
     padding: 0.5em;
@@ -646,8 +650,15 @@ html, body {
     color: white;
 }
 
-.ContentBodyVoirPropriete__content-colonneDeux {
-    flex: 1;
+.ContentColonneUn__btn-disableqr {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    width: 100%;
+    padding: 0.5em;
+    cursor: pointer;
+    background-color: red;
+    border: 1px solid red;
+    color: white;
 }
 
 .ContentColonneDeux__Card {
@@ -657,11 +668,12 @@ html, body {
 
 .ContentColonneDeux__label-image {
     padding-left: 1.2em;
-    padding-top: 1.5em;
+    padding-top: 1em;
+    padding-bottom: 0.5em;
 }
 
 .ContentColonneDeux__label-content {
-    padding-top: 3em;
+    padding-top: 2.5em;
     padding-left: 2.5em;
 }
 
@@ -679,23 +691,23 @@ html, body {
     color: white;
 }
 
-.ContentColonneDeux__btn-disableqr {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    width: 100%;
-    padding: 0.5em;
-    cursor: pointer;
-    background-color: red;
-    border: 1px solid red;
-    color: white;
-}
-
 .ContentColonneUn__label-content {
     padding: 1.5em;
 }
 
 .ContentColonneUn__label-fullname {
     padding-bottom: 0.5em;
+}
+
+.ContentColonneDeux__btn-alerte {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    width: 100%;
+    padding: 0.5em;
+    cursor: pointer;
+    background-color: #3056D3;
+    border: 1px solid #3056D3;
+    color: white;
 }
 
 .ContentBodyDataVisite {
