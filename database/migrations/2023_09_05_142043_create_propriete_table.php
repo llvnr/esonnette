@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string("adresse");
             $table->integer("codepostal");
             $table->string("ville");
+            $table->boolean('status');
             $table->timestamps();
         });
 

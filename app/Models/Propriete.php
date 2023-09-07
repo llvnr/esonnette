@@ -18,7 +18,8 @@ class Propriete extends Model
         "typepropriete",
         "adresse",
         "codepostal",
-        "ville"
+        "ville",
+        "status"
     ];
 
 }
