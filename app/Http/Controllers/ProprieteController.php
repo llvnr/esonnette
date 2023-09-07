@@ -114,7 +114,8 @@ class ProprieteController extends Controller
                         "typepropriete" => $typepropriete,
                         "adresse" => $adresse,
                         "codepostal" => $codepostal,
-                        "ville" => $ville
+                        "ville" => $ville,
+                        "status" => true
                     ]);
 
                 }
