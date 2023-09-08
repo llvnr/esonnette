@@ -22,6 +22,47 @@ class AlerteController extends Controller
     }
 
     /**
+     * Get All By ID
+     *
+     * @return void
+    */
+
+    public function index(Request $Request) {
+
+
+        try {
+            //code...
+
+            $validator = Validator::make($request->all(), [
+                'id' => 'required'
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+    
+            $id = $request->id;
+    
+            $alerte = Alerte::where('propriete_id', $id)->get();
+    
+            return response()->json([
+                "status" => true,
+                "result" => $alerte
+            ]);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+
+            return response()->json([
+                "status" => false,
+                "message" => $th->getMessage()
+            ], 500);
+
+        }
+
+    }
+
+    /**
      * Create Alerte
      *
      * @return void
