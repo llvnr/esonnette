@@ -51,8 +51,8 @@ class AlerteController extends Controller
             if($checkAlerte){
                 return response()->json([
                     "status" => false,
-                    "message" => "Une alerte [".$type."] existe déjà.";
-                ], 500);
+                    "message" => "Une alerte [".$type."] existe déjà."
+                ]);
             } else {
 
                 $create = Alerte::create([

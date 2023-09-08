@@ -68,7 +68,47 @@ export default {
             this.$router.go(-1)
         },
         createAlertEmail() {
-            alert('Create alerte email ! ID : ' + this.getID)
+
+            let id = this.getID
+            let email = this.email
+            let type = this.typeAlert
+
+            if(email.length == 0) return alert('Le champ [EMAIL] est obligatoire.')
+
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/createAlerte', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    id: id,
+                    type: type,
+                    data: email
+                })
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        alert("L'alerte email a bien été créer.")
+                        this.$router.go(-1)
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+
         }
     },
     components: { Header  }
