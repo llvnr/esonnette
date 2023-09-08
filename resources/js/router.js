@@ -8,6 +8,7 @@ import Connexion from "./views/Connexion.vue";
 import Inscription from "./views/Inscription.vue";
 import Code from "./views/Code.vue";
 import Alerte from "./views/Alerte.vue";
+import AddAlerte from "./views/AddAlerte.vue";
 
 const routes = [
     {
@@ -39,6 +40,12 @@ const routes = [
         name: 'Alerte',
         component: Alerte,
         meta: { requiresAuth: true } // Marquer la route comme nécessitant une authentification
+    },
+    {
+        path: '/alerte/add/:type',
+        name: 'AddAlerte',
+        component: AddAlerte,
+        meta: { requiresAuth: true }
     },
     {
         path: '/addpropriete',

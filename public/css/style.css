@@ -888,3 +888,52 @@ html, body {
 }
 
 /* PAGE GESTION DES ALERTES */
+
+/* PAGE AJOUT ALERTE */
+
+.ContentBodyADDAlertEmail {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+}
+
+.ContentBodyADDAlertEmail__label-email {
+    margin-bottom: 0.5em;
+    color: #204646;
+}
+
+.ContentBodyADDAlertEmail__input-email {
+    height: 2.5em;
+    border: 2px solid #204646;
+    margin-bottom: 1.5em;
+}
+
+.ContentBodyADDAlertEmail__btnAddEmail {
+    height: 2.5em;
+    /* background-color: #F3F9FF; */
+    font-size: 1.3em;
+    background-color: #3056D3;
+    border: 2px solid #3056D3;
+    color: white;
+    cursor: pointer;
+}
+
+.ContentBodyADDAlertEmail__btnAddEmail:hover {
+    background-color: #3056D3;
+}
+
+.ContentBodyADDAlertEmail__btnGoBack {
+    height: 2.5em;
+    /* background-color: #F3F9FF; */
+    font-size: 1.3em;
+    background-color: #3056D3;
+    border: 2px solid #3056D3;
+    color: white;
+    cursor: pointer;
+    margin-top: 0.5em;
+}
+
+.ContentBodyADDAlertEmail__btnGoBack:hover {
+    background-color: #3056D3;
+}
+/* PAGE AJOUT ALERTE */

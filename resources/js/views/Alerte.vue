@@ -16,12 +16,12 @@
                     </div>
                     <div class="ContentBodyAlerte__colonneUn-cDeux">
                         <select class="ContentBodyAlerte__select-type" v-model="typeAlerte">
-                            <option value="Email">Email</option>
-                            <option value="Discord">Discord</option>
-                            <option value="SMS">SMS (Indisponible)</option>
-                            <option value="Slack">Slack (Indisponible)</option>
+                            <option value="email">Email</option>
+                            <option value="discord">Discord</option>
+                            <option value="sms">SMS (Indisponible)</option>
+                            <option value="slack">Slack (Indisponible)</option>
                         </select>
-                        <button class="ContentBodyAlerte__colonneUn-btn">Nouveau</button>
+                        <button class="ContentBodyAlerte__colonneUn-btn" @click="goAddAlert">Nouveau</button>
                     </div>
                 </div>
                 <div class="ContentBodyAlerte__colonneDeux">
@@ -65,12 +65,20 @@ export default {
     data() {
         return {
             getID: null,
-            typeAlerte: "Email"
+            typeAlerte: "email"
         }
     },
     methods: {
         goBack() {
             this.$router.go(-1)
+        },
+        goAddAlert() {
+            let typeAlert = this.typeAlerte
+            if(typeAlert === "sms" || typeAlert === "slack"){
+                alert('INDISPONIBLE POUR LE MOMENT.')
+            } else {
+                this.$router.push('/alerte/add/' + typeAlert)
+            }
         }
     },
     mounted() {
