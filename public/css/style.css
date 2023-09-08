@@ -936,4 +936,51 @@ html, body {
 .ContentBodyADDAlertEmail__btnGoBack:hover {
     background-color: #3056D3;
 }
+
+.ContentBodyADDAlertDiscord {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+}
+
+.ContentBodyADDAlertDiscord__label-discord {
+    margin-bottom: 0.5em;
+    color: #204646;
+}
+
+.ContentBodyADDAlertDiscord__input-discord {
+    height: 2.5em;
+    border: 2px solid #204646;
+    margin-bottom: 1.5em;
+}
+
+.ContentBodyADDAlertDiscord__btnAddDiscord {
+    height: 2.5em;
+    /* background-color: #F3F9FF; */
+    font-size: 1.3em;
+    background-color: #3056D3;
+    border: 2px solid #3056D3;
+    color: white;
+    cursor: pointer;
+}
+
+.ContentBodyADDAlertDiscord__btnAddDiscord:hover {
+    background-color: #3056D3;
+}
+
+.ContentBodyADDAlertDiscord__btnGoBack {
+    height: 2.5em;
+    /* background-color: #F3F9FF; */
+    font-size: 1.3em;
+    background-color: #3056D3;
+    border: 2px solid #3056D3;
+    color: white;
+    cursor: pointer;
+    margin-top: 0.5em;
+}
+
+.ContentBodyADDAlertDiscord__btnGoBack:hover {
+    background-color: #3056D3;
+}
+
 /* PAGE AJOUT ALERTE */

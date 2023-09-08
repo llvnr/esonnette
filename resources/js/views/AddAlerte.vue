@@ -23,7 +23,17 @@
 
             </div>
             <div v-else-if="typeAlert === 'discord'">
-                DISCORD 
+
+                <div class="ContentBodyADDAlertDiscord">
+
+                    <div class="ContentBodyADDAlertDiscord__label-discord">Webhook discord</div>
+                    <input type="text" class="ContentBodyADDAlertDiscord__input-discord" v-model="discord" placeholder="Webhook discord">
+
+                    <button class="ContentBodyADDAlertDiscord__btnAddDiscord">Créer</button>
+                    <button class="ContentBodyADDAlertDiscord__btnGoBack" @click="this.goBack">Retour</button>
+
+                </div>
+
             </div>
             <div v-else-if="typeAlert === 'sms'">
                 SMS 
