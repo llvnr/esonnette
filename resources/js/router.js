@@ -42,7 +42,7 @@ const routes = [
         meta: { requiresAuth: true } // Marquer la route comme nécessitant une authentification
     },
     {
-        path: '/alerte/add/:type',
+        path: '/alerte/add/:type/:id',
         name: 'AddAlerte',
         component: AddAlerte,
         meta: { requiresAuth: true }

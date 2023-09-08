@@ -16,7 +16,7 @@
                     <div class="ContentBodyADDAlertEmail__label-email">Adresse email</div>
                     <input type="email" class="ContentBodyADDAlertEmail__input-email" v-model="email" placeholder="Adresse email de destination">
 
-                    <button class="ContentBodyADDAlertEmail__btnAddEmail">Créer</button>
+                    <button class="ContentBodyADDAlertEmail__btnAddEmail" @click="this.createAlertEmail">Créer</button>
                     <button class="ContentBodyADDAlertEmail__btnGoBack" @click="this.goBack">Retour</button>
 
                 </div>
@@ -54,17 +54,22 @@ import Header from '../components/Header.vue';
 export default {
     data() {
         return {
+            getID: null,
             typeAlert: null,
             email: ''
         }
     },
+    mounted() {
+        this.getID = this.$route.params.id
+        this.typeAlert = this.$route.params.type
+    },
     methods: {
         goBack() {
             this.$router.go(-1)
+        },
+        createAlertEmail() {
+            alert('Create alerte email ! ID : ' + this.getID)
         }
-    },
-    mounted() {
-        this.typeAlert = this.$route.params.type
     },
     components: { Header  }
 }

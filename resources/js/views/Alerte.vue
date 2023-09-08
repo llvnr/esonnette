@@ -77,7 +77,7 @@ export default {
             if(typeAlert === "sms" || typeAlert === "slack"){
                 alert('INDISPONIBLE POUR LE MOMENT.')
             } else {
-                this.$router.push('/alerte/add/' + typeAlert)
+                this.$router.push('/alerte/add/' + typeAlert + '/' + this.getID)
             }
         }
     },

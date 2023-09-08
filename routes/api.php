@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ProprieteController;
+use App\Http\Controllers\AlerteController;
 use App\Models\User;
 
 /*
@@ -34,6 +35,10 @@ Route::group([
     Route::post('/showPropriete', [ProprieteController::class, 'show']);
     Route::post('/updatePropriete', [ProprieteController::class, 'update']);
     // Gestion Propriete
+
+    // Gestion alerte
+    Route::post('/createAlerte', [AlerteController::class, 'create']);
+    // Gestion alerte
 
     // Gestion Profil 
     Route::post('/update', [UserController::class, 'UpdateProfil']);
