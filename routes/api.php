@@ -37,6 +37,7 @@ Route::group([
     // Gestion Propriete
 
     // Gestion alerte
+    Route::post('/getAlerte', [AlerteController::class, 'index']);
     Route::post('/createAlerte', [AlerteController::class, 'create']);
     // Gestion alerte
 

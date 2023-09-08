@@ -26,24 +26,16 @@
                 </div>
                 <div class="ContentBodyAlerte__colonneDeux">
                     
-                    <div class="cardAlerte noDecor">
+                    <div v-for="(item, index) in allAlerte" class="cardAlerte noDecor">
 
-                        <div class="cardAlerte__label-id">1</div>
-                        <div class="cardAlerte__label-logo">LOGO</div>
-                        <div class="cardAlerte__label-type">TYPE</div>
-                        <div class="cardAlerte__label-informations">INFOS</div>
-                        <div class="cardAlerte__label-etat">ETAT</div>
-                        <div class="cardAlerte__label-action">Voir - Modifier - Delete</div>
-
-                    </div>
-
-                    <div class="cardAlerte noDecor">
-
-                        <div class="cardAlerte__label-id">1</div>
-                        <div class="cardAlerte__label-logo">LOGO</div>
-                        <div class="cardAlerte__label-type">TYPE</div>
-                        <div class="cardAlerte__label-informations">INFOS</div>
-                        <div class="cardAlerte__label-etat">ETAT</div>
+                        <div class="cardAlerte__label-id">{{ item.id }}</div>
+                        <div v-if="item.type === 'email'" class="cardAlerte__label-logo"><img src="https://img.icons8.com/?size=25&id=D9x0PpvvT1AL&format=png" /></div>
+                        <div v-else-if="item.type === 'discord'" class="cardAlerte__label-logo"><img src="https://img.icons8.com/?size=25&id=LOWwEDik1xs8&format=png" /></div>
+                        <div v-else-if="item.type === 'slack'" class="cardAlerte__label-logo">LOGO</div>
+                        <div v-else-if="item.type === 'sms'" class="cardAlerte__label-logo">LOGO</div>
+                        <div class="cardAlerte__label-type">{{ item.type }}</div>
+                        <div class="cardAlerte__label-informations">{{ item.informations }}</div>
+                        <div class="cardAlerte__label-etat">{{ item.etat }}</div>
                         <div class="cardAlerte__label-action">Voir - Modifier - Delete</div>
 
                     </div>
@@ -65,8 +57,13 @@ export default {
     data() {
         return {
             getID: null,
-            typeAlerte: "email"
+            typeAlerte: "email",
+            allAlerte: {}
         }
+    },
+    mounted() {
+        this.getID = this.$route.params.id
+        this.getAlerte()
     },
     methods: {
         goBack() {
@@ -79,10 +76,41 @@ export default {
             } else {
                 this.$router.push('/alerte/add/' + typeAlert + '/' + this.getID)
             }
+        },
+        getAlerte() {
+
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/getAlerte', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    id: this.getID
+                })
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        this.allAlerte = data.result
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+
         }
-    },
-    mounted() {
-        this.getID = this.$route.params.id
     },
     components: { Header }
 }

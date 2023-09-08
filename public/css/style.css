@@ -842,7 +842,7 @@ html, body {
     margin-bottom: 0.5em;
     display: flex;
     flex-direction: row;
-    gap: 15%;
+    gap: 14%;
     cursor: pointer;
     color:black;
 }

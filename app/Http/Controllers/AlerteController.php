@@ -27,8 +27,7 @@ class AlerteController extends Controller
      * @return void
     */
 
-    public function index(Request $Request) {
-
+    public function index(Request $request){
 
         try {
             //code...
