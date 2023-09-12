@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ProprieteController;
 use App\Http\Controllers\AlerteController;
+use App\Http\Controllers\VisiteController;
 use App\Models\User;
 
 /*
@@ -40,6 +41,10 @@ Route::group([
     Route::post('/getAlerte', [AlerteController::class, 'index']);
     Route::post('/createAlerte', [AlerteController::class, 'create']);
     // Gestion alerte
+
+    // Gestion visite
+    Route::post('/getVisite', [VisiteController::class, 'index']);
+    // Gestion visite
 
     // Gestion Profil 
     Route::post('/update', [UserController::class, 'UpdateProfil']);
