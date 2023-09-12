@@ -97,7 +97,8 @@ router.beforeEach((to, from, next) => {
             if (response.ok) {
                 return response.json();
             } else {
-                throw new Error('Erreur de réponse du serveur');
+                console.log('Erreur de réponse du serveur')
+                next('/connexion')
             }
         })
         .then(data => {
