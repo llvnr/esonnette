@@ -14,7 +14,6 @@ class Visite extends Model
     protected $fillable = [
         'propriete_id',
         'alerte_id',
-        'date_visite',
         'denomination',
         'telephone',
         'etat'
