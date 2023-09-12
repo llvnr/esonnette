@@ -3,7 +3,7 @@
     <div class="ShellDashboard__sidebar">
 
         <div class="ShellDashboard__sidebar-header">
-            <img src="assets/images/logo.png" width="150" class="ShellDashboard__sidebar-header-title" />
+            <img src="/assets/images/logo.png" width="150" class="ShellDashboard__sidebar-header-title" />
         </div>
         <div class="ShellDashboard__sidebar-content">
             <ul v-if="isLogging" class="SidebarContent__navigation">
