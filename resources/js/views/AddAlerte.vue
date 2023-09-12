@@ -29,7 +29,7 @@
                     <div class="ContentBodyADDAlertDiscord__label-discord">Webhook discord</div>
                     <input type="text" class="ContentBodyADDAlertDiscord__input-discord" v-model="discord" placeholder="Webhook discord">
 
-                    <button class="ContentBodyADDAlertDiscord__btnAddDiscord">Créer</button>
+                    <button class="ContentBodyADDAlertDiscord__btnAddDiscord" @click="this.createAlertDiscord">Créer</button>
                     <button class="ContentBodyADDAlertDiscord__btnGoBack" @click="this.goBack">Retour</button>
 
                 </div>
@@ -56,7 +56,8 @@ export default {
         return {
             getID: null,
             typeAlert: null,
-            email: ''
+            email: '',
+            discord: ''
         }
     },
     mounted() {
@@ -101,6 +102,49 @@ export default {
                 if(data !== undefined){
                     if(data.status){
                         alert("L'alerte email a bien été créer.")
+                        this.$router.go(-1)
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+
+        },
+        createAlertDiscord() {
+
+            let id = this.getID
+            let discord = this.discord
+            let type = this.typeAlert
+
+            if(discord.length == 0) return alert('Le champ [DISCORD] est obligatoire.')
+
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/createAlerte', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    id: id,
+                    type: type,
+                    data: discord
+                })
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        alert("L'alerte discord a bien été créer.")
                         this.$router.go(-1)
                     } else {
                         alert(data.message)
