@@ -722,9 +722,9 @@ html, body {
     border: 2px solid #E5E9F0;
     padding: 1.5em;
     margin-bottom: 0.5em;
-    display: flex;
-    flex-direction: row;
-    gap: 8%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 12.2%);
+    /* gap: 5px; */
     cursor: pointer;
     color:black;
 }
@@ -736,43 +736,49 @@ html, body {
 .cardVisite__label-id {
     display: flex;
     align-items: center;
-    justify-content: center; 
+    /* justify-content: center;  */
 }
 
 .cardVisite__label-image {
     display: flex;
     align-items: center;
-    justify-content: center;     
+    /* justify-content: center;      */
 }
 
 .cardVisite__label-date {
     display: flex;
     align-items: center;
-    justify-content: center;    
+    /* justify-content: center;     */
 }
 
 .cardVisite__label-heure {
     display: flex;
     align-items: center;
-    justify-content: center; 
+    /* justify-content: center;  */
 }
 
 .cardVisite__label-name {
     display: flex;
     align-items: center;
-    justify-content: center; 
+    /* justify-content: center;  */
+}
+
+.cardVisite__label-contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cardVisite__label-type {
     display: flex;
     align-items: center;
-    justify-content: center; 
+    /* justify-content: center;  */
 }
 
 .cardVisite__label-status {
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
 }
 
 /* PAGE VOIR PROPRIETE */

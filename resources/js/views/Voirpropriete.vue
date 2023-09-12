@@ -66,6 +66,7 @@
                         <div class="cardVisite__label-date">29/08/2023</div>
                         <div class="cardVisite__label-heure">11:37</div>
                         <div class="cardVisite__label-name">Nom ou nom d'entreprise</div>
+                        <div class="cardVisite__label-contact">0692000000</div>
                         <div class="cardVisite__label-type">Type : Email / Discord / Sms</div>
                         <div class="cardVisite__label-status">Statut</div>
 
