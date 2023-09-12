@@ -41,7 +41,7 @@ class VisiteController extends Controller
 
             $id = $request->id;
 
-            $getVisite = Visite::where('propriete_id', $id)->orderBy('created_at', 'DESC')->get();
+            $getVisite = Visite::with('alerte')->where('propriete_id', $id)->orderBy('created_at', 'DESC')->get();
 
             return response()->json([
                 "status" => true,

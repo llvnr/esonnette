@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Alerte;
+use App\Models\Propriete;
 
 class Visite extends Model
 {
@@ -18,5 +20,13 @@ class Visite extends Model
         'telephone',
         'etat'
     ];
+
+    public function alerte() {
+        return $this->belongsTo(Alerte::class, 'alerte_id', 'id');
+    }
+
+    public function propriete() {
+        return $this->belongsTo(Propriete::class, 'propriete_id', 'id');
+    }
 
 }

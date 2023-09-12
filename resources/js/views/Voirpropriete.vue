@@ -66,8 +66,15 @@
                         <div class="cardVisite__label-date">{{ formatDate(item.created_at) }}</div>
                         <div class="cardVisite__label-name">{{ item.denomination }}</div>
                         <div class="cardVisite__label-contact">{{ item.telephone }}</div>
-                        <div class="cardVisite__label-type">{{ item.alerte_id }}</div>
-                        <div class="cardVisite__label-status">{{ item.etat }}</div>
+                        <div v-if="item.alerte.type === 'email'" class="cardVisite__label-type">
+                            <img src="https://img.icons8.com/?size=25&id=D9x0PpvvT1AL&format=png" />
+                        </div>
+                        <div v-else-if="item.alerte.type === 'discord'" class="cardVisite__label-type">
+                            <img src="https://img.icons8.com/?size=25&id=30998&format=png" />
+                        </div>
+                        <div class="cardVisite__label-status" :class="item.etat ? 'state-activate-write' : 'state-desactivate-write'">
+                            {{ item.etat ? 'Vu' : 'Manqué' }}
+                        </div>
 
                     </div>
 

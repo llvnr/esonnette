@@ -772,7 +772,15 @@ html, body {
 .cardVisite__label-type {
     display: flex;
     align-items: center;
-    /* justify-content: center;  */
+    justify-content: center;
+}
+
+.state-activate-write {
+    color: #204646;
+}
+
+.state-desactivate-write {
+    color: red;
 }
 
 .cardVisite__label-status {
