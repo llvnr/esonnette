@@ -59,16 +59,15 @@
 
                 <div class="ContentBodyDataVisite">
                     
-                    <div v-for="n in 10" class="cardVisite">
+                    <div v-for="(item, index) in allVisite" class="cardVisite">
 
-                        <div class="cardVisite__label-id">1</div>
+                        <div class="cardVisite__label-id">{{ item.id }}</div>
                         <div class="cardVisite__label-image"><img src="https://img.icons8.com/?size=40&id=Hjmjz1QamXpz&format=png" alt=""></div>
-                        <div class="cardVisite__label-date">29/08/2023</div>
-                        <div class="cardVisite__label-heure">11:37</div>
-                        <div class="cardVisite__label-name">Nom ou nom d'entreprise</div>
-                        <div class="cardVisite__label-contact">0692000000</div>
-                        <div class="cardVisite__label-type">Type : Email / Discord / Sms</div>
-                        <div class="cardVisite__label-status">Statut</div>
+                        <div class="cardVisite__label-date">{{ formatDate(item.created_at) }}</div>
+                        <div class="cardVisite__label-name">{{ item.denomination }}</div>
+                        <div class="cardVisite__label-contact">{{ item.telephone }}</div>
+                        <div class="cardVisite__label-type">{{ item.alerte_id }}</div>
+                        <div class="cardVisite__label-status">{{ item.etat }}</div>
 
                     </div>
 
@@ -90,14 +89,20 @@ export default {
     data() {
         return {
             infoPropriete: {},
+            allVisite: {},
             getID: null
         }
     },
     mounted() {
         this.getID = this.$route.params.id
         this.getOnePropriete()
+        this.getVisite()
     },
     methods: {
+        formatDate(dateString) {
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        },
         changeStateQrcode(state) {
  
             let etat = state
@@ -164,6 +169,40 @@ export default {
                 if(data !== undefined){
                     if(data.status){
                         this.infoPropriete = data.result
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+
+        },
+        getVisite() {
+
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/getVisite', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    id: this.getID
+                })
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        this.allVisite = data.result
                     } else {
                         alert(data.message)
                     }
