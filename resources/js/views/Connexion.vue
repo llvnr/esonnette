@@ -1,24 +1,23 @@
 <template>
 
-    <div class="ShellDashboard__content">
+    <div class="ShellDashboard">
 
-        <div class="ShellDashboard__content-header">
+        <div class="ShellDashboard__content">
 
-            <Header title="Connexion" />
+            <div class="ShellDashboard__content-body">
 
-        </div>
-        <div class="ShellDashboard__content-body">
+                <div class="Shellogin">
 
-            <div class="Shellogin">
+                    <div class="Shellogin__image">
+                        <img src="assets/images/logo_color.png" width="350" class="Shellogin__title" />
+                    </div>
+                    <form class="Shellogin__form" @submit.prevent="login">
+                        <input type="email" class="Shellogin__email" name="email" v-model="email" placeholder="Votre adresse email...">
 
-                <div class="Shellogin__image">
-                    <img src="assets/images/logo_color.png" width="350" class="Shellogin__title" />
+                        <button type="submit" class="Shellogin__btnlogin">Connexion</button>
+                    </form>
                 </div>
-                <form class="Shellogin__form" @submit.prevent="login">
-                    <input type="email" class="Shellogin__email" name="email" v-model="email" placeholder="Votre adresse email...">
 
-                    <button type="submit" class="Shellogin__btnlogin">Connexion</button>
-                </form>
             </div>
 
         </div>

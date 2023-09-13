@@ -2,7 +2,7 @@
 
     <div class="ShellDashboard">
 
-        <Sidebar :isLogging="true" />
+        <Sidebar />
 
         <div class="ShellDashboard__content">
 
