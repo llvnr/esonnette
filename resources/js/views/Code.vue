@@ -1,27 +1,26 @@
 <template>
 
-    <div class="ShellDashboard__content">
+    <div class="ShellDashboard">
 
-        <div class="ShellDashboard__content-header">
+        <div class="ShellDashboard__content">
 
-            <Header title="Code de confirmation" :isLogging="false" />
+            <div class="ShellDashboard__content-body">
 
-        </div>
-        <div class="ShellDashboard__content-body">
+                <div class="ShellCode">
 
-            <div class="ShellCode">
+                    <div class="ShellCode__image">
+                        <img src="assets/images/logo_color.png" width="350" class="ShellCode__title" />
+                    </div>
 
-                <div class="ShellCode__image">
-                    <img src="assets/images/logo_color.png" width="350" class="ShellCode__title" />
+                    <form class="Shellogin__form" @submit.prevent="login">
+
+                        <input type="number" step="1" class="ShellCode__email" v-model="code" placeholder="Votre code de confirmation...">
+
+                        <button type="submit" class="ShellCode__btnlogin">Connexion</button>
+
+                    </form>
+
                 </div>
-
-                <form class="Shellogin__form" @submit.prevent="login">
-
-                    <input type="number" step="1" class="ShellCode__email" v-model="code" placeholder="Votre code de confirmation...">
-
-                    <button type="submit" class="ShellCode__btnlogin">Connexion</button>
-
-                </form>
 
             </div>
 
