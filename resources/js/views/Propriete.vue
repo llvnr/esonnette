@@ -1,34 +1,40 @@
 <template>
 
-    <div class="ShellDashboard__content">
+    <div class="ShellDashboard">
 
-        <div class="ShellDashboard__content-header">
+        <Sidebar :isLogging="true" />
 
-            <Header title="Mes propriétés" />
+        <div class="ShellDashboard__content">
 
-        </div>
-        <div class="ShellDashboard__content-body">
+            <div class="ShellDashboard__content-header">
 
-            <div class="ContentBodyPropriete">
+                <Header title="Mes propriétés" />
 
-                <div class="ContentBodyPropriete__colonneUn">
-                    <router-link to="/addpropriete" class="noDecor"><button class="ContentBodyPropriete__colonneUn-btnPropriete">Nouveau</button></router-link>
-                </div>
-                <div class="ContentBodyPropriete__colonneDeux">
-                    
-                    <router-link :to="'/voir-propriete/' + item.id" v-for="(item, index) in proprietes" class="cardPropriete noDecor">
+            </div>
+            <div class="ShellDashboard__content-body">
 
-                        <div class="cardPropriete__label-id">{{ item.id }}</div>
-                        <div class="cardPropriete__label-image"><img :src="item.qrcode" width="50" /></div>
-                        <div class="cardPropriete__label-name">{{ item.nom }}</div>
-                        <div class="cardPropriete__label-surname">{{ item.prenom }}</div>
-                        <div class="cardPropriete__label-adresse">{{ item.adresse }}</div>
-                        <div class="cardPropriete__label-codepostal">{{ item.codepostal }}</div>
-                        <div class="cardPropriete__label-ville">{{ item.ville }}</div>
-                        <div class="cardPropriete__label-visite">0 Visite(s)</div>
+                <div class="ContentBodyPropriete">
 
-                    </router-link>
-                    
+                    <div class="ContentBodyPropriete__colonneUn">
+                        <router-link to="/addpropriete" class="noDecor"><button class="ContentBodyPropriete__colonneUn-btnPropriete">Nouveau</button></router-link>
+                    </div>
+                    <div class="ContentBodyPropriete__colonneDeux">
+                        
+                        <router-link :to="'/voir-propriete/' + item.id" v-for="(item, index) in proprietes" class="cardPropriete noDecor">
+
+                            <div class="cardPropriete__label-id">{{ item.id }}</div>
+                            <div class="cardPropriete__label-image"><img :src="item.qrcode" width="50" /></div>
+                            <div class="cardPropriete__label-name">{{ item.nom }}</div>
+                            <div class="cardPropriete__label-surname">{{ item.prenom }}</div>
+                            <div class="cardPropriete__label-adresse">{{ item.adresse }}</div>
+                            <div class="cardPropriete__label-codepostal">{{ item.codepostal }}</div>
+                            <div class="cardPropriete__label-ville">{{ item.ville }}</div>
+                            <div class="cardPropriete__label-visite">0 Visite(s)</div>
+
+                        </router-link>
+                        
+                    </div>
+
                 </div>
 
             </div>
@@ -41,6 +47,7 @@
 
 <script>
 
+import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
 
 export default {
@@ -86,7 +93,7 @@ export default {
 
         }
     },  
-    components: { Header }
+    components: { Sidebar, Header }
 }
 
 </script>
