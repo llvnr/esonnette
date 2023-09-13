@@ -997,3 +997,85 @@ html, body {
 }
 
 /* PAGE AJOUT ALERTE */
+
+/* PAGE DE SCAN */
+
+.ShellScan {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; /* Empêche le débordement de ShellDashboard */
+}
+
+.ShellScan__Header {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 1.5em;
+}
+
+.ShellScan__Body {
+    flex: 10;
+    background-color: #F2F8FE;
+    display: flex;
+    flex-direction: column;
+}
+
+.ShellScan__Body-Title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3056D3;
+    color: white;
+    font-size: 1.5em;
+}
+
+.ShellScan__Body-Content {
+    flex: 11;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 40em;
+    padding-right: 40em;
+}
+
+.ShellScan__Body-Content-label {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.ShellBody__Body-Content-input-name {
+    height: 2em;
+    margin-bottom: 0.5em;
+}
+
+.ShellBody__Body-Content-input-telephone {
+    height: 2em;
+    margin-bottom: 0.5em;
+}
+
+.ShellScan__Body-Content-infos {
+    margin-bottom: 0.5em;
+}
+
+.ShellScan__Body-Content-Canaux {
+    height: 2em;
+    margin-bottom: 0.5em;
+}
+
+.ShellScan__Footer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3056D3;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+/* PAGE DE SCAN */
