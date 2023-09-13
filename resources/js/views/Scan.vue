@@ -17,7 +17,7 @@
                 </select>
                 <div class="ShellScan__Body-Content-infospub">
                     Besoin d'une sonnette comme ça chez vous ? <br> Rendez-vous sur 
-                    <a href="https://yakelkun.llvnr.com" target="_blank">https://yakelkun.llvnr.com</a>
+                    <a href="https://yakelkun.equativa.com" target="_blank">https://yakelkun.equativa.com</a>
                 </div>
 
             </div>
@@ -38,6 +38,15 @@ export default {
     },
     methods: {
         dringdring() {
+
+            let denomination = this.denomination
+            let telephone = this.telephone
+            let canaux = this.canaux 
+
+            if(denomination.length === 0) return alert('Le champ [NOM] est obligatoire.')
+            if(telephone.length === 0) return alert('Le champ [TELEPHONE] est obligatoire.')
+            if(canaux.length === 0) return alert('Le champ [CANAUX] est obligatoire.')
+
             alert('dring dring !')
         }
     }
