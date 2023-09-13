@@ -1,20 +1,13 @@
 <template>
-    <div class="ShellDashboard">
-
-        <Sidebar :isLogging="true" />
-
-        <router-view></router-view>
-
-    </div>
-
+    <router-view></router-view>
 </template>
 
-<script setup>
+<script>
 
-import Sidebar from "./components/Sidebar.vue";
+import Sidebar from './components/Sidebar.vue';
 
-import { onMounted } from 'vue';
-
-onMounted(() => console.log('Hello world !')) 
+export default {
+    components: { Sidebar }
+}
 
 </script>

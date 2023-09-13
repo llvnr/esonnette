@@ -9,6 +9,7 @@ import Inscription from "./views/Inscription.vue";
 import Code from "./views/Code.vue";
 import Alerte from "./views/Alerte.vue";
 import AddAlerte from "./views/AddAlerte.vue";
+import Scan from "./views/Scan.vue";
 
 const routes = [
     {
@@ -52,6 +53,11 @@ const routes = [
         name: 'AddPropriete',
         component: AddPropriete,
         meta: { requiresAuth: true } // Marquer la route comme nécessitant une authentification
+    },
+    {
+        path: '/propriete/qrcode/:id',
+        name: 'Scan',
+        component: Scan,
     },
     {
         path: '/connexion',

@@ -36,7 +36,9 @@
                         <div class="ContentColonneDeux__Card">
 
                             <div class="ContentColonneDeux__label-image">
-                                <img :src="infoPropriete.qrcode" width="100" alt="">
+                                <router-link :to="'/propriete/qrcode/' + getID">
+                                    <img :src="infoPropriete.qrcode" width="100" alt="">
+                                </router-link>
                             </div>
                             <div class="ContentColonneDeux__label-content">
                                 <div class="ContentColonneDeux__label-visite-total"><b>0</b> Visite(s) totale(s)</div>
