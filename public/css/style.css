@@ -100,9 +100,9 @@ html, body {
 .Shellregister {
     display: flex;
     flex-direction: column;
-    margin: 12em;
-    padding-left: 25em;
-    padding-right: 25em;
+    margin: 15em;
+    padding-left: 30em;
+    padding-right: 30em;
 }
 
 .Shellregister__image {
