@@ -1,54 +1,61 @@
 <template>
 
-    <div class="ShellDashboard__content">
+    <div class="ShellDashboard">
 
-        <div class="ShellDashboard__content-header">
+        <Sidebar :isLogging="true" />
 
-            <Header title="Ajouter une alerte" />
+        <div class="ShellDashboard__content">
 
-        </div>
-        <div class="ShellDashboard__content-body">
+            <div class="ShellDashboard__content-header">
 
-            <div v-if="typeAlert === 'email'">
-                
-                <div class="ContentBodyADDAlertEmail">
+                <Header title="Ajouter une alerte" />
 
-                    <div class="ContentBodyADDAlertEmail__label-email">Adresse email</div>
-                    <input type="email" class="ContentBodyADDAlertEmail__input-email" v-model="email" placeholder="Adresse email de destination">
+            </div>
+            <div class="ShellDashboard__content-body">
 
-                    <button class="ContentBodyADDAlertEmail__btnAddEmail" @click="this.createAlertEmail">Créer</button>
-                    <button class="ContentBodyADDAlertEmail__btnGoBack" @click="this.goBack">Retour</button>
+                <div v-if="typeAlert === 'email'">
+                    
+                    <div class="ContentBodyADDAlertEmail">
 
+                        <div class="ContentBodyADDAlertEmail__label-email">Adresse email</div>
+                        <input type="email" class="ContentBodyADDAlertEmail__input-email" v-model="email" placeholder="Adresse email de destination">
+
+                        <button class="ContentBodyADDAlertEmail__btnAddEmail" @click="this.createAlertEmail">Créer</button>
+                        <button class="ContentBodyADDAlertEmail__btnGoBack" @click="this.goBack">Retour</button>
+
+                    </div>
+
+                </div>
+                <div v-else-if="typeAlert === 'discord'">
+
+                    <div class="ContentBodyADDAlertDiscord">
+
+                        <div class="ContentBodyADDAlertDiscord__label-discord">Webhook discord</div>
+                        <input type="text" class="ContentBodyADDAlertDiscord__input-discord" v-model="discord" placeholder="Webhook discord">
+
+                        <button class="ContentBodyADDAlertDiscord__btnAddDiscord" @click="this.createAlertDiscord">Créer</button>
+                        <button class="ContentBodyADDAlertDiscord__btnGoBack" @click="this.goBack">Retour</button>
+
+                    </div>
+
+                </div>
+                <div v-else-if="typeAlert === 'sms'">
+                    SMS 
+                </div>
+                <div v-else-if="typeAlert === 'slack'">
+                    SLACK
                 </div>
 
             </div>
-            <div v-else-if="typeAlert === 'discord'">
-
-                <div class="ContentBodyADDAlertDiscord">
-
-                    <div class="ContentBodyADDAlertDiscord__label-discord">Webhook discord</div>
-                    <input type="text" class="ContentBodyADDAlertDiscord__input-discord" v-model="discord" placeholder="Webhook discord">
-
-                    <button class="ContentBodyADDAlertDiscord__btnAddDiscord" @click="this.createAlertDiscord">Créer</button>
-                    <button class="ContentBodyADDAlertDiscord__btnGoBack" @click="this.goBack">Retour</button>
-
-                </div>
-
-            </div>
-            <div v-else-if="typeAlert === 'sms'">
-                SMS 
-            </div>
-            <div v-else-if="typeAlert === 'slack'">
-                SLACK
-            </div>
-
         </div>
+
     </div>
 
 </template>
 
 <script>
 
+import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
 
 export default {
@@ -155,7 +162,7 @@ export default {
 
         }
     },
-    components: { Header  }
+    components: { Sidebar, Header  }
 }
 
 </script>
