@@ -158,7 +158,7 @@ class ProprieteController extends Controller
 
             $id = $request->id;
 
-            $getPropriete = Propriete::find($id);
+            $getPropriete = Propriete::with('Alerte')->find($id);
 
             return response()->json([
                 "status" => true,

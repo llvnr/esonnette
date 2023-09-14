@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Alerte;
 
 class Propriete extends Model
 {
@@ -21,5 +22,9 @@ class Propriete extends Model
         "ville",
         "status"
     ];
+
+    public function Alerte() {
+        return $this->hasMany(Alerte::class, 'propriete_id', 'id');
+    }
 
 }
