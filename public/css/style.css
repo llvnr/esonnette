@@ -1079,10 +1079,18 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #3056D3;
-    color: white;
     font-size: 1.2em;
     cursor: pointer;
+}
+
+.ShellScan__Footer-disablebtn {
+    background-color: grey;
+    color: black;
+}
+
+.ShellScan__Footer-enablebtn {
+    background-color: #3056D3;
+    color: white;
 }
 
 /* PAGE DE SCAN */

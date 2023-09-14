@@ -8,6 +8,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 use App\Models\Propriete;
+use App\Models\Alerte;
+use App\Models\Visite;
 
 class ProprieteController extends Controller
 {
@@ -242,13 +244,75 @@ class ProprieteController extends Controller
         try {
             //code...
             $validator = Validator::make($request->all(), [
-                'id' => 'required'
+                'id' => 'required',
+                'denomination' => 'required',
+                'telephone' => 'required',
+                'canaux' => 'required'
             ]);
     
             if ($validator->fails()) {
                 return response()->json($validator->errors(), 422);
             }
 
+            $id = $request->id;
+            $denomination = $request->denomination;
+            $telephone = $request->telephone;
+            $canaux = $request->canaux;
+
+            $infosCanal = Alerte::find($canaux);
+
+            switch ($infosCanal->type) {
+                case 'email':
+                    # code...
+                    return response()->json([
+                        "status" => true,
+                        "message" => "L'email a bien été envoyer."
+                    ]); 
+                    break;
+                case 'discord':
+
+                    $createVisite = Visite::create([
+                        "propriete_id" => $id,
+                        "alerte_id" => $infosCanal->id,
+                        "denomination" => $denomination,
+                        "telephone" => $telephone,
+                        "etat" => 1
+                    ]);
+
+                    $curl = curl_init();
+
+                    curl_setopt_array($curl, array(
+                    CURLOPT_URL => $infosCanal->informations,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS =>'{
+                        "username": "ESONNETTE",
+                        "content": "Quelqu\'un vient de sonner ! ['.$denomination.' / '.$telephone.']"
+                    }',
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                    ),
+                    ));
+
+                    $response = curl_exec($curl);
+
+                    curl_close($curl);
+
+                    return response()->json([
+                        "status" => true,
+                        "result" => $response
+                    ]);
+
+                    break;
+                default:
+                    # code...
+                    break;
+            }
 
         } catch (\Throwable $th) {
             //throw $th;

@@ -16,12 +16,13 @@
                 </select>
                 <div class="ShellScan__Body-Content-infospub">
                     Besoin d'une sonnette comme ça chez vous ? <br> Rendez-vous sur 
-                    <a href="https://yakelkun.equativa.com" target="_blank">https://yakelkun.equativa.com</a>
+                    <a href="https://esonnette.com" target="_blank">https://esonnette.com</a>
                 </div>
 
             </div>
         </div>
-        <div class="ShellScan__Footer" @click="this.dringdring">SONNER</div>
+        <div class="ShellScan__Footer ShellScan__Footer-disablebtn" v-if="!etatDringDring">SONNER ({{ timerDringDring }}s)</div>
+        <div class="ShellScan__Footer ShellScan__Footer-enablebtn" v-else @click="this.dringdring">SONNER</div>
     </div>
 </template>
 
@@ -30,6 +31,8 @@
 export default {
     data() {
         return {
+            etatDringDring: true,
+            timerDringDring: 0,
             denomination: '',
             telephone: '',
             canaux: '1',
@@ -78,6 +81,7 @@ export default {
         },
         dringdring() {
 
+            let id = this.$route.params.id
             let denomination = this.denomination
             let telephone = this.telephone
             let canaux = this.canaux 
@@ -86,7 +90,50 @@ export default {
             if(telephone.length === 0) return alert('Le champ [TELEPHONE] est obligatoire.')
             if(canaux.length === 0) return alert('Le champ [CANAUX] est obligatoire.')
 
-            alert('dring dring !')
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/scan', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    id: id,
+                    denomination: denomination,
+                    telephone: telephone,
+                    canaux: canaux
+                })
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        alert('Votre visite a bien été notifié.')
+                        this.timerDringDring = 10; // Démarrez le compteur à 10 secondes
+                        this.etatDringDring = false;
+                        const intervalId = setInterval(() => {
+                        if (this.timerDringDring === 0) {
+                            clearInterval(intervalId); // Arrêtez le compteur lorsque les 10 secondes sont écoulées
+                            this.etatDringDring = true; // Réactivez le bouton
+                        } else {
+                            this.timerDringDring--; // Décrémentez le compteur d'une seconde chaque seconde
+                        }
+                        }, 1000); // Répétez toutes les 1000 ms (1 seconde)
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+
         }
     }
 }
