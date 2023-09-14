@@ -231,4 +231,33 @@ class ProprieteController extends Controller
 
     }
 
+    /**
+     * Scan function
+     *
+     * @return void
+    */
+
+    public function scan(Request $request) {
+
+        try {
+            //code...
+            $validator = Validator::make($request->all(), [
+                'id' => 'required'
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                "status" => false,
+                "message" => $th->getMessage()
+            ], 500);
+        }
+
+    }
+
 }

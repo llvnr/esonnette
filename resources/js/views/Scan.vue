@@ -2,7 +2,7 @@
     <div class="ShellScan">
         <div class="ShellScan__Header">Bienvenue chez</div>
         <div class="ShellScan__Body">
-            <div class="ShellScan__Body-Title">Ludovic LEVENEUR</div>
+            <div class="ShellScan__Body-Title">{{ getPropriete.prenom + ' ' + getPropriete.nom }}</div>
             <div class="ShellScan__Body-Content">
 
                 <div class="ShellScan__Body-Content-label">Qui êtes vous ?</div>
@@ -33,10 +33,50 @@ export default {
         return {
             denomination: '',
             telephone: '',
-            canaux: 'Email'
+            canaux: 'Email',
+            getPropriete: {}
         }
     },
+    mounted() {
+        this.getData()
+    },
     methods: {
+        getData() {
+
+            let idPropriete = this.$route.params.id
+
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/showPropriete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    id: idPropriete
+                })
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        this.getPropriete = data.result
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+
+        },
         dringdring() {
 
             let denomination = this.denomination
