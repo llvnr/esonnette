@@ -12,8 +12,7 @@
                     Comment voulez vous sonner ?
                 </div>
                 <select class="ShellScan__Body-Content-Canaux" v-model="canaux">
-                    <option value="Email">Via Email</option>
-                    <option value="Discord">Via Discord</option>
+                    <option v-for="(item, index) in getPropriete.alerte" :key="index" :value="item.id">Via {{ item.type }}</option>
                 </select>
                 <div class="ShellScan__Body-Content-infospub">
                     Besoin d'une sonnette comme ça chez vous ? <br> Rendez-vous sur 
@@ -33,7 +32,7 @@ export default {
         return {
             denomination: '',
             telephone: '',
-            canaux: 'Email',
+            canaux: '1',
             getPropriete: {}
         }
     },
