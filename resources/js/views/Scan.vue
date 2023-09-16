@@ -21,8 +21,9 @@
 
             </div>
         </div>
-        <div class="ShellScan__Footer ShellScan__Footer-disablebtn" v-if="!etatDringDring">SONNER ({{ timerDringDring }}s)</div>
-        <div class="ShellScan__Footer ShellScan__Footer-enablebtn" v-else @click="this.dringdring">SONNER</div>
+        <div class="ShellScan__Footer ShellScan__Footer-desactivatebtn" v-if="!etatQrcode">SONNETTE <br>(Désactivé)</div>
+        <div class="ShellScan__Footer ShellScan__Footer-disablebtn" v-else-if="etatQrcode && !etatDringDring">SONNER ({{ timerDringDring }}s)</div>
+        <div class="ShellScan__Footer ShellScan__Footer-enablebtn" v-else-if="etatQrcode && etatDringDring" @click="this.dringdring">SONNER</div>
     </div>
 </template>
 
@@ -31,6 +32,7 @@
 export default {
     data() {
         return {
+            etatQrcode: null,
             etatDringDring: true,
             timerDringDring: 0,
             denomination: '',
@@ -70,6 +72,11 @@ export default {
             .then(data => {
                 if(data !== undefined){
                     if(data.status){
+                        if(data.result.status == 1){
+                            this.etatQrcode = true
+                        } else {
+                            this.etatQrcode = false
+                        }
                         this.getPropriete = data.result
                     } else {
                         alert(data.message)

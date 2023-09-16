@@ -1083,6 +1083,12 @@ html, body {
     cursor: pointer;
 }
 
+.ShellScan__Footer-desactivatebtn {
+    background-color: red;
+    color: white;
+    cursor: no-drop;
+}
+
 .ShellScan__Footer-disablebtn {
     background-color: grey;
     color: black;
