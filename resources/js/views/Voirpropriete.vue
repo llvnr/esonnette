@@ -45,8 +45,7 @@
                                     </router-link>
                                 </div>
                                 <div class="ContentColonneDeux__label-content">
-                                    <div class="ContentColonneDeux__label-visite-total"><b>0</b> Visite(s) totale(s)</div>
-                                    <div class="ContentColonneDeux__label-visite-manquer"><b>0</b> Visite(s) manqué</div>
+                                    <div class="ContentColonneDeux__label-visite-total"><b>{{ allVisite.length }}</b> Visite(s) reçu totale(s)</div>
                                     <div class="ContentColonneDeux__label-qrcode">Etat du QRCODE : 
                                         <span v-if="infoPropriete.status" class="ContentColonneDeux__label-etat-qrcode state-activate">Activé</span>
                                         <span v-else class="ContentColonneDeux__label-etat-qrcode state-desactivate">Désactivé</span>

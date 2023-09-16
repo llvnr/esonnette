@@ -677,6 +677,10 @@ html, body {
     padding-left: 2.5em;
 }
 
+.ContentColonneDeux__label-visite-total {
+    margin-bottom: 1em;
+}
+
 .ContentColonneDeux__label-etat-qrcode {
     padding: 0.5em;
 }
