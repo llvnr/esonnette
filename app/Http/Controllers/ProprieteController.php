@@ -270,43 +270,65 @@ class ProprieteController extends Controller
                     ]); 
                     break;
                 case 'discord':
+                    
+                    $date = date('Y-m-d');
 
-                    $createVisite = Visite::create([
-                        "propriete_id" => $id,
-                        "alerte_id" => $infosCanal->id,
-                        "denomination" => $denomination,
-                        "telephone" => $telephone,
-                        "etat" => 1
-                    ]);
+                    $checkSecurite = Visite::where('propriete_id', $id)
+                    ->orWhere('denomination', $denomination)
+                    ->orWhere('telephone', $telephone)
+                    ->where('created_at', 'LIKE', '%'.$date.'%')
+                    ->count();
 
-                    $curl = curl_init();
+                    // DOUBLER LA SECURITE, VOIR COMMENT IDENTIFIER
+                    // UN UTILISATEUR INCONNU CAR SI LA IL CHANGE
+                    // LA DENOMINATION ou LE NUMERO DE TELEPHONE
+                    // IL PASSE LA SECURITE.
 
-                    curl_setopt_array($curl, array(
-                    CURLOPT_URL => $infosCanal->informations,
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS =>'{
-                        "username": "ESONNETTE",
-                        "content": "Quelqu\'un vient de sonner ! ['.$denomination.' / '.$telephone.']"
-                    }',
-                    CURLOPT_HTTPHEADER => array(
-                        'Content-Type: application/json',
-                    ),
-                    ));
+                    if($checkSecurite >= 3){
+                        return response()->json([
+                            "status" => false,
+                            "message" => "Vous avez déjà sonné 5 fois. Revenez demain."
+                        ]);
+                    } else {
 
-                    $response = curl_exec($curl);
+                        $createVisite = Visite::create([
+                            "propriete_id" => $id,
+                            "alerte_id" => $infosCanal->id,
+                            "denomination" => $denomination,
+                            "telephone" => $telephone,
+                            "etat" => 1
+                        ]);
 
-                    curl_close($curl);
+                        $curl = curl_init();
 
-                    return response()->json([
-                        "status" => true,
-                        "result" => $response
-                    ]);
+                        curl_setopt_array($curl, array(
+                        CURLOPT_URL => $infosCanal->informations,
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS =>'{
+                            "username": "ESONNETTE",
+                            "content": "Quelqu\'un vient de sonner ! ['.$denomination.' / '.$telephone.']"
+                        }',
+                        CURLOPT_HTTPHEADER => array(
+                            'Content-Type: application/json',
+                        ),
+                        ));
+
+                        $response = curl_exec($curl);
+
+                        curl_close($curl);
+
+                        return response()->json([
+                            "status" => true,
+                            "result" => $response
+                        ]);
+
+                    }
 
                     break;
                 default:
