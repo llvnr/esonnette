@@ -15,76 +15,15 @@
 
                 <div class="ContentBody__row">
 
-                    <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-title">Content de vous revoir !</div>
-                        <div class="ContentBody__row-card-infos">
-                            Ici vous pouvez voir toutes les données importantes en un seul endroit !
-                        </div>
-                    </div>
-
-                    <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">{{ utilisateur }}</div>
-                        <div class="ContentBody__row-card-title">Utilisateur(s)</div>
-                        <div class="ContentBody__row-card-infos">
-                            Comptabilise le nombre d'utilisateurs qui sont dans cette instance.
-                        </div>
-                    </div>
-
-                    <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">{{ role }}</div>
-                        <div class="ContentBody__row-card-title">Rôle(s)</div>
-                        <div class="ContentBody__row-card-infos">
-                            Comptabilise le nombre de rôle qui sont dans cette instance.
-                        </div>
-                    </div>
-
-                    <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">{{ propriete }}</div>
-                        <div class="ContentBody__row-card-title">Propriétés</div>
-                        <div class="ContentBody__row-card-infos">
-                            Comptabilise le nombre de propriétés associé à cette instance.
-                        </div>
-                    </div>
-
-                    <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">{{ notification }}</div>
-                        <div class="ContentBody__row-card-title">Alerte(s) totale(s)</div>
-                        <div class="ContentBody__row-card-infos">
-                            Comptabilise le nombre d'alerte reçu sur l'ensemble des propriétés.
-                        </div>
-                    </div>
-
-                    <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">{{ notificationEmail }}</div>
-                        <div class="ContentBody__row-card-title">Alerte(s) email(s)</div>
-                        <div class="ContentBody__row-card-infos">
-                            Comptabilise le nombre d'alertes par email envoyées sur l'ensemble des propriétés.
-                        </div>
-                    </div>
-
-                    <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">{{ notificationDiscord }}</div>
-                        <div class="ContentBody__row-card-title">Alerte(s) discord</div>
-                        <div class="ContentBody__row-card-infos">
-                            Comptabilise le nombre d'alertes discord envoyés sur l'ensemble des propriétés.
-                        </div>
-                    </div>
-
-                    <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">{{ notificationSMS }}</div>
-                        <div class="ContentBody__row-card-title">Alerte(s) SMS</div>
-                        <div class="ContentBody__row-card-infos">
-                            Comptabilise le nombre d'alertes SMS envoyés sur l'ensemble des propriétés.
-                        </div>
-                    </div>
-
-                    <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">{{ notificationSlack }}</div>
-                        <div class="ContentBody__row-card-title">Alerte(s) Slack</div>
-                        <div class="ContentBody__row-card-infos">
-                            Comptabilise le nombre d'alertes Slack envoyés sur l'ensemble des propriétés.
-                        </div>
-                    </div>
+                    <Card title="Content de vous revoir !" description="Ici vous pouvez voir toutes les données importantes en un seul endroit !"></Card>
+                    <Card :counter="utilisateur" title="Utilisateur(s)" description="Comptabilise le nombre d'utilisateurs qui sont dans cette instance."></Card>
+                    <Card :counter="role" title="Rôle(s)" description="Comptabilise le nombre de rôle qui sont dans cette instance."></Card>
+                    <Card :counter="propriete" title="Propriétés" description="Comptabilise le nombre de propriétés associé à cette instance."></Card>
+                    <Card :counter="notification" title="Alerte(s) totale(s)" description="Comptabilise le nombre d'alerte reçu sur l'ensemble des propriétés."></Card>
+                    <Card :counter="notificationEmail" title="Alerte(s) email(s)" description="Comptabilise le nombre d'alertes par email envoyées sur l'ensemble des propriétés."></Card>
+                    <Card :counter="notificationDiscord" title="Alerte(s) discord" description="Comptabilise le nombre d'alertes discord envoyés sur l'ensemble des propriétés."></Card>
+                    <Card :counter="notificationSMS" title="Alerte(s) SMS" description="Comptabilise le nombre d'alertes SMS envoyés sur l'ensemble des propriétés."></Card>
+                    <Card :counter="notificationSlack" title="Alerte(s) Slack" description="Comptabilise le nombre d'alertes Slack envoyés sur l'ensemble des propriétés."></Card>
 
                 </div>
 
