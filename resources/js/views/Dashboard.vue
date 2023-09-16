@@ -100,6 +100,7 @@
 
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
+import Card from '../components/Card.vue';
 
 export default {
     data(){
@@ -156,7 +157,7 @@ export default {
             .catch(error => console.log(error));
         }
     },
-    components: { Sidebar, Header }
+    components: { Sidebar, Header, Card }
 }
 
 </script>
