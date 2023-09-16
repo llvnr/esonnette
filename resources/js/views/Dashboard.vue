@@ -47,23 +47,15 @@
                     </div>
 
                     <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">15</div>
-                        <div class="ContentBody__row-card-title">Visite(s) totale(s)</div>
+                        <div class="ContentBody__row-card-counter">{{ notification }}</div>
+                        <div class="ContentBody__row-card-title">Alerte(s) totale(s)</div>
                         <div class="ContentBody__row-card-infos">
-                            Comptabilise le nombre de visite reçu sur l'ensemble des propriétés.
+                            Comptabilise le nombre d'alerte reçu sur l'ensemble des propriétés.
                         </div>
                     </div>
 
                     <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">25</div>
-                        <div class="ContentBody__row-card-title">Visite(s) manqué(s)</div>
-                        <div class="ContentBody__row-card-infos">
-                            Comptabilise le nombre de visite manqué sur l'ensemble des propriétés.
-                        </div>
-                    </div>
-
-                    <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">35</div>
+                        <div class="ContentBody__row-card-counter">{{ notificationEmail }}</div>
                         <div class="ContentBody__row-card-title">Alerte(s) email(s)</div>
                         <div class="ContentBody__row-card-infos">
                             Comptabilise le nombre d'alertes par email envoyées sur l'ensemble des propriétés.
@@ -71,7 +63,7 @@
                     </div>
 
                     <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">45</div>
+                        <div class="ContentBody__row-card-counter">{{ notificationDiscord }}</div>
                         <div class="ContentBody__row-card-title">Alerte(s) discord</div>
                         <div class="ContentBody__row-card-infos">
                             Comptabilise le nombre d'alertes discord envoyés sur l'ensemble des propriétés.
@@ -79,10 +71,18 @@
                     </div>
 
                     <div class="ContentBody__row-card">
-                        <div class="ContentBody__row-card-counter">55</div>
+                        <div class="ContentBody__row-card-counter">{{ notificationSMS }}</div>
                         <div class="ContentBody__row-card-title">Alerte(s) SMS</div>
                         <div class="ContentBody__row-card-infos">
                             Comptabilise le nombre d'alertes SMS envoyés sur l'ensemble des propriétés.
+                        </div>
+                    </div>
+
+                    <div class="ContentBody__row-card">
+                        <div class="ContentBody__row-card-counter">{{ notificationSlack }}</div>
+                        <div class="ContentBody__row-card-title">Alerte(s) Slack</div>
+                        <div class="ContentBody__row-card-infos">
+                            Comptabilise le nombre d'alertes Slack envoyés sur l'ensemble des propriétés.
                         </div>
                     </div>
 
@@ -106,7 +106,12 @@ export default {
         return {
             utilisateur: null,
             role: null,
-            propriete: null
+            propriete: null,
+            notification: null,
+            notificationEmail: null,
+            notificationDiscord: null,
+            notificationSMS: null,
+            notificationSlack: null
         }
     },
     mounted() {
@@ -138,6 +143,11 @@ export default {
                         this.utilisateur = data.data.utilisateur
                         this.role = data.data.role
                         this.propriete = data.data.propriete
+                        this.notification = data.data.notification
+                        this.notificationEmail = data.data.notification_email
+                        this.notificationDiscord = data.data.notification_discord
+                        this.notificationSMS = data.data.notification_sms
+                        this.notificationSlack = data.data.notification_slack
                     } else {
                         alert(data.message)
                     }

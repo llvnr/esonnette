@@ -9,6 +9,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Propriete;
+use App\Models\Visite;
 
 class GeneralController extends Controller
 {
@@ -37,13 +38,31 @@ class GeneralController extends Controller
             $utilisateur = User::count();
             $role = Role::count();
             $propriete = Propriete::count();
+            $alerte = Visite::count();
+            $alerteEmail = Visite::whereHas('alerte', function ($query) {
+                $query->where('type', 'email');
+            })->count();
+            $alerteDiscord = Visite::whereHas('alerte', function ($query) {
+                $query->where('type', 'discord');
+            })->count();
+            $alerteSms = Visite::whereHas('alerte', function ($query) {
+                $query->where('type', 'sms');
+            })->count();
+            $alerteSlack = Visite::whereHas('alerte', function ($query) {
+                $query->where('type', 'slack');
+            })->count();
 
             return response()->json([
                 "status" => true,
                 "data" => [
                     "utilisateur" => $utilisateur,
                     "role" => $role,
-                    "propriete" => $propriete
+                    "propriete" => $propriete,
+                    "notification" => $alerte,
+                    "notification_email" => $alerteEmail,
+                    "notification_discord" => $alerteDiscord,
+                    "notification_sms" => $alerteSms,
+                    "notification_slack" => $alerteSlack
                 ]
             ]);
 
@@ -51,8 +70,8 @@ class GeneralController extends Controller
             //throw $th;
             return response()->json([
                 "status" => false,
-                "message" => $th
-            ]);
+                "message" => $th->getMessage()
+            ], 500);
         }
 
     }
