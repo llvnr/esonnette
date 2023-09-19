@@ -274,20 +274,18 @@ class ProprieteController extends Controller
                     $date = date('Y-m-d');
 
                     $checkSecurite = Visite::where('propriete_id', $id)
-                    ->orWhere('denomination', $denomination)
-                    ->orWhere('telephone', $telephone)
+                    ->where(function ($query) use ($denomination, $telephone) {
+                        $query->orWhere('denomination', $denomination)
+                            ->orWhere('telephone', $telephone);
+                    })
                     ->where('created_at', 'LIKE', '%'.$date.'%')
                     ->count();
-
-                    // DOUBLER LA SECURITE, VOIR COMMENT IDENTIFIER
-                    // UN UTILISATEUR INCONNU CAR SI LA IL CHANGE
-                    // LA DENOMINATION ou LE NUMERO DE TELEPHONE
-                    // IL PASSE LA SECURITE.
 
                     if($checkSecurite >= 3){
                         return response()->json([
                             "status" => false,
-                            "message" => "Vous avez déjà sonné 5 fois. Revenez demain."
+                            "result" => $checkSecurite,
+                            "message" => "Vous avez déjà sonné 3 fois. Revenez demain."
                         ]);
                     } else {
 

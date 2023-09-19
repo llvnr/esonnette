@@ -135,6 +135,7 @@ export default {
                         }
                         }, 1000); // Répétez toutes les 1000 ms (1 seconde)
                     } else {
+                        console.log(data.result)
                         alert(data.message)
                     }
                 }
