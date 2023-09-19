@@ -13,6 +13,8 @@
             </div>
             <div class="ShellDashboard__content-body">
 
+                <Message :visibility="isVisibilityMessage" :type="isTypeMessage" :message="isMessage" />
+
                 <div class="ContentBodyADDPropriete">
 
                     <div class="ContentBodyADDPropriete__label-name">Nom du propriétaire</div>
@@ -50,6 +52,7 @@
 
 <script>
 
+import Message from '../components/Message.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
 
@@ -61,7 +64,10 @@ export default {
             typepropriete: 'Maison',
             adresse: '',
             codepostal: '',
-            ville: ''
+            ville: '',
+            isVisibilityMessage: false,
+            isTypeMessage: 'success',
+            isMessage: ''
         }
     },
     methods: {
@@ -74,12 +80,12 @@ export default {
             let codepostal = this.codepostal
             let ville = this.ville
 
-            if(nom.length == 0) return alert('Le champ [NOM] est obligatoire.')
-            if(prenom.length == 0) return alert('Le champ [PRENOM] est obligatoire.')
-            if(typepropriete.length == 0) return alert('Le champ [TYPE DE PROPRIETE] est obligatoire.')
-            if(adresse.length == 0) return alert('Le champ [ADRESSE] est obligatoire.')
-            if(codepostal.length == 0) return alert('Le champ [CODE POSTAL] est obligatoire.')
-            if(ville.length == 0) return alert('Le champ [VILLE] est obligatoire.')
+            if (!this.checkRequiredField('NOM', nom)) return;
+            if (!this.checkRequiredField('PRENOM', prenom)) return;
+            if (!this.checkRequiredField('TYPE DE PROPRIETE', typepropriete)) return;
+            if (!this.checkRequiredField('ADRESSE', adresse)) return;
+            if (!this.checkRequiredField('CODE POSTAL', codepostal)) return;
+            if (!this.checkRequiredField('VILLE', ville)) return;
 
             const token = localStorage.getItem('token');
 
@@ -110,18 +116,45 @@ export default {
                 if(data !== undefined){
                     if(data.status){
                         console.log(data)
-                        alert(data.message)
-                        this.$router.push('/propriete')
+
+                        this.isVisibilityMessage = true 
+                        this.isTypeMessage = "success"
+                        this.isMessage = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessage = false;
+                            this.$router.push('/propriete')
+                        }, 3000);
+
                     } else {
-                        alert(data.message)
+                        this.isVisibilityMessage = true 
+                        this.isTypeMessage = "danger"
+                        this.isMessage = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessage = false;
+                        }, 3000);
                     }
                 }
             })
             .catch(error => console.log(error));
  
+        },
+        checkRequiredField(fieldName, fieldValue) {
+            if (fieldValue.length === 0) {
+                this.isVisibilityMessage = true 
+                this.isTypeMessage = "danger"
+                this.isMessage = `Le champ [${fieldName}] est obligatoire.`
+
+                setTimeout(() => {
+                    this.isVisibilityMessage = false;
+                }, 3000);
+                return false; // Indique que la validation a échoué
+            }
+            return true; // Indique que la validation a réussi
         }
     },
-    components: { Sidebar, Header }
+    components: { Sidebar, Header, Message }
 }
 
 </script>
