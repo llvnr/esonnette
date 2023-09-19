@@ -13,6 +13,8 @@
             </div>
             <div class="ShellDashboard__content-body">
 
+                <!-- <Message :visibility="true" type="success" :message="'Bonjour !'" /> -->
+
                 <div class="ContentBodyVoirPropriete">
 
                     <div class="ContentBodyVoirPropriete__content">
@@ -97,6 +99,7 @@
 
 <script>
 
+import Message from '../components/Message.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
 
@@ -227,7 +230,7 @@ export default {
 
         }
     },
-    components: { Sidebar, Header }
+    components: { Sidebar, Header, Message }
 
 }
 

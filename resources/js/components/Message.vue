@@ -1,15 +1,15 @@
 <template>
-    <div v-if="type === 'success'" class="alert alert-success">
-        Message !
+    <div v-if="visibility && type === 'success'" class="alert alert-success">
+        {{ message }}
     </div>
-    <div v-else-if="type === 'danger'" class="alert alert-danger">
-        Message !
+    <div v-else-if="visibility && type === 'danger'" class="alert alert-danger">
+        {{ message }}
     </div>
-    <div v-else-if="type === 'warning'" class="alert alert-warning">
-        Message !
+    <div v-else-if="visibility && type === 'warning'" class="alert alert-warning">
+        {{ message }}
     </div>
-    <div v-else-if="type === 'info'" class="alert alert-info">
-        Message !
+    <div v-else-if="visibility && type === 'info'" class="alert alert-info">
+        {{ message }}
     </div>
 </template>
 
@@ -17,8 +17,8 @@
 
 .alert {
     width: 100%;
-    height: 2em;
-    max-height: 2em;
+    height: 3em;
+    max-height: 3em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,7 +54,9 @@
 
 export default {
     props: {
-        type: ''
+        visibility: Boolean,
+        type: String,
+        message: String
     }
 }
 
