@@ -13,6 +13,8 @@
             </div>
             <div class="ShellDashboard__content-body">
 
+                <Message :visibility="isVisibilityMessage" :type="isTypeMessage" :message="isMessage" />
+
                 <div class="ContentBody">
 
                     <div class="ContentBody__colonneUn">
@@ -60,6 +62,7 @@
 </template>
 
 <script>
+import Message from '../components/Message.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
 export default {
@@ -69,7 +72,10 @@ export default {
             id: null,
             username: null,
             email: null,
-            accountConfirmed: null
+            accountConfirmed: null,
+            isVisibilityMessage: false,
+            isTypeMessage: 'success',
+            isMessage: ''
         }
     },
     mounted() {
@@ -81,8 +87,8 @@ export default {
             let username = this.username 
             let email = this.email 
 
-            if(username.length == 0) return alert('Le champ [Nom d\'utilisateur] est obligatoire.')
-            if(email.length == 0) return alert('Le champ [Email] est obligatoire.')
+            if(!this.checkRequiredField("Nom d'utilisateur", username)) return;
+            if(!this.checkRequiredField("Email", email)) return;
 
             const token = localStorage.getItem('token');
 
@@ -107,20 +113,33 @@ export default {
                 }
             })
             .then(data => {
-                console.log(data)
                 if(data.status){
                     this.username = data.data.username
                     this.email = data.data.email
                     this.accountConfirmed = data.data.email_verified_at
-                    alert(data.message)
+
+                    this.isVisibilityMessage = true 
+                    this.isTypeMessage = "success"
+                    this.isMessage = data.message
+
+                    setTimeout(() => {
+                        this.isVisibilityMessage = false;
+                    }, 3000);
+
                 } else {
-                    alert(data.message)
+                    this.isVisibilityMessage = true 
+                    this.isTypeMessage = "danger"
+                    this.isMessage = data.message
+
+                    setTimeout(() => {
+                        this.isVisibilityMessage = false;
+                    }, 3000);
                 }
             })
             .catch(error => console.log(error));
         },  
         sendMailConfirmation() {
-            alert("L'email de confirmation a bien été renvoyer.")
+            alert("Cette fonctionnaité est en cours de développement...")
         },          
         getProfile() {
             const token = localStorage.getItem('token');
@@ -151,9 +170,22 @@ export default {
             })
             .catch(error => console.log(error));
 
+        },
+        checkRequiredField(fieldName, fieldValue) {
+            if (fieldValue.length === 0) {
+                this.isVisibilityMessage = true 
+                this.isTypeMessage = "danger"
+                this.isMessage = `Le champ [${fieldName}] est obligatoire.`
+
+                setTimeout(() => {
+                    this.isVisibilityMessage = false;
+                }, 3000);
+                return false; // Indique que la validation a échoué
+            }
+            return true; // Indique que la validation a réussi
         }
     },
-    components: { Sidebar, Header }
+    components: { Sidebar, Header, Message }
 
 }
 
