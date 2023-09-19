@@ -12,6 +12,8 @@
                         <img src="assets/images/logo_color.png" width="350" class="ShellCode__title" />
                     </div>
 
+                    <Message :visibility="true" type="success" :message="'Bonjour !'" />
+
                     <form class="Shellogin__form" @submit.prevent="login">
 
                         <input type="number" step="1" class="ShellCode__email" v-model="code" placeholder="Votre code de confirmation...">
@@ -31,6 +33,7 @@
 </template>
 
 <script>
+import Message from '../components/Message.vue';
 import Header from '../components/Header.vue';
 export default {
 
@@ -73,7 +76,7 @@ export default {
             .catch(error => console.log(error));
         }
     },
-    components: { Header }
+    components: { Header, Message }
 
 }
 

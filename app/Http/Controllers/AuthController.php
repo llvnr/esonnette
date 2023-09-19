@@ -72,9 +72,15 @@ class AuthController extends Controller
         ->first();
 
         if (!$user) {
-            return response()->json(['error' => 'User not found'], 404);
+            return response()->json([
+                'status' => false,
+                "message" => "Utilisateur introuvable ou code incorrect."
+            ], 404);
         } else if (! $token = JWTAuth::fromUser($user)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json([
+                "status" => false,
+                'message' => 'Non autorisé.'
+            ], 401);
         }
 
         // Authentifiez l'utilisateur manuellement
@@ -84,7 +90,11 @@ class AuthController extends Controller
             "code" => null
         ]);
 
-        return $this->createNewToken($token);
+        return response()->json([
+            "status" => true,
+            "result" => $this->createNewToken($token)
+        ]);
+      
     }
     /**
      * Register a User.
