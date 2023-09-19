@@ -1,6 +1,9 @@
 <template>
 
-    <div class="ShellDashboard">
+    <div v-if="!loadData" class="ShellLoader">
+        <Loader />
+    </div>
+    <div v-else class="ShellDashboard">
 
         <Sidebar :isLogging="true" />
 
@@ -62,6 +65,7 @@
 </template>
 
 <script>
+import Loader from '../components/Loader.vue';
 import Message from '../components/Message.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
@@ -69,6 +73,7 @@ export default {
 
     data() {
         return {
+            loadData: false,
             id: null,
             username: null,
             email: null,
@@ -166,6 +171,7 @@ export default {
                     this.username = data.username
                     this.email = data.email
                     this.accountConfirmed = data.email_verified_at
+                    this.loadData = true
                 }
             })
             .catch(error => console.log(error));
@@ -185,7 +191,7 @@ export default {
             return true; // Indique que la validation a réussi
         }
     },
-    components: { Sidebar, Header, Message }
+    components: { Sidebar, Header, Message, Loader }
 
 }
 
