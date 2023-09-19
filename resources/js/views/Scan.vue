@@ -3,6 +3,7 @@
         <div class="ShellScan__Header">Bienvenue chez</div>
         <div class="ShellScan__Body">
             <div class="ShellScan__Body-Title">{{ getPropriete.prenom + ' ' + getPropriete.nom }}</div>
+            <Message :visibility="isVisibilityMessage" :type="isTypeMessage" :message="isMessage" />
             <div class="ShellScan__Body-Content">
 
                 <div class="ShellScan__Body-Content-label">Qui êtes vous ?</div>
@@ -29,6 +30,8 @@
 
 <script>
 
+import Message from '../components/Message.vue'
+
 export default {
     data() {
         return {
@@ -38,7 +41,10 @@ export default {
             denomination: '',
             telephone: '',
             canaux: '1',
-            getPropriete: {}
+            getPropriete: {},
+            isVisibilityMessage: false,
+            isTypeMessage: 'success',
+            isMessage: ''
         }
     },
     mounted() {
@@ -79,7 +85,13 @@ export default {
                         }
                         this.getPropriete = data.result
                     } else {
-                        alert(data.message)
+                        this.isVisibilityMessage = true 
+                        this.isTypeMessage = "danger"
+                        this.isMessage = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessage = false;
+                        }, 3000);
                     }
                 }
             })
@@ -93,9 +105,9 @@ export default {
             let telephone = this.telephone
             let canaux = this.canaux 
 
-            if(denomination.length === 0) return alert('Le champ [NOM] est obligatoire.')
-            if(telephone.length === 0) return alert('Le champ [TELEPHONE] est obligatoire.')
-            if(canaux.length === 0) return alert('Le champ [CANAUX] est obligatoire.')
+            if(!this.checkRequiredField("NOM", denomination)) return;
+            if(!this.checkRequiredField("TELEPHONE", telephone)) return;
+            if(!this.checkRequiredField("TYPE", canaux)) return;
 
             const token = localStorage.getItem('token');
 
@@ -123,7 +135,7 @@ export default {
             .then(data => {
                 if(data !== undefined){
                     if(data.status){
-                        alert('Votre visite a bien été notifié.')
+
                         this.timerDringDring = 10; // Démarrez le compteur à 10 secondes
                         this.etatDringDring = false;
                         const intervalId = setInterval(() => {
@@ -134,16 +146,44 @@ export default {
                             this.timerDringDring--; // Décrémentez le compteur d'une seconde chaque seconde
                         }
                         }, 1000); // Répétez toutes les 1000 ms (1 seconde)
+
+                        this.isVisibilityMessage = true 
+                        this.isTypeMessage = "success"
+                        this.isMessage = 'Votre visite a bien été notifié.'
+
+                        setTimeout(() => {
+                            this.isVisibilityMessage = false;
+                        }, 3000);
+
                     } else {
-                        console.log(data.result)
-                        alert(data.message)
+                        this.isVisibilityMessage = true 
+                        this.isTypeMessage = "danger"
+                        this.isMessage = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessage = false;
+                        }, 3000);
                     }
                 }
             })
             .catch(error => console.log(error));
 
+        },
+        checkRequiredField(fieldName, fieldValue) {
+            if (fieldValue.length === 0) {
+                this.isVisibilityMessage = true 
+                this.isTypeMessage = "danger"
+                this.isMessage = `Le champ [${fieldName}] est obligatoire.`
+
+                setTimeout(() => {
+                    this.isVisibilityMessage = false;
+                }, 3000);
+                return false; // Indique que la validation a échoué
+            }
+            return true; // Indique que la validation a réussi
         }
-    }
+    },
+    components: { Message }
 }
 
 </script>
