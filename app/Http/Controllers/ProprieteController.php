@@ -11,6 +11,9 @@ use App\Models\Propriete;
 use App\Models\Alerte;
 use App\Models\Visite;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendSonnetteMail;
+
 class ProprieteController extends Controller
 {
     //
@@ -264,10 +267,48 @@ class ProprieteController extends Controller
             switch ($infosCanal->type) {
                 case 'email':
                     # code...
-                    return response()->json([
-                        "status" => true,
-                        "message" => "L'email a bien été envoyer."
-                    ]); 
+
+                    $date = date('Y-m-d');
+
+                    $checkSecurite = Visite::where('propriete_id', $id)
+                    ->where(function ($query) use ($denomination, $telephone) {
+                        $query->orWhere('denomination', $denomination)
+                            ->orWhere('telephone', $telephone);
+                    })
+                    ->where('created_at', 'LIKE', '%'.$date.'%')
+                    ->count();
+
+                    if($checkSecurite >= 3){
+                        return response()->json([
+                            "status" => false,
+                            "result" => $checkSecurite,
+                            "message" => "Vous avez déjà sonné 3 fois. Revenez demain."
+                        ]);
+                    } else {
+
+                        $createVisite = Visite::create([
+                            "propriete_id" => $id,
+                            "alerte_id" => $infosCanal->id,
+                            "denomination" => $denomination,
+                            "telephone" => $telephone,
+                            "etat" => 1
+                        ]);
+
+                        $details = [
+                            'denomination' => $denomination,
+                            'telephone' => $telephone,
+                            'date' => $createVisite->created_at
+                        ];
+                       
+                        Mail::to($infosCanal->informations)->send(new SendSonnetteMail($details));
+
+                        return response()->json([
+                            "status" => true,
+                            "message" => "Le propriétaire a été informé par email de votre visite."
+                        ]); 
+
+                    }
+
                     break;
                 case 'discord':
                     
