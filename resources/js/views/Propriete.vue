@@ -1,6 +1,9 @@
 <template>
 
-    <div class="ShellDashboard">
+    <div v-if="!loadData" class="ShellLoader">
+        <Loader />
+    </div>
+    <div v-else class="ShellDashboard">
 
         <Sidebar :isLogging="true" />
 
@@ -51,6 +54,7 @@
 
 <script>
 
+import Loader from '../components/Loader.vue';
 import Message from '../components/Message.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
@@ -58,6 +62,7 @@ import Header from '../components/Header.vue';
 export default {
     data() {
         return {
+            loadData: false,
             dataIsOkay: false,
             proprietes: null,
             isVisibilityMessageOne: false,
@@ -98,6 +103,7 @@ export default {
                         if(data.result.length != 0){
                             this.dataIsOkay = true
                             this.proprietes = data.result
+                            this.loadData = true
                         }
                     } else {
                         this.isVisibilityMessageOne = true 
@@ -114,7 +120,7 @@ export default {
 
         }
     },  
-    components: { Sidebar, Header, Message }
+    components: { Sidebar, Header, Message, Loader }
 }
 
 </script>
