@@ -12,7 +12,7 @@
                         <img src="assets/images/logo_color.png" width="350" class="ShellCode__title" />
                     </div>
 
-                    <Message :visibility="true" type="success" :message="'Bonjour !'" />
+                    <Message :visibility="isVisibilityMessage" :type="isTypeMessage" :message="isMessage" />
 
                     <form class="Shellogin__form" @submit.prevent="login">
 
@@ -39,7 +39,10 @@ export default {
 
     data() {
         return {
-            code: ''
+            code: '',
+            isVisibilityMessage: false,
+            isTypeMessage: 'success',
+            isMessage: 'Bonjour !'
         }
     },
     methods: {
@@ -63,15 +66,26 @@ export default {
                 }
             })
             .then(data => {
-                console.log(data.access_token)
-                console.log(data.user)
 
-                localStorage.setItem("token", data.access_token)
+                if(data.status){
 
-                window.location.assign('/');
+                    localStorage.removeItem("email")
+                    localStorage.setItem("token", data.result.original.access_token)
 
-                // this.$router.push('/')
+                    window.location.assign('/');
 
+                } else {
+
+                    this.isVisibilityMessage = true 
+                    this.isTypeMessage = "danger"
+                    this.isMessage = data.message
+
+                    setTimeout(() => {
+                        this.isVisibilityMessage = false;
+                    }, 2500);
+
+                }
+                
             })
             .catch(error => console.log(error));
         }

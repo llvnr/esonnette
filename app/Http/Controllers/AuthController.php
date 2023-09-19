@@ -75,12 +75,12 @@ class AuthController extends Controller
             return response()->json([
                 'status' => false,
                 "message" => "Utilisateur introuvable ou code incorrect."
-            ], 404);
+            ]);
         } else if (! $token = JWTAuth::fromUser($user)) {
             return response()->json([
                 "status" => false,
                 'message' => 'Non autorisé.'
-            ], 401);
+            ]);
         }
 
         // Authentifiez l'utilisateur manuellement
