@@ -13,6 +13,8 @@
             </div>
             <div class="ShellDashboard__content-body">
 
+                <Message :visibility="isVisibilityMessage" :type="isTypeMessage" :message="isMessage" />
+
                 <div v-if="typeAlert === 'email'">
                     
                     <div class="ContentBodyADDAlertEmail">
@@ -55,6 +57,7 @@
 
 <script>
 
+import Message from '../components/Message.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
 
@@ -64,7 +67,10 @@ export default {
             getID: null,
             typeAlert: null,
             email: '',
-            discord: ''
+            discord: '',
+            isVisibilityMessage: false,
+            isTypeMessage: 'success',
+            isMessage: ''
         }
     },
     mounted() {
@@ -81,7 +87,7 @@ export default {
             let email = this.email
             let type = this.typeAlert
 
-            if(email.length == 0) return alert('Le champ [EMAIL] est obligatoire.')
+            if(!this.checkRequiredField('EMAIL', email)) return;
 
             const token = localStorage.getItem('token');
 
@@ -108,10 +114,26 @@ export default {
             .then(data => {
                 if(data !== undefined){
                     if(data.status){
-                        alert("L'alerte email a bien été créer.")
-                        this.$router.go(-1)
+
+                        this.isVisibilityMessage = true 
+                        this.isTypeMessage = "success"
+                        this.isMessage = "L'alerte email a bien été créer."
+
+                        setTimeout(() => {
+                            this.isVisibilityMessage = false;
+                            this.$router.go(-1)
+                        }, 3000);
+
                     } else {
-                        alert(data.message)
+
+                        this.isVisibilityMessage = true 
+                        this.isTypeMessage = "danger"
+                        this.isMessage = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessage = false;
+                        }, 3000);
+
                     }
                 }
             })
@@ -124,7 +146,7 @@ export default {
             let discord = this.discord
             let type = this.typeAlert
 
-            if(discord.length == 0) return alert('Le champ [DISCORD] est obligatoire.')
+            if(!this.checkRequiredField('DISCORD', discord)) return;
 
             const token = localStorage.getItem('token');
 
@@ -151,18 +173,45 @@ export default {
             .then(data => {
                 if(data !== undefined){
                     if(data.status){
-                        alert("L'alerte discord a bien été créer.")
-                        this.$router.go(-1)
+                        this.isVisibilityMessage = true 
+                        this.isTypeMessage = "danger"
+                        this.isMessage = "L'alerte discord a bien été créer."
+
+                        setTimeout(() => {
+                            this.isVisibilityMessage = false;
+                            this.$router.go(-1)
+                        }, 3000);
                     } else {
-                        alert(data.message)
+
+                        this.isVisibilityMessage = true 
+                        this.isTypeMessage = "danger"
+                        this.isMessage = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessage = false;
+                        }, 3000);
+
                     }
                 }
             })
             .catch(error => console.log(error));
 
+        },
+        checkRequiredField(fieldName, fieldValue) {
+            if (fieldValue.length === 0) {
+                this.isVisibilityMessage = true 
+                this.isTypeMessage = "danger"
+                this.isMessage = `Le champ [${fieldName}] est obligatoire.`
+
+                setTimeout(() => {
+                    this.isVisibilityMessage = false;
+                }, 3000);
+                return false; // Indique que la validation a échoué
+            }
+            return true; // Indique que la validation a réussi
         }
     },
-    components: { Sidebar, Header  }
+    components: { Sidebar, Header, Message  }
 }
 
 </script>
