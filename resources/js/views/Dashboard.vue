@@ -1,6 +1,9 @@
 <template>
 
-    <div class="ShellDashboard">
+    <div v-if="!loadData" class="ShellLoader">
+        <Loader />
+    </div>
+    <div v-else class="ShellDashboard">
 
         <Sidebar />
 
@@ -37,6 +40,7 @@
 
 <script>
 
+import Loader from '../components/Loader.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
 import Card from '../components/Card.vue';
@@ -44,6 +48,7 @@ import Card from '../components/Card.vue';
 export default {
     data(){
         return {
+            loadData: false,
             utilisateur: null,
             role: null,
             propriete: null,
@@ -88,6 +93,7 @@ export default {
                         this.notificationDiscord = data.data.notification_discord
                         this.notificationSMS = data.data.notification_sms
                         this.notificationSlack = data.data.notification_slack
+                        this.loadData = true
                     } else {
                         alert(data.message)
                     }
@@ -96,7 +102,7 @@ export default {
             .catch(error => console.log(error));
         }
     },
-    components: { Sidebar, Header, Card }
+    components: { Sidebar, Header, Card, Loader }
 }
 
 </script>

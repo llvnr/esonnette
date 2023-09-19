@@ -6,6 +6,16 @@ html, body {
     overflow: hidden; /* Empêche le débordement global */
 }
 
+/* LOADER */
+.ShellLoader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden; /* Empêche le débordement de ShellDashboard */
+}
+/* LOADER */
+
 /* PAGE LOGIN */
 
 .Shellogin {
