@@ -13,6 +13,8 @@
             </div>
             <div class="ShellDashboard__content-body">
 
+                <Message :visibility="isVisibilityMessageOne" :type="isTypeMessageOne" :message="isMessageOne" />
+
                 <div class="ContentBodyAlerte">
 
                     <div class="ContentBodyAlerte__colonneUn">
@@ -31,7 +33,9 @@
                     </div>
                     <div class="ContentBodyAlerte__colonneDeux">
                         
-                        <div v-for="(item, index) in allAlerte" class="cardAlerte noDecor">
+                        <Message v-if="!dataIsOkay" :visibility="isVisibilityMessageTwo" :type="isTypeMessageTwo" :message="isMessageTwo" />
+
+                        <div v-for="(item, index) in allAlerte" v-else class="cardAlerte noDecor">
 
                             <div class="cardAlerte__label-id">{{ item.id }}</div>
                             <div v-if="item.type === 'email'" class="cardAlerte__label-logo"><img src="https://img.icons8.com/?size=25&id=D9x0PpvvT1AL&format=png" /></div>
@@ -59,15 +63,23 @@
 
 <script>
 
+import Message from '../components/Message.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
 
 export default {
     data() {
         return {
+            dataIsOkay: false,
             getID: null,
             typeAlerte: "email",
-            allAlerte: {}
+            allAlerte: {},
+            isVisibilityMessageOne: false,
+            isTypeMessageOne: 'danger',
+            isMessageOne: "",
+            isVisibilityMessageTwo: true,
+            isTypeMessageTwo: 'danger',
+            isMessageTwo: "Vous n'avez défini aucune alerte."
         }
     },
     mounted() {
@@ -111,9 +123,18 @@ export default {
             .then(data => {
                 if(data !== undefined){
                     if(data.status){
-                        this.allAlerte = data.result
+                        if(data.result.length != 0){
+                            this.dataIsOkay = true
+                            this.allAlerte = data.result
+                        }
                     } else {
-                        alert(data.message)
+                        this.isVisibilityMessageOne = true 
+                        this.isTypeMessageOne = "danger"
+                        this.isMessageOne = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessageOne = false;
+                        }, 3000);
                     }
                 }
             })
@@ -121,7 +142,7 @@ export default {
 
         }
     },
-    components: { Sidebar, Header }
+    components: { Sidebar, Header, Message }
 }
 
 </script>

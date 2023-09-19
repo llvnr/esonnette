@@ -13,7 +13,7 @@
             </div>
             <div class="ShellDashboard__content-body">
 
-                <!-- <Message :visibility="true" type="success" :message="'Bonjour !'" /> -->
+                <Message :visibility="isVisibilityMessageOne" :type="isTypeMessageOne" :message="isMessageOne" />
 
                 <div class="ContentBodyVoirPropriete">
 
@@ -64,7 +64,9 @@
                         </div>
                     </div>
 
-                    <div class="ContentBodyDataVisite">
+                    <Message v-if="!dataIsOkay" :visibility="isVisibilityMessageTwo" :type="isTypeMessageTwo" :message="isMessageTwo" />
+
+                    <div v-else class="ContentBodyDataVisite">
                         
                         <div v-for="(item, index) in allVisite" class="cardVisite">
 
@@ -106,9 +108,16 @@ import Header from '../components/Header.vue';
 export default {
     data() {
         return {
+            dataIsOkay: false,
             infoPropriete: {},
             allVisite: {},
-            getID: null
+            getID: null,
+            isVisibilityMessageOne: false,
+            isTypeMessageOne: 'danger',
+            isMessageOne: "",
+            isVisibilityMessageTwo: true,
+            isTypeMessageTwo: 'danger',
+            isMessageTwo: "Vous n'avez reçu aucune visite."
         }
     },
     mounted() {
@@ -152,7 +161,13 @@ export default {
                     if(data.status){
                         this.infoPropriete = data.result
                     } else {
-                        alert(data.message)
+                        this.isVisibilityMessageOne = true 
+                        this.isTypeMessageOne = "danger"
+                        this.isMessageOne = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessageOne = false;
+                        }, 3000);
                     }
                 }
             })
@@ -188,7 +203,13 @@ export default {
                     if(data.status){
                         this.infoPropriete = data.result
                     } else {
-                        alert(data.message)
+                        this.isVisibilityMessageOne = true 
+                        this.isTypeMessageOne = "danger"
+                        this.isMessageOne = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessageOne = false;
+                        }, 3000);
                     }
                 }
             })
@@ -220,9 +241,18 @@ export default {
             .then(data => {
                 if(data !== undefined){
                     if(data.status){
-                        this.allVisite = data.result
+                        if(data.result.length != 0){
+                            this.dataIsOkay = true
+                            this.allVisite = data.result
+                        }
                     } else {
-                        alert(data.message)
+                        this.isVisibilityMessageOne = true 
+                        this.isTypeMessageOne = "danger"
+                        this.isMessageOne = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessageOne = false;
+                        }, 3000);
                     }
                 }
             })

@@ -13,6 +13,8 @@
             </div>
             <div class="ShellDashboard__content-body">
 
+                <Message :visibility="isVisibilityMessageOne" :type="isTypeMessageOne" :message="isMessageOne" />
+
                 <div class="ContentBodyPropriete">
 
                     <div class="ContentBodyPropriete__colonneUn">
@@ -20,7 +22,9 @@
                     </div>
                     <div class="ContentBodyPropriete__colonneDeux">
                         
-                        <router-link :to="'/voir-propriete/' + item.id" v-for="(item, index) in proprietes" class="cardPropriete noDecor">
+                        <Message v-if="!dataIsOkay" :visibility="isVisibilityMessageTwo" :type="isTypeMessageTwo" :message="isMessageTwo" />
+
+                        <router-link :to="'/voir-propriete/' + item.id" v-for="(item, index) in proprietes" v-else class="cardPropriete noDecor">
 
                             <div class="cardPropriete__label-id">{{ item.id }}</div>
                             <div class="cardPropriete__label-image"><img :src="item.qrcode" width="50" /></div>
@@ -47,13 +51,21 @@
 
 <script>
 
+import Message from '../components/Message.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
 
 export default {
     data() {
         return {
-            proprietes: null
+            dataIsOkay: false,
+            proprietes: null,
+            isVisibilityMessageOne: false,
+            isTypeMessageOne: 'danger',
+            isMessageOne: "",
+            isVisibilityMessageTwo: true,
+            isTypeMessageTwo: 'danger',
+            isMessageTwo: "Aucune propriété disponible."
         }
     },
     mounted() {
@@ -83,9 +95,18 @@ export default {
                 if(data !== undefined){
                     if(data.status){
                         // console.log(data)
-                        this.proprietes = data.result
+                        if(data.result.length != 0){
+                            this.dataIsOkay = true
+                            this.proprietes = data.result
+                        }
                     } else {
-                        alert(data.message)
+                        this.isVisibilityMessageOne = true 
+                        this.isTypeMessageOne = "danger"
+                        this.isMessageOne = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessageOne = false;
+                        }, 3000);
                     }
                 }
             })
@@ -93,7 +114,7 @@ export default {
 
         }
     },  
-    components: { Sidebar, Header }
+    components: { Sidebar, Header, Message }
 }
 
 </script>
