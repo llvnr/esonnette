@@ -42,7 +42,7 @@ export default {
             code: '',
             isVisibilityMessage: false,
             isTypeMessage: 'success',
-            isMessage: 'Bonjour !'
+            isMessage: ''
         }
     },
     methods: {

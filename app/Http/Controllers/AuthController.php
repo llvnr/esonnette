@@ -33,7 +33,10 @@ class AuthController extends Controller
 
         $checkUser = User::where('email', $request->email)->first();
         if (!$checkUser) {
-            return response()->json(['error' => 'User not found'], 404);
+            return response()->json([
+                "status" => false,
+                "message" => 'Utilisateur introuvable'
+            ]);
         } else {
             $generateCode = rand(100000, 999999);
 
@@ -45,9 +48,9 @@ class AuthController extends Controller
 
             return response()->json([
                 "status" => true,
-                "message" => "L'utilisateur existe et un code d'authentification a été générer.",
+                "message" => "Si l'utilisateur existe, un code d'authentification sera générer. Vous allez être rédirigé...",
                 "code" => $generateCode
-            ], 201);
+            ]);
 
         }
 

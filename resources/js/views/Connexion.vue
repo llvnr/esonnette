@@ -11,6 +11,9 @@
                     <div class="Shellogin__image">
                         <img src="assets/images/logo_color.png" width="350" class="Shellogin__title" />
                     </div>
+
+                    <Message :visibility="isVisibilityMessage" :type="isTypeMessage" :message="isMessage" />
+
                     <form class="Shellogin__form" @submit.prevent="login">
                         <input type="email" class="Shellogin__email" name="email" v-model="email" placeholder="Votre adresse email...">
 
@@ -27,12 +30,16 @@
 </template>
 
 <script>
+import Message from '../components/Message.vue';
 import Header from '../components/Header.vue';
 
 export default {
     data() {
         return {
-            email: ''
+            email: '',
+            isVisibilityMessage: false,
+            isTypeMessage: 'success',
+            isMessage: ''
         };
     },
     methods: {
@@ -56,19 +63,34 @@ export default {
             })
             .then(data => {
                 if(data.status){
-                    console.log(data.message)
+                    // console.log(data.message)
                     console.log(data.code)
 
-                    localStorage.setItem("email", this.email)
+                    this.isVisibilityMessage = true 
+                    this.isTypeMessage = "success"
+                    this.isMessage = data.message
 
-                    this.$router.push('/code')
+                    setTimeout(() => {
+                        this.isVisibilityMessage = false;
+                        localStorage.setItem("email", this.email)
 
+                        this.$router.push('/code')
+                    }, 3000);
+
+                } else {
+                    this.isVisibilityMessage = true 
+                    this.isTypeMessage = "danger"
+                    this.isMessage = data.message
+
+                    setTimeout(() => {
+                        this.isVisibilityMessage = false;
+                    }, 2500);
                 }
             })
             .catch(error => console.log(error));
         }
     },
-    components: { Header }
+    components: { Header, Message }
 }
 
 </script>
