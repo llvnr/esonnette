@@ -6,6 +6,9 @@ use App\Models\User;
 use Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CodeConfirmationMail;
+
 class AuthController extends Controller
 {
     /**
@@ -45,6 +48,11 @@ class AuthController extends Controller
             ]);
 
             // NE PAS OUBLIER L'ENVOIE DE MAIL PLUS TARD
+            $details = [
+                'code' => $generateCode
+            ];
+           
+            Mail::to($request->email)->send(new CodeConfirmationMail($details));
 
             return response()->json([
                 "status" => true,
