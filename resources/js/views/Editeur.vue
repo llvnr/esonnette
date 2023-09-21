@@ -137,7 +137,83 @@ export default {
                         if(data.result.length != 0){
                             // this.dataIsOkay = true
                             this.proprietes = data.result
+                            this.getSticker()
                             // this.loadData = true
+                        }
+                    } else {
+                        this.isVisibilityMessageOne = true 
+                        this.isTypeMessageOne = "danger"
+                        this.isMessageOne = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessageOne = false;
+                        }, 3000);
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+
+        },
+        getSticker() {
+
+            let idPropriete = this.myProperty
+
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/getSticker', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    idPropriete: idPropriete
+                })
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        // console.log(data)
+                        if(data.result.length != 0){
+                            // this.dataIsOkay = true
+                            // this.proprietes = data.result
+                            // this.loadData = true
+
+                            console.log(data)
+                            let configuration = JSON.parse(data.result.configuration)
+                            this.border = configuration.border
+                            this.background = configuration.background
+                            this.title = configuration.title
+                            this.subtitle = configuration.subtitle
+                            this.backgroundQrcode = configuration.backgroundQrcode
+                            this.colorQrcode = configuration.colorQrcode
+                            this.separation = configuration.separation
+                            this.signature = configuration.signature
+
+                            let sticker = document.getElementById("sticker")
+                            sticker.style.border = "1px solid" + this.border
+                            sticker.style.backgroundColor = this.background
+                            let stickerText = document.getElementById("stickerText")
+                            stickerText.style.color = this.title
+                            let stickerSubtext = document.getElementById("stickerSubtext")
+                            stickerSubtext.style.color = this.subtitle
+                            let stickerQrcode = document.getElementById("stickerQrcode")
+                            let stickerSeparation = document.getElementById("stickerSeparation")
+                            stickerSeparation.style.borderBottom = "4px solid " + this.separation
+                            let stickerLogo = document.getElementById("stickerLogo")
+                            let stickerSignature = document.getElementById("stickerSignature")
+                            stickerSignature.style.color = this.signature
+
+                            // console.log(configuration)
+
                         }
                     } else {
                         this.isVisibilityMessageOne = true 

@@ -10,6 +10,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Propriete;
 use App\Models\Alerte;
 use App\Models\Visite;
+use App\Models\Sticker;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendSonnetteMail;
@@ -387,6 +388,44 @@ class ProprieteController extends Controller
                 "message" => $th->getMessage()
             ], 500);
         }
+
+    }
+
+    /**
+     * Get Sticker By ID Property
+     *
+     * @return void
+    */
+
+    public function getSticker(Request $request) {
+
+        try {
+            //code...
+            $validator = Validator::make($request->all(), [
+                'idPropriete' => 'required'
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
+            $idPropriete = $request->idPropriete;
+
+            $getSticker = Sticker::where('propriete_id', $idPropriete)->first();
+
+            return response()->json([
+                "status" => true,
+                "result" => $getSticker
+            ]);
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                "status" => false,
+                "message" => $th->getMessage()
+            ], 500);
+        }
+
 
     }
 
