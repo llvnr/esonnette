@@ -129,15 +129,32 @@ class ProprieteController extends Controller
                         "qrcode" => "data:image/png;base64,".$qrCode
                     ]);
 
+                    $configurationInitial = [
+                        "border" => "#000000",
+                        "background" => "#FFFFFF",
+                        "title" => "#3056D3",
+                        "subtitle" => "#000000",
+                        "backgroundQrcode" => "#FFFFFF",
+                        "colorQrcode" => "#FFFFFF",
+                        "separation" => "#000000",
+                        "signature" => "#000000"
+                    ];
+
+                    $createSticker = Sticker::create([
+                        "user_id" => auth()->user()->id,
+                        "propriete_id" => $addPropriete->id,
+                        "configuration" => $configurationInitial
+                    ]);
+
+                    return response()->json([
+                        "status" => true,
+                        "message" => "Votre propriété a été créer avec succès.",
+                        "result" => $addPropriete
+                    ]);
+
                 }
 
             }
-
-            return response()->json([
-                "status" => true,
-                "message" => "Votre propriété a été créer avec succès.",
-                "result" => $addPropriete
-            ]);
 
         } catch (\Throwable $th) {
             return response()->json([

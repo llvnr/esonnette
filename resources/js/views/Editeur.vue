@@ -189,7 +189,7 @@ export default {
                             // this.loadData = true
 
                             console.log(data)
-                            let configuration = JSON.parse(data.result.configuration)
+                            let configuration = data.result.configuration
                             this.border = configuration.border
                             this.background = configuration.background
                             this.title = configuration.title

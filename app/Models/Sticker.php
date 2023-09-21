@@ -17,4 +17,8 @@ class Sticker extends Model
         "configuration"
     ];
 
+    protected $casts = [
+        'configuration' => 'json',
+    ];
+
 }

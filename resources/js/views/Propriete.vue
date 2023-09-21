@@ -104,6 +104,15 @@ export default {
                             this.dataIsOkay = true
                             this.proprietes = data.result
                             this.loadData = true
+                        } else {
+                            this.loadData = true
+                            this.isVisibilityMessageTwo = true 
+                            this.isTypeMessageTwo = "danger"
+                            this.isMessageTwo = "Vous n'avez aucun propriété."
+
+                            setTimeout(() => {
+                                this.isVisibilityMessageOne = false;
+                            }, 3000);
                         }
                     } else {
                         this.isVisibilityMessageOne = true 
