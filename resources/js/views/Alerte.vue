@@ -132,6 +132,15 @@ export default {
                             this.dataIsOkay = true
                             this.allAlerte = data.result
                             this.loadData = true
+                        } else {
+                            this.loadData = true
+                            this.isVisibilityMessageTwo = true 
+                            this.isTypeMessageTwo = "danger"
+                            this.isMessageTwo = "Aucune alerte définie."
+
+                            setTimeout(() => {
+                                this.isVisibilityMessageOne = false;
+                            }, 3000);
                         }
                     } else {
                         this.isVisibilityMessageOne = true 
