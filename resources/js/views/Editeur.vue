@@ -96,7 +96,7 @@ export default {
             isMessageOne: "",
             loadData: true,
             proprietes: {},
-            myProperty: 1,
+            myProperty: null,
             border: '#000000',
             background: '#FFFFFF',
             title: '#3056D3',
@@ -137,6 +137,7 @@ export default {
                         if(data.result.length != 0){
                             // this.dataIsOkay = true
                             this.proprietes = data.result
+                            this.myProperty = data.result[0].id
                             this.getSticker()
                             // this.loadData = true
                         }
