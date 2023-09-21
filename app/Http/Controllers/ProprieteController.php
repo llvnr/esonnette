@@ -28,7 +28,7 @@ class ProprieteController extends Controller
     }
 
     /**
-     * Get All Propriete
+     * Get All Propriete By ID
      *
      * @return void
     */
@@ -38,7 +38,7 @@ class ProprieteController extends Controller
         try {
             //code...
 
-            $all = Propriete::all();
+            $all = Propriete::where('user_id', auth()->user()->id)->get();
 
             return response()->json([
                 "status" => true,
