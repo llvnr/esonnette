@@ -10,6 +10,7 @@ import Code from "./views/Code.vue";
 import Alerte from "./views/Alerte.vue";
 import AddAlerte from "./views/AddAlerte.vue";
 import Scan from "./views/Scan.vue";
+import Editeur from "./views/Editeur.vue"
 
 const routes = [
     {
@@ -58,6 +59,11 @@ const routes = [
         path: '/propriete/qrcode/:id',
         name: 'Scan',
         component: Scan,
+    },
+    {
+        path: '/editeur',
+        name: 'Editeur',
+        component: Editeur
     },
     {
         path: '/connexion',

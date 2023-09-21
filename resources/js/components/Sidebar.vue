@@ -9,6 +9,7 @@
             <ul v-if="isLogging" class="SidebarContent__navigation">
                 <router-link to="/"  class="noDecor"><li class="SidebarContent__navigation-element">Dashboard</li></router-link>
                 <router-link to="/propriete" class="noDecor"><li class="SidebarContent__navigation-element">Mes propriétés</li></router-link>
+                <router-link to="/editeur" class="noDecor"><li class="SidebarContent__navigation-element">Editeur de sticker</li></router-link>
                 <li class="SidebarContent__navigation-element noDecor" @click="Logout">Déconnexion</li>
             </ul>
             <ul v-else class="SidebarContent__navigation">
