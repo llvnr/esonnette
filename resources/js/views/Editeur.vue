@@ -17,6 +17,9 @@
             <div class="ShellDashboard__content-body">
 
                 <div class="ShellEditeur">
+
+                    <Message :visibility="isVisibilityMessageOne" :type="isTypeMessageOne" :message="isMessageOne" />
+
                     <div class="ShellEditeur__left">
 
                         <div class="Sticker" id="sticker">
@@ -33,9 +36,9 @@
                     </div>
                     <div class="ShellEditeur__right">
 
-                        <div class="ShellEditeur__right-labelpropriete">Propriété : </div>
-                        <select class="ShellEditeur__right-selectpropriete">
-                            <option value="Ma propriete">Ma propriété</option>
+                        <div class="ShellEditeur__right-labelpropriete">Mes propriétés : </div>
+                        <select v-for="(item, index) in proprietes" v-model="myProperty" class="ShellEditeur__right-selectpropriete">
+                            <option :value="item.id">{{ "#" + item.id + ' - ' + item.prenom + ' ' + item.nom + ' (' + item.adresse + ' ' + item.codepostal + ' ' + item.ville + ')' }}</option>
                         </select>
 
                         <hr>
@@ -66,7 +69,7 @@
 
                         <br>
 
-                        <button class="ShellEditeur__right-btnsave">Enregistrer</button>
+                        <button class="ShellEditeur__right-btnupdate">Modifier</button>
 
                     </div>
                 </div>
@@ -83,11 +86,17 @@
 import Loader from '../components/Loader.vue';
 import Header from '../components/Header.vue';
 import Sidebar from '../components/Sidebar.vue';
+import Message from '../components/Message.vue';
 
 export default {
     data() {
         return {
+            isVisibilityMessageOne: false,
+            isTypeMessageOne: 'danger',
+            isMessageOne: "",
             loadData: true,
+            proprietes: {},
+            myProperty: 1,
             border: '#000000',
             background: '#FFFFFF',
             title: '#3056D3',
@@ -98,7 +107,52 @@ export default {
             signature: '#000000'
         }
     },
+    mounted() {
+        this.getPropriete()
+    },
     methods: {
+        getPropriete() {
+            
+            const token = localStorage.getItem('token');
+
+            fetch('/api/auth/allPropriete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        // console.log(data)
+                        if(data.result.length != 0){
+                            // this.dataIsOkay = true
+                            this.proprietes = data.result
+                            // this.loadData = true
+                        }
+                    } else {
+                        this.isVisibilityMessageOne = true 
+                        this.isTypeMessageOne = "danger"
+                        this.isMessageOne = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessageOne = false;
+                        }, 3000);
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+
+        },
         changeStyleSticker() {
 
             let border = this.border 
@@ -130,7 +184,7 @@ export default {
 
         }
     },
-    components: { Loader, Header, Sidebar }
+    components: { Loader, Header, Sidebar, Message }
 }
 
 </script>
