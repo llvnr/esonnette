@@ -73,9 +73,6 @@ class ProprieteController extends Controller
                 return response()->json($validator->errors(), 422);
             }
 
-            $appURL = env('APP_URL');
-
-            $qrCode = base64_encode(QrCode::format('png')->size(500)->generate($appURL));
             $nom = $request->nom;
             $prenom = $request->prenom;
             $typepropriete = $request->typepropriete;
@@ -113,7 +110,8 @@ class ProprieteController extends Controller
                 } else {
 
                     $addPropriete = Propriete::create([
-                        "qrcode" => "data:image/png;base64,".$qrCode,
+                        "user_id" => auth()->user()->id,
+                        "qrcode" => "data:image/png;base64",
                         "nom" => $nom,
                         "prenom" => $prenom,
                         "typepropriete" => $typepropriete,
@@ -121,6 +119,13 @@ class ProprieteController extends Controller
                         "codepostal" => $codepostal,
                         "ville" => $ville,
                         "status" => true
+                    ]);
+
+                    $appURL = env('APP_URL')."/propriete/qrcode/".$addPropriete->id;
+                    $qrCode = base64_encode(QrCode::format('png')->size(500)->generate($appURL));
+
+                    $addPropriete->update([
+                        "qrcode" => "data:image/png;base64,".$qrCode
                     ]);
 
                 }
