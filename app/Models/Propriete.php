@@ -13,6 +13,7 @@ class Propriete extends Model
     protected $table = "propriete";
 
     protected $fillable = [
+        "user_id",
         "qrcode",
         "nom",
         "prenom",
