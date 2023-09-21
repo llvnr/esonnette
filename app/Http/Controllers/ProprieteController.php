@@ -121,7 +121,7 @@ class ProprieteController extends Controller
                         "status" => true
                     ]);
 
-                    $appURL = env('APP_URL')."/propriete/qrcode/".$addPropriete->id;
+                    $appURL = env('APP_URL')."propriete/qrcode/".$addPropriete->id;
                     $qrCode = base64_encode(QrCode::format('png')->size(500)->generate($appURL));
 
                     $addPropriete->update([
