@@ -1091,3 +1091,68 @@ html, body {
 }
 
 /* PAGE DE SCAN */
+
+/* PAGE EDITEUR */
+
+.ShellEditeur {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.ShellEditeur__left {
+    flex: 3;
+    padding: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Sticker {
+    border: 1px solid black;
+    width: 500px;
+    height: 450px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Sticker__text {
+    font-size: 1.5em;
+    font-weight: bold;
+    color:#3056D3;
+}
+
+.Sticker__subtext {
+    font-size: 2em;
+    font-weight: bold;
+    color:black;
+}
+
+.Sticker__qrcode {
+    width: 300px; 
+    height: 250px;
+}
+
+.Sticker__separation {
+    width: 10%;
+    border-bottom: 4px solid #3056D3; 
+}
+
+.Sticker__logo {
+    width: 200px;
+}
+
+.Sticker__signature {
+    color: black;
+}
+
+.ShellEditeur__right {
+    flex: 1;
+    background-color: white;
+    border-left: 2px solid #E5E9F0;
+}
+
+/* PAGE EDITEUR */

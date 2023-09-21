@@ -63,7 +63,8 @@ const routes = [
     {
         path: '/editeur',
         name: 'Editeur',
-        component: Editeur
+        component: Editeur,
+        meta: { requiresAuth: true } // Marquer la route comme nécessitant une authentification
     },
     {
         path: '/connexion',
