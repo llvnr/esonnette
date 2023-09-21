@@ -17,7 +17,8 @@
                     <form class="Shellogin__form" @submit.prevent="login">
                         <input type="email" class="Shellogin__email" name="email" v-model="email" placeholder="Votre adresse email...">
 
-                        <button type="submit" class="Shellogin__btnlogin">Connexion</button>
+                        <button type="submit" v-if="!isLoading" class="Shellogin__btnlogin-disabled" :disabled="!isLoading">Patientez...</button>
+                        <button type="submit" v-else class="Shellogin__btnlogin">Connexion</button>
                     </form>
                 </div>
 
@@ -36,6 +37,7 @@ import Header from '../components/Header.vue';
 export default {
     data() {
         return {
+            isLoading: true,
             email: '',
             isVisibilityMessage: false,
             isTypeMessage: 'success',
@@ -44,6 +46,9 @@ export default {
     },
     methods: {
         login() {
+
+            this.isLoading = false
+
             fetch('/api/auth/chugc', {
                 method: 'POST',
                 headers: {
@@ -66,6 +71,8 @@ export default {
                     // console.log(data.message)
                     console.log(data.code)
 
+                    this.isLoading = true
+
                     this.isVisibilityMessage = true 
                     this.isTypeMessage = "success"
                     this.isMessage = data.message
@@ -78,6 +85,7 @@ export default {
                     }, 3000);
 
                 } else {
+                    this.isLoading = true
                     this.isVisibilityMessage = true 
                     this.isTypeMessage = "danger"
                     this.isMessage = data.message

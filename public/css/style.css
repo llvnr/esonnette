@@ -57,6 +57,16 @@ html, body {
     cursor: pointer;
 }
 
+.Shellogin__btnlogin-disabled {
+    height: 2.5em;
+    font-size: 1.3em;
+    opacity: 0.6; /* Une valeur inférieure à 1 rendra le bouton plus transparent */
+    cursor: not-allowed; /* Affiche un curseur "interdit" */
+    background-color: #ccc; /* Couleur de fond grise */
+    color: #999; /* Couleur du texte grise */
+    border: 1px solid #ccc; /* Bordure grise */
+}
+
 .Shellogin__btnlogin:hover {
     background-color: #3056D3;
 }
