@@ -69,7 +69,7 @@
 
                         <br>
 
-                        <button class="ShellEditeur__right-btnupdate">Modifier</button>
+                        <button class="ShellEditeur__right-btnupdate" @click="updateSticker">Modifier</button>
 
                     </div>
                 </div>
@@ -259,6 +259,9 @@ export default {
             // backgroundQrcode + ' / ' + colorQrcode + ' / '
             // + separation)
 
+        },
+        updateSticker() {
+            alert('Mise à jour du sticker !')
         }
     },
     components: { Loader, Header, Sidebar, Message }
