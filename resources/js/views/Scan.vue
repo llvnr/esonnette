@@ -16,7 +16,7 @@
 
             </div>
         </div>
-        <div class="ShellScan__Footer ShellScan__Footer-desactivatebtn" v-if="!etatQrcode">SONNETTE <br>(Désactivé)</div>
+        <div class="ShellScan__Footer ShellScan__Footer-desactivatebtn" v-if="!etatQrcode">{{ textStateQrcode }}</div>
         <div class="ShellScan__Footer ShellScan__Footer-disablebtn" v-else-if="etatQrcode && !etatDringDring">SONNER ({{ timerDringDring }}s)</div>
         <div class="ShellScan__Footer ShellScan__Footer-enablebtn" v-else-if="etatQrcode && etatDringDring" @click="this.dringdring">SONNER</div>
     </div>
@@ -29,6 +29,7 @@ import Message from '../components/Message.vue'
 export default {
     data() {
         return {
+            textStateQrcode: 'SONNETTE <br>(Désactivé)',
             etatQrcode: null,
             etatDringDring: true,
             timerDringDring: 0,
@@ -93,6 +94,9 @@ export default {
         },
         dringdring() {
 
+            this.etatQrcode = false
+            this.textStateQrcode = 'SONNETTE <br>(Patientez...)'
+
             let id = this.$route.params.id
             let denomination = this.denomination
             let telephone = this.telephone
@@ -125,6 +129,9 @@ export default {
             .then(data => {
                 if(data !== undefined){
                     if(data.status){
+
+                        this.etatQrcode = true
+                        this.textStateQrcode = 'SONNETTE <br>(Désactivé)'
 
                         this.timerDringDring = 10; // Démarrez le compteur à 10 secondes
                         this.etatDringDring = false;
