@@ -38,6 +38,26 @@
                     <div class="ContentBodyADDPropriete__label-ville">Ville</div>
                     <input type="text" class="ContentBodyADDPropriete__input-ville" v-model="ville" placeholder="Ville">
 
+                    <div class="ContentBodyADDPropriete__label-alerte">Alerte par default</div>
+                    <select v-model="typeAlert" class="ContentBodyADDPropriete__select-alert">
+                        <option value="email">Email</option>
+                        <option value="discord">Discord</option>
+                    </select>
+
+                    <div v-if="typeAlert === 'email'" class="ContentBodyADDProprieteAlertEmail">
+
+                        <div class="ContentBodyADDProprieteAlertEmail__label-email">Adresse email</div>
+                        <input type="email" class="ContentBodyADDProprieteAlertEmail__input-email" v-model="alertData" placeholder="Adresse email de destination">
+
+                    </div>
+
+                    <div v-else-if="typeAlert === 'discord'" class="ContentBodyADDProprieteAlertDiscord">
+
+                        <div class="ContentBodyADDProprieteAlertDiscord__label-discord">Url Webhook</div>
+                        <input type="text" class="ContentBodyADDProprieteAlertDiscord__input-discord" v-model="alertData" placeholder="Adresse email de destination">
+
+                    </div>
+
                     <button class="ContentBodyADDPropriete__btnadd" @click="this.addPropriete">Créer</button>
 
                 </div>
@@ -59,6 +79,8 @@ import Header from '../components/Header.vue';
 export default {
     data() {
         return {
+            typeAlert: 'email',
+            alertData: '',
             nom: '',
             prenom: '',
             typepropriete: 'Maison',
@@ -79,6 +101,8 @@ export default {
             let adresse = this.adresse
             let codepostal = this.codepostal
             let ville = this.ville
+            let typeAlert = this.typeAlert
+            let alertData = this.alertData
 
             if (!this.checkRequiredField('NOM', nom)) return;
             if (!this.checkRequiredField('PRENOM', prenom)) return;
@@ -86,6 +110,7 @@ export default {
             if (!this.checkRequiredField('ADRESSE', adresse)) return;
             if (!this.checkRequiredField('CODE POSTAL', codepostal)) return;
             if (!this.checkRequiredField('VILLE', ville)) return;
+            if (!this.checkRequiredField('EMAIL ou WEBHOOK', alertData)) return;
 
             const token = localStorage.getItem('token');
 
@@ -101,7 +126,9 @@ export default {
                     typepropriete: typepropriete,
                     adresse: adresse,
                     codepostal: codepostal,
-                    ville: ville
+                    ville: ville,
+                    typeAlert: typeAlert,
+                    alertData: alertData
                 })
             })
             .then(response => {

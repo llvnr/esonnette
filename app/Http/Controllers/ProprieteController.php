@@ -80,6 +80,8 @@ class ProprieteController extends Controller
             $adresse = $request->adresse;
             $codepostal = $request->codepostal;
             $ville = $request->ville;
+            $typeAlert = $request->typeAlert;
+            $alertData = $request->alertData;
 
             $checkProprietaire = Propriete::where('nom', $nom)
             ->where('prenom', $prenom)
@@ -144,6 +146,13 @@ class ProprieteController extends Controller
                         "user_id" => auth()->user()->id,
                         "propriete_id" => $addPropriete->id,
                         "configuration" => $configurationInitial
+                    ]);
+
+                    $createAlerte = Alerte::create([
+                        "propriete_id" => $addPropriete->id,
+                        "type" => $typeAlert,
+                        "informations" => $alertData,
+                        "etat" => 2
                     ]);
 
                     return response()->json([
