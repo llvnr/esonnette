@@ -250,6 +250,15 @@ export default {
                         if(data.result.length != 0){
                             this.dataIsOkay = true
                             this.allVisite = data.result
+                        } else {
+                            // this.dataIsOkay = true
+                            this.isVisibilityMessageTwo = true 
+                            this.isTypeMessageTwo = "danger"
+                            this.isMessageTwo = "Vous n'avez aucune reçu visite."
+
+                            // setTimeout(() => {
+                            //     this.isVisibilityMessageTwo = false;
+                            // }, 3000);
                         }
                     } else {
                         this.isVisibilityMessageOne = true 
