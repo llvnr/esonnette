@@ -9,12 +9,6 @@
                 <div class="ShellScan__Body-Content-label">Qui êtes vous ?</div>
                 <input type="text" class="ShellBody__Body-Content-input-name" v-model="denomination" placeholder="Votre nom ou entreprise" />
                 <input type="text" class="ShellBody__Body-Content-input-telephone" v-model="telephone" placeholder="Votre numéro de téléphone" />
-                <div class="ShellScan__Body-Content-infos">
-                    Comment voulez vous sonner ?
-                </div>
-                <select class="ShellScan__Body-Content-Canaux" v-model="canaux">
-                    <option v-for="(item, index) in getPropriete.alerte" :key="index" :value="item.id">Via {{ item.type }}</option>
-                </select>
                 <div class="ShellScan__Body-Content-infospub">
                     Besoin d'une sonnette comme ça chez vous ? <br> Rendez-vous sur 
                     <a href="https://esonnette.com" target="_blank">https://esonnette.com</a>
@@ -40,7 +34,6 @@ export default {
             timerDringDring: 0,
             denomination: '',
             telephone: '',
-            canaux: '1',
             getPropriete: {},
             isVisibilityMessage: false,
             isTypeMessage: 'success',
@@ -103,11 +96,9 @@ export default {
             let id = this.$route.params.id
             let denomination = this.denomination
             let telephone = this.telephone
-            let canaux = this.canaux 
 
             if(!this.checkRequiredField("NOM", denomination)) return;
             if(!this.checkRequiredField("TELEPHONE", telephone)) return;
-            if(!this.checkRequiredField("TYPE", canaux)) return;
 
             const token = localStorage.getItem('token');
 
@@ -120,8 +111,7 @@ export default {
                 body: JSON.stringify({
                     id: id,
                     denomination: denomination,
-                    telephone: telephone,
-                    canaux: canaux
+                    telephone: telephone
                 })
             })
             .then(response => {

@@ -281,8 +281,7 @@ class ProprieteController extends Controller
             $validator = Validator::make($request->all(), [
                 'id' => 'required',
                 'denomination' => 'required',
-                'telephone' => 'required',
-                'canaux' => 'required'
+                'telephone' => 'required'
             ]);
     
             if ($validator->fails()) {
@@ -292,9 +291,8 @@ class ProprieteController extends Controller
             $id = $request->id;
             $denomination = $request->denomination;
             $telephone = $request->telephone;
-            $canaux = $request->canaux;
 
-            $infosCanal = Alerte::find($canaux);
+            $infosCanal = Alerte::where('propriete_id', $id)->where('etat', 2)->first();
 
             switch ($infosCanal->type) {
                 case 'email':
