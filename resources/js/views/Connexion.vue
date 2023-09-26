@@ -14,7 +14,7 @@
 
                     <Message :visibility="isVisibilityMessage" :type="isTypeMessage" :message="isMessage" />
 
-                    <form class="Shellogin__form" @submit.prevent="login">
+                    <form class="Shellogin__form" @submit.prevent="handleLogin">
                         <input type="email" class="Shellogin__email" name="email" v-model="email" placeholder="Votre adresse email...">
 
                         <button type="submit" v-if="!isLoading" class="Shellogin__btnlogin-disabled" :disabled="!isLoading">Patientez...</button>
@@ -33,6 +33,8 @@
 <script>
 import Message from '../components/Message.vue';
 import Header from '../components/Header.vue';
+import { ref } from 'vue';
+import { useAuthStore } from '../stores/auth.js';
 
 export default {
     data() {
@@ -45,57 +47,40 @@ export default {
         };
     },
     methods: {
-        login() {
+        async handleLogin() {
 
             this.isLoading = false
 
-            fetch('/api/auth/chugc', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: this.email
-                })
-            })
-            .then(response => {
-                // Gérer la réponse ici, si nécessaire
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Erreur de réponse du serveur');
-                }
-            })
-            .then(data => {
-                if(data.status){
-                    // console.log(data.message)
-                    console.log(data.code)
+            // Obtenez une référence au store d'authentification
+            const authStore = useAuthStore();
 
-                    this.isLoading = true
+            const loginSuccessful = await authStore.chugc(this.email);
 
-                    this.isVisibilityMessage = true 
-                    this.isTypeMessage = "success"
-                    this.isMessage = data.message
+            if (loginSuccessful) {
+                // Redirigez l'utilisateur ou effectuez d'autres actions en cas de succès
+                this.isLoading = true
 
-                    setTimeout(() => {
-                        this.isVisibilityMessage = false;
-                        localStorage.setItem("email", this.email)
+                this.isVisibilityMessage = true 
+                this.isTypeMessage = "success"
+                this.isMessage = "Un code de confirmation a été envoyer."
 
-                        this.$router.push('/code')
-                    }, 3000);
+                setTimeout(() => {
+                    this.isVisibilityMessage = false;
+                    this.$router.push('/code')
+                }, 3000);
 
-                } else {
-                    this.isLoading = true
-                    this.isVisibilityMessage = true 
-                    this.isTypeMessage = "danger"
-                    this.isMessage = data.message
+            } else {
+                // Affichez un message d'erreur ou effectuez d'autres actions en cas d'échec
+                this.isLoading = true
+                this.isVisibilityMessage = true 
+                this.isTypeMessage = "danger"
+                this.isMessage = "Une erreur est survenue à la connexion."
 
-                    setTimeout(() => {
-                        this.isVisibilityMessage = false;
-                    }, 2500);
-                }
-            })
-            .catch(error => console.log(error));
+                setTimeout(() => {
+                    this.isVisibilityMessage = false;
+                }, 2500);
+            }
+
         }
     },
     components: { Header, Message }
