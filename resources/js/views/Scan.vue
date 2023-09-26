@@ -50,14 +50,13 @@ export default {
 
             let idPropriete = this.$route.params.id
 
-            const authStore = useAuthStore();
-            const token = authStore.token;
+            // const authStore = useAuthStore();
+            // const token = authStore.token;
 
-            fetch('/api/auth/showPropriete', {
+            fetch('/api/auth/showProprieteNoLogin', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     id: idPropriete

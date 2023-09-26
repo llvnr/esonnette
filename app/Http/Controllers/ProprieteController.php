@@ -25,7 +25,7 @@ class ProprieteController extends Controller
      * @return void
     */
     public function __construct() {
-        $this->middleware('auth:api');
+        $this->middleware('auth:api', ['except' => ['showNoLogin']]);
     }
 
     /**
@@ -181,6 +181,44 @@ class ProprieteController extends Controller
     */
 
     public function show(Request $request){
+
+        try {
+            //code...
+
+            $validator = Validator::make($request->all(), [
+                'id' => 'required'
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
+            $id = $request->id;
+
+            $getPropriete = Propriete::with('Alerte')->find($id);
+
+            return response()->json([
+                "status" => true,
+                "result" => $getPropriete
+            ]);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                "status" => false,
+                "message" => $th->getMessage()
+            ], 500);
+        }
+
+    }
+
+    /**
+     * Show One By ID No LOGIN
+     *
+     * @return void
+    */
+
+    public function showNoLogin(Request $request){
 
         try {
             //code...

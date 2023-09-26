@@ -34,6 +34,7 @@ Route::group([
     Route::post('/allPropriete', [ProprieteController::class, 'index']);
     Route::post('/createPropriete', [ProprieteController::class, 'create']);
     Route::post('/showPropriete', [ProprieteController::class, 'show']);
+    Route::post('/showProprieteNoLogin', [ProprieteController::class, 'showNoLogin']);
     Route::post('/updatePropriete', [ProprieteController::class, 'update']);
     Route::post('/scan', [ProprieteController::class, 'scan']);
     Route::post('/getSticker', [ProprieteController::class, 'getSticker']);
