@@ -491,4 +491,73 @@ class ProprieteController extends Controller
 
     }
 
+    /**
+     * Update sticker By ID Property
+     *
+     * @return void
+    */
+
+    public function updateSticker(Request $request) {
+
+        try {
+            //code...
+
+            $validator = Validator::make($request->all(), [
+                'idPropriete' => 'required',
+                'border' => 'required',
+                'background' => 'required',
+                'title' => 'required',
+                'subtitle' => 'required',
+                'backgroundQrcode' => 'required',
+                'colorQrcode' => 'required',
+                'separation' => 'required',
+                'signature' => 'required'
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
+            $idPropriete = $request->idPropriete;
+
+            $border = $request->border;
+            $background = $request->background;
+            $title = $request->title;
+            $subtitle = $request->subtitle;
+            $backgroundQrcode = $request->backgroundQrcode;
+            $colorQrcode = $request->colorQrcode;
+            $separation = $request->separation;
+            $signature = $request->signature;
+
+            $nouvelleConfiguration = [
+                "border" => $border,
+                "background" => $background,
+                "title" => $title,
+                "subtitle" => $subtitle,
+                "backgroundQrcode" => $backgroundQrcode,
+                "colorQrcode" => $colorQrcode,
+                "separation" => $separation,
+                "signature" => $signature
+            ];
+
+            $getSticker = Sticker::where('propriete_id', $idPropriete)->first();
+            $updateSticker = $getSticker->update([
+                "configuration" => $nouvelleConfiguration
+            ]);
+
+            return response()->json([
+                "status" => true,
+                "result" => $updateSticker
+            ]);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                "status" => false,
+                "message" => $th->getMessage()
+            ], 500);
+        }
+
+    }
+
 }

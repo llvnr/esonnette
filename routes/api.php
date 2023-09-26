@@ -38,6 +38,7 @@ Route::group([
     Route::post('/updatePropriete', [ProprieteController::class, 'update']);
     Route::post('/scan', [ProprieteController::class, 'scan']);
     Route::post('/getSticker', [ProprieteController::class, 'getSticker']);
+    Route::post('/updateSticker', [ProprieteController::class, 'updateSticker']);
     // Gestion Propriete
 
     // Gestion alerte

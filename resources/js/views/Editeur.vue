@@ -274,7 +274,70 @@ export default {
 
         },
         updateSticker() {
-            alert('Mise à jour du sticker !')
+
+            let idPropriete = this.myProperty
+
+            let border = this.border
+            let background = this.background
+            let title = this.title
+            let subtitle = this.subtitle
+            let backgroundQrcode = this.backgroundQrcode
+            let colorQrcode = this.colorQrcode
+            let separation = this.separation
+            let signature = this.signature
+
+            const authStore = useAuthStore();
+            const token = authStore.token;
+            
+            fetch('/api/auth/updateSticker', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    idPropriete: idPropriete,
+                    border: border, 
+                    background: background,
+                    title: title,
+                    subtitle: subtitle,
+                    backgroundQrcode: backgroundQrcode,
+                    colorQrcode: colorQrcode,
+                    separation: separation,
+                    signature: signature
+                })
+            })
+            .then(response => {
+                // Gérer la réponse ici, si nécessaire
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur de réponse du serveur');
+                }
+            })
+            .then(data => {
+                if(data !== undefined){
+                    if(data.status){
+                        this.isVisibilityMessageOne = true 
+                        this.isTypeMessageOne = "success"
+                        this.isMessageOne = "Le sticker a bien été mis à jour."
+
+                        setTimeout(() => {
+                            this.isVisibilityMessageOne = false;
+                        }, 3000);
+                    } else {
+                        this.isVisibilityMessageOne = true 
+                        this.isTypeMessageOne = "danger"
+                        this.isMessageOne = data.message
+
+                        setTimeout(() => {
+                            this.isVisibilityMessageOne = false;
+                        }, 3000);
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+
         }
     },
     components: { Loader, Header, Sidebar, Message }
