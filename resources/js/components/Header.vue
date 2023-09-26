@@ -22,6 +22,9 @@
 </template>
 
 <script>
+
+import { useAuthStore } from '../stores/auth.js';
+
 export default {
     props: ['title'],
     data() {
@@ -35,33 +38,9 @@ export default {
     methods: {
         checkIsLogging() {
 
-            const token = localStorage.getItem('token');
+            const authStore = useAuthStore();
 
-            fetch('/api/auth/user-profile', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(response => {
-                // Gérer la réponse ici, si nécessaire
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Erreur de réponse du serveur');
-                }
-            })
-            .then(data => {
-                console.log(data)
-                if(data == undefined){
-                    this.isLogging = false
-                } else {
-                    this.isLogging = true
-                }
-
-            })
-            .catch(error => console.log(error));
+            this.isLogging = authStore.isAuthenticated;
 
         }
     }
