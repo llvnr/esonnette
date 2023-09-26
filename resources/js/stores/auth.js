@@ -23,8 +23,6 @@ export const useAuthStore = defineStore('auth', {
                     })
                 });
 
-                console.log('RESPONSE', response)
-
                 if(response.status === 200){
                     this.email = email 
                     return true; // Authentification réussie.
@@ -38,8 +36,40 @@ export const useAuthStore = defineStore('auth', {
             }
         },
 
-        login(credentials) {
+        async login(credentials) {
+            try {
+                
+                console.log(this.email)
 
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: this.email,
+                        code: credentials
+                    })
+                })
+
+                if(response.status === 200){
+
+                    const data = await response.json();
+
+                    this.token = data.result.original.access_token
+                    this.user = data.result.original.user
+                    this.isAuthenticated = true
+
+                    return true;
+
+                } else {
+                    console.log('TU ENTRE PAS ICI PCKE 200')
+                    return false;
+                }
+                
+            } catch (error) {
+                return false;
+            }
         },
 
         logout() {

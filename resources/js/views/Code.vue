@@ -14,7 +14,7 @@
 
                     <Message :visibility="isVisibilityMessage" :type="isTypeMessage" :message="isMessage" />
 
-                    <form class="Shellogin__form" @submit.prevent="login">
+                    <form class="Shellogin__form" @submit.prevent="handleLogin">
 
                         <input type="number" step="1" class="ShellCode__email" v-model="code" placeholder="Votre code de confirmation...">
 
@@ -35,6 +35,9 @@
 <script>
 import Message from '../components/Message.vue';
 import Header from '../components/Header.vue';
+import { ref } from 'vue';
+import { useAuthStore } from '../stores/auth.js';
+
 export default {
 
     data() {
@@ -46,48 +49,26 @@ export default {
         }
     },
     methods: {
-        login() {
-            fetch('/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: localStorage.getItem('email'),
-                    code: this.code
-                })
-            })
-            .then(response => {
-                // Gérer la réponse ici, si nécessaire
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Erreur de réponse du serveur');
-                }
-            })
-            .then(data => {
+        async handleLogin() {
 
-                if(data.status){
+            // Obtenez une référence au store d'authentification
+            const authStore = useAuthStore();
 
-                    localStorage.removeItem("email")
-                    localStorage.setItem("token", data.result.original.access_token)
+            const loginSuccessful = await authStore.login(this.code);
+            if (loginSuccessful) {
 
-                    window.location.assign('/');
+                this.$router.push('/')
 
-                } else {
+            } else {
+                this.isVisibilityMessage = true 
+                this.isTypeMessage = "danger"
+                this.isMessage = "Connexion impossible."
 
-                    this.isVisibilityMessage = true 
-                    this.isTypeMessage = "danger"
-                    this.isMessage = data.message
+                setTimeout(() => {
+                    this.isVisibilityMessage = false;
+                }, 2500);
+            }
 
-                    setTimeout(() => {
-                        this.isVisibilityMessage = false;
-                    }, 2500);
-
-                }
-                
-            })
-            .catch(error => console.log(error));
         }
     },
     components: { Header, Message }
