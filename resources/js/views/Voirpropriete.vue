@@ -104,6 +104,8 @@
 
 <script>
 
+import { useAuthStore } from '../stores/auth.js';
+
 import Loader from '../components/Loader.vue';
 import Message from '../components/Message.vue';
 import Sidebar from '../components/Sidebar.vue';
@@ -140,7 +142,8 @@ export default {
             let etat = state
             let idPropriete = this.$route.params.id
 
-            const token = localStorage.getItem('token');
+            const authStore = useAuthStore();
+            const token = authStore.token;
 
             fetch('/api/auth/updatePropriete', {
                 method: 'POST',
@@ -183,7 +186,8 @@ export default {
 
             let idPropriete = this.$route.params.id
 
-            const token = localStorage.getItem('token');
+            const authStore = useAuthStore();
+            const token = authStore.token;
 
             fetch('/api/auth/showPropriete', {
                 method: 'POST',
@@ -224,7 +228,8 @@ export default {
         },
         getVisite() {
 
-            const token = localStorage.getItem('token');
+            const authStore = useAuthStore();
+            const token = authStore.token;
 
             fetch('/api/auth/getVisite', {
                 method: 'POST',
