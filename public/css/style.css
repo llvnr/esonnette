@@ -973,6 +973,28 @@ html, body {
     margin-bottom: 1.5em;
 }
 
+.ContentBodyADDAlertEmail__label-etat {
+    margin-bottom: 0.5em;
+    color: #204646;
+}
+
+.ContentBodyADDAlertEmail__select-etat {
+    height: 2.5em;
+    border: 2px solid #204646;
+    margin-bottom: 1.5em;
+}
+
+.ContentBodyADDAlertDiscord__label-etat {
+    margin-bottom: 0.5em;
+    color: #204646;
+}
+
+.ContentBodyADDAlertDiscord__select-etat {
+    height: 2.5em;
+    border: 2px solid #204646;
+    margin-bottom: 1.5em;
+}
+
 .ContentBodyADDAlertEmail__btnAddEmail {
     height: 2.5em;
     /* background-color: #F3F9FF; */

@@ -43,6 +43,8 @@ Route::group([
     // Gestion alerte
     Route::post('/getAlerte', [AlerteController::class, 'index']);
     Route::post('/createAlerte', [AlerteController::class, 'create']);
+    Route::post('/getOneAlerte', [AlerteController::class, 'show']);
+    Route::post('/updateAlerte', [AlerteController::class, 'update']);
     // Gestion alerte
 
     // Gestion visite

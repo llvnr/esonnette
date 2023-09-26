@@ -47,8 +47,12 @@
                             <div v-else-if="item.type === 'sms'" class="cardAlerte__label-logo">LOGO</div>
                             <div class="cardAlerte__label-type">{{ item.type }}</div>
                             <!-- <div class="cardAlerte__label-informations">{{ item.informations.substring(0, 21) }}</div> -->
-                            <div class="cardAlerte__label-etat">{{ item.etat }}</div>
-                            <div class="cardAlerte__label-action">Voir - Modifier - Delete</div>
+                            <div v-if="item.etat == 2" class="cardAlerte__label-etat">Default</div>
+                            <div v-else-if="item.etat == 1" class="cardAlerte__label-etat">Activé</div>
+                            <div v-else-if="item.etat == 0" class="cardAlerte__label-etat">Désactivé</div>
+                            <div class="cardAlerte__label-action">
+                                <router-link :to="'/alerte/update/' + item.type + '/' + item.id"  class="noDecor">Modifier</router-link> - Delete
+                            </div>
 
                         </div>
                         

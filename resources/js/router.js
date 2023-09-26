@@ -11,6 +11,7 @@ import Inscription from "./views/Inscription.vue";
 import Code from "./views/Code.vue";
 import Alerte from "./views/Alerte.vue";
 import AddAlerte from "./views/AddAlerte.vue";
+import UpdateAlerte from "./views/UpdateAlerte.vue"
 import Scan from "./views/Scan.vue";
 import Editeur from "./views/Editeur.vue"
 
@@ -49,6 +50,12 @@ const routes = [
         path: '/alerte/add/:type/:id',
         name: 'AddAlerte',
         component: AddAlerte,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/alerte/update/:type/:id',
+        name: 'UpdateAlerte',
+        component: UpdateAlerte,
         meta: { requiresAuth: true }
     },
     {
