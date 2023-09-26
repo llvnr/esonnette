@@ -83,6 +83,8 @@
 
 <script>
 
+import { useAuthStore } from '../stores/auth.js';
+
 import Loader from '../components/Loader.vue';
 import Header from '../components/Header.vue';
 import Sidebar from '../components/Sidebar.vue';
@@ -113,7 +115,8 @@ export default {
     methods: {
         getPropriete() {
             
-            const token = localStorage.getItem('token');
+            const authStore = useAuthStore();
+            const token = authStore.token;
 
             fetch('/api/auth/allPropriete', {
                 method: 'POST',
@@ -159,8 +162,9 @@ export default {
 
             let idPropriete = this.myProperty
 
-            const token = localStorage.getItem('token');
-
+            const authStore = useAuthStore();
+            const token = authStore.token;
+            
             fetch('/api/auth/getSticker', {
                 method: 'POST',
                 headers: {
