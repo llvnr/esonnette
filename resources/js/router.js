@@ -93,54 +93,17 @@ const router = createRouter({
 // Ajouter un guard global pour vérifier l'authentification avant d'accéder à des routes protégées
 router.beforeEach((to, from, next) => {
 
-        const authStore = useAuthStore();
+    const authStore = useAuthStore();
 
-        if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-            // Si la route requiert une authentification et l'utilisateur n'est pas authentifié,
-            // redirigez-le vers la page de connexion par exemple.
-            next('/connexion');
-          } else {
-            // Sinon, autorisez la navigation.
-            next();
-        }
+    if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+        // Si la route requiert une authentification et l'utilisateur n'est pas authentifié,
+        // redirigez-le vers la page de connexion par exemple.
+        next('/connexion');
+        } else {
+        // Sinon, autorisez la navigation.
+        next();
+    }
 
-        //   const token = localStorage.getItem('token');
-        //   if (!token) {
-        //     // L'utilisateur n'est pas authentifié, rediriger vers la page de connexion
-        //     next('/connexion');
-        //   } else {
-        //     // L'utilisateur est authentifié, autoriser l'accès à la route
-
-        //     fetch('/api/auth/user-profile', {
-        //         method: 'GET',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'Authorization': `Bearer ${token}`
-        //         }
-        //     })
-        //     .then(response => {
-        //         // Gérer la réponse ici, si nécessaire
-        //         if (response.ok) {
-        //             return response.json();
-        //         } else {
-        //             console.log('Erreur de réponse du serveur')
-        //             next('/connexion')
-        //         }
-        //     })
-        //     .then(data => {
-        //         console.log(data)
-        //         if(data == undefined){
-        //             next('/connexion')
-        //         } else {
-        //             next();
-        //         }
-
-        //     })
-        //     .catch(error => console.log(error));
-        //   }
-        // } else {
-        //   // La route ne nécessite pas d'authentification, autoriser l'accès
-        //   next();
 });
 
 export default router;

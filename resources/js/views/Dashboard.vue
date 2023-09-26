@@ -44,6 +44,7 @@ import Loader from '../components/Loader.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
 import Card from '../components/Card.vue';
+import { useAuthStore } from "../stores/auth.js";
 
 export default {
     data(){
@@ -64,7 +65,8 @@ export default {
     },
     methods: {
         initDashboard() {
-            const token = localStorage.getItem('token');
+            const authStore = useAuthStore();
+            const token = authStore.token;
 
             fetch('/api/auth/getDashboard', {
                 method: 'POST',
