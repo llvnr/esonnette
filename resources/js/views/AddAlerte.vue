@@ -57,6 +57,8 @@
 
 <script>
 
+import { useAuthStore } from '../stores/auth.js';
+
 import Message from '../components/Message.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
@@ -89,7 +91,8 @@ export default {
 
             if(!this.checkRequiredField('EMAIL', email)) return;
 
-            const token = localStorage.getItem('token');
+            const authStore = useAuthStore();
+            const token = authStore.token;
 
             fetch('/api/auth/createAlerte', {
                 method: 'POST',
@@ -147,8 +150,9 @@ export default {
             let type = this.typeAlert
 
             if(!this.checkRequiredField('DISCORD', discord)) return;
-
-            const token = localStorage.getItem('token');
+            
+            const authStore = useAuthStore();
+            const token = authStore.token;
 
             fetch('/api/auth/createAlerte', {
                 method: 'POST',
