@@ -10,7 +10,7 @@
                 <router-link to="/"  class="noDecor"><li class="SidebarContent__navigation-element">Dashboard</li></router-link>
                 <router-link to="/propriete" class="noDecor"><li class="SidebarContent__navigation-element">Mes propriétés</li></router-link>
                 <router-link to="/editeur" class="noDecor"><li class="SidebarContent__navigation-element">Editeur de sticker</li></router-link>
-                <li class="SidebarContent__navigation-element noDecor" @click="Logout">Déconnexion</li>
+                <li class="SidebarContent__navigation-element noDecor" @click="handleLogout">Déconnexion</li>
             </ul>
             <ul v-else class="SidebarContent__navigation">
                 <router-link to="/connexion"  class="noDecor"><li class="SidebarContent__navigation-element">Connexion</li></router-link>
@@ -43,35 +43,18 @@ export default {
             this.isLogging = authStore.isAuthenticated
 
         },
-        Logout() {
+        async handleLogout() {
 
-            let token = localStorage.getItem("token");
+            // Obtenez une référence au store d'authentification
+            const authStore = useAuthStore();
 
-            fetch('/api/auth/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(response => {
-                // Gérer la réponse ici, si nécessaire
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Erreur de réponse du serveur');
-                }
-            })
-            .then(data => {
-                
-                localStorage.removeItem("token")
-                localStorage.removeItem("email")
+            const logoutSuccessful = await authStore.logout();
 
-                // this.$router.push('/connexion')
-                window.location.assign('/connexion');
-                
-            })
-            .catch(error => console.log(error));
+            if(logoutSuccessful){
+                this.$router.push('/connexion')
+            } else {
+                alert('Déconnexion impossible.')
+            }
 
         }
     }

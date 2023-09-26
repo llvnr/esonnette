@@ -39,8 +39,6 @@ export const useAuthStore = defineStore('auth', {
         async login(credentials) {
             try {
                 
-                console.log(this.email)
-
                 const response = await fetch('/api/auth/login', {
                     method: 'POST',
                     headers: {
@@ -72,7 +70,32 @@ export const useAuthStore = defineStore('auth', {
             }
         },
 
-        logout() {
+        async logout() {
+
+            try {
+                
+                const response = await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${this.token}`
+                    }
+                })
+
+                if(response.status === 200){
+                    this.token = null
+                    this.user = null
+                    this.isAuthenticated = false
+
+                    return true
+
+                } else {
+                    return false
+                }
+                
+            } catch (error) {
+                return false
+            }
 
         },
     },

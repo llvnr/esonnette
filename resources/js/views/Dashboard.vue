@@ -44,7 +44,7 @@ import { useAuthStore } from "../stores/auth.js";
 
 import Loader from '../components/Loader.vue';
 import Card from '../components/Card.vue';
-import Sidebar from "../components/sidebar.vue";
+import Sidebar from "../components/Sidebar.vue";
 import Header from "../components/Header.vue";
 
 export default {
