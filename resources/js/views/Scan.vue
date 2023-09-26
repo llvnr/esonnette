@@ -24,6 +24,7 @@
 
 <script>
 
+import { useAuthStore } from '../stores/auth.js'
 import Message from '../components/Message.vue'
 
 export default {
@@ -49,7 +50,8 @@ export default {
 
             let idPropriete = this.$route.params.id
 
-            const token = localStorage.getItem('token');
+            const authStore = useAuthStore();
+            const token = authStore.token;
 
             fetch('/api/auth/showPropriete', {
                 method: 'POST',
@@ -104,7 +106,8 @@ export default {
             if(!this.checkRequiredField("NOM", denomination)) return;
             if(!this.checkRequiredField("TELEPHONE", telephone)) return;
 
-            const token = localStorage.getItem('token');
+            const authStore = useAuthStore();
+            const token = authStore.token;
 
             fetch('/api/auth/scan', {
                 method: 'POST',
