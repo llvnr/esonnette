@@ -65,10 +65,14 @@
 </template>
 
 <script>
+
+import { useAuthStore } from '../stores/auth.js';
+
 import Loader from '../components/Loader.vue';
 import Message from '../components/Message.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Header from '../components/Header.vue';
+
 export default {
 
     data() {
@@ -95,7 +99,8 @@ export default {
             if(!this.checkRequiredField("Nom d'utilisateur", username)) return;
             if(!this.checkRequiredField("Email", email)) return;
 
-            const token = localStorage.getItem('token');
+            const authStore = useAuthStore();
+            const token = authStore.token;
 
             fetch('/api/auth/update', {
                 method: 'POST',
@@ -147,7 +152,8 @@ export default {
             alert("Cette fonctionnaité est en cours de développement...")
         },          
         getProfile() {
-            const token = localStorage.getItem('token');
+            const authStore = useAuthStore();
+            const token = authStore.token;
 
             fetch('/api/auth/user-profile', {
                 method: 'GET',
