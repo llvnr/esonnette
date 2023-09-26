@@ -16,9 +16,9 @@
             </div>
             <div class="ShellDashboard__content-body">
 
-                <div class="ShellEditeur">
+                <Message :visibility="isVisibilityMessageOne" :type="isTypeMessageOne" :message="isMessageOne" />
 
-                    <Message :visibility="isVisibilityMessageOne" :type="isTypeMessageOne" :message="isMessageOne" />
+                <div v-if="Object.keys(proprietes).length != 0" class="ShellEditeur">
 
                     <div class="ShellEditeur__left">
 
@@ -138,11 +138,20 @@ export default {
                     if(data.status){
                         // console.log(data)
                         if(data.result.length != 0){
+                            // data.result.length
                             // this.dataIsOkay = true
                             this.proprietes = data.result
                             this.myProperty = data.result[0].id
                             this.getSticker()
                             // this.loadData = true
+                        } else {
+                            this.isVisibilityMessageOne = true 
+                            this.isTypeMessageOne = "danger"
+                            this.isMessageOne = "Vous devez définir au minimum une propriété."
+
+                            // setTimeout(() => {
+                            //     this.isVisibilityMessageOne = false;
+                            // }, 3000);
                         }
                     } else {
                         this.isVisibilityMessageOne = true 
