@@ -1,6 +1,6 @@
 <template>
 
-    <div class="ContentHeader">
+    <div class="ContentHeader" id="ContentHeader">
 
         <div class="ContentHeader__colonneLeft">
             <div class="ContentHeader__colonneLeft-title">{{ title  }}</div>

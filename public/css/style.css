@@ -1175,7 +1175,7 @@ html, body {
 
 /* PAGE DE SCAN */
 
-/* PAGE EDITEUR */
+/* PAGE EDITEUR DE STICKER */
 
 .ShellEditeur {
     display: flex;
@@ -1255,8 +1255,8 @@ html, body {
 .ShellEditeur__right-labelborder {
     color: black;
     font-size: 1.2em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
 }
 
 .ShellEditeur__right-inputborder {
@@ -1269,8 +1269,8 @@ html, body {
 .ShellEditeur__right-labelbackground {
     color: black;
     font-size: 1.2em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
 }
 
 .ShellEditeur__right-inputbackground {
@@ -1283,8 +1283,8 @@ html, body {
 .ShellEditeur__right-labeltitle {
     color: black;
     font-size: 1.2em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
 }
 
 .ShellEditeur__right-inputtitle {
@@ -1297,8 +1297,8 @@ html, body {
 .ShellEditeur__right-labelsubtitle {
     color: black;
     font-size: 1.2em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
 }
 
 .ShellEditeur__right-inputsubtitle {
@@ -1311,8 +1311,8 @@ html, body {
 .ShellEditeur__right-labelbackgroundqrcode {
     color: black;
     font-size: 1.2em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
 }
 
 .ShellEditeur__right-inputbackgroundqrcode {
@@ -1325,8 +1325,8 @@ html, body {
 .ShellEditeur__right-labelcolorqrcode {
     color: black;
     font-size: 1.2em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
 }
 
 .ShellEditeur__right-inputcolorqrcode {
@@ -1339,8 +1339,8 @@ html, body {
 .ShellEditeur__right-labelseparation {
     color: black;
     font-size: 1.2em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
 }
 
 .ShellEditeur__right-inputseparation {
@@ -1354,8 +1354,8 @@ html, body {
 .ShellEditeur__right-labelsignature {
     color: black;
     font-size: 1.2em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
 }
 
 .ShellEditeur__right-inputsignature {
@@ -1376,4 +1376,21 @@ html, body {
     color: white;
 }
 
-/* PAGE EDITEUR */
+/* PAGE EDITEUR DE STICKER */
+
+/* ZONE IMPRESSION */
+
+@media print {
+
+    #ShellEditeur__left {
+        border-top: 1px solid white;
+        background-color: white;
+    }
+
+    #ShellDashboard__sidebar, #ContentHeader, #ShellEditeur__right {
+        display: none;
+    }
+
+}
+
+/* ZONE IMPRESSION */

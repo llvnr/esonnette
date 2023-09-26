@@ -20,7 +20,7 @@
 
                 <div v-if="Object.keys(proprietes).length != 0" class="ShellEditeur">
 
-                    <div class="ShellEditeur__left">
+                    <div class="ShellEditeur__left" id="ShellEditeur__left">
 
                         <div class="Sticker" id="sticker">
 
@@ -34,7 +34,7 @@
                         </div>
 
                     </div>
-                    <div class="ShellEditeur__right">
+                    <div class="ShellEditeur__right" id="ShellEditeur__right">
 
                         <div class="ShellEditeur__right-labelpropriete">Mes propriétés : </div>
                         <select v-for="(item, index) in proprietes" v-model="myProperty" class="ShellEditeur__right-selectpropriete">
@@ -71,6 +71,7 @@
 
                         <button class="ShellEditeur__right-btnupdate" @click="updateSticker(true)">Modifier</button>
                         <button class="ShellEditeur__right-btnupdate" @click="updateSticker(false)">Réinitialisation</button>
+                        <button class="ShellEditeur__right-btnupdate" @click="printSticker">Impression</button>
 
                     </div>
                 </div>
@@ -372,6 +373,23 @@ export default {
                 }
             })
             .catch(error => console.log(error));
+
+        },
+        printSticker() {
+
+            let ShellEditeurLeftHTML = document.getElementById("ShellEditeur__left")
+
+            if(ShellEditeurLeftHTML){
+                window.print();
+            } else {
+                this.isVisibilityMessageOne = true 
+                this.isTypeMessageOne = "danger"
+                this.isMessageOne = "Element à imprimer non trouvé."
+
+                setTimeout(() => {
+                    this.isVisibilityMessageOne = false;
+                }, 3000);
+            }
 
         }
     },

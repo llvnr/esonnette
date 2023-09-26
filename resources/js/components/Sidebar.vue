@@ -1,6 +1,6 @@
 <template>
 
-    <div class="ShellDashboard__sidebar">
+    <div class="ShellDashboard__sidebar" id="ShellDashboard__sidebar">
 
         <div class="ShellDashboard__sidebar-header">
             <img src="/assets/images/logo.png" width="150" class="ShellDashboard__sidebar-header-title" />
