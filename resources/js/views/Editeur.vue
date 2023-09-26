@@ -69,7 +69,8 @@
 
                         <br>
 
-                        <button class="ShellEditeur__right-btnupdate" @click="updateSticker">Modifier</button>
+                        <button class="ShellEditeur__right-btnupdate" @click="updateSticker(true)">Modifier</button>
+                        <button class="ShellEditeur__right-btnupdate" @click="updateSticker(false)">Réinitialisation</button>
 
                     </div>
                 </div>
@@ -268,23 +269,38 @@ export default {
             let stickerSignature = document.getElementById("stickerSignature")
             stickerSignature.style.color = signature
 
-            // alert(border + ' / ' + background + ' / ' + 
-            // backgroundQrcode + ' / ' + colorQrcode + ' / '
-            // + separation)
-
         },
-        updateSticker() {
+        updateSticker(reset) {
 
             let idPropriete = this.myProperty
+            let border
+            let background
+            let title
+            let subtitle
+            let backgroundQrcode
+            let colorQrcode
+            let separation
+            let signature
 
-            let border = this.border
-            let background = this.background
-            let title = this.title
-            let subtitle = this.subtitle
-            let backgroundQrcode = this.backgroundQrcode
-            let colorQrcode = this.colorQrcode
-            let separation = this.separation
-            let signature = this.signature
+            if(reset) {
+                border = this.border
+                background = this.background
+                title = this.title
+                subtitle = this.subtitle
+                backgroundQrcode = this.backgroundQrcode
+                colorQrcode = this.colorQrcode
+                separation = this.separation
+                signature = this.signature
+            } else {
+                border = "#000000"
+                background = "#FFFFFF"
+                title = "#3056D3"
+                subtitle = "#000000" 
+                backgroundQrcode = "#FFFFFF"
+                colorQrcode = "#FFFFFF"
+                separation = "#000000"
+                signature = "#000000"
+            }
 
             const authStore = useAuthStore();
             const token = authStore.token;
@@ -320,7 +336,26 @@ export default {
                     if(data.status){
                         this.isVisibilityMessageOne = true 
                         this.isTypeMessageOne = "success"
-                        this.isMessageOne = "Le sticker a bien été mis à jour."
+                        if(reset){
+                            this.isMessageOne = "Le sticker a bien été mis à jour."
+                        } else {
+                            this.isMessageOne = "Le sticker a bien été réinitialiser."
+
+                            let sticker = document.getElementById("sticker")
+                            sticker.style.border = "1px solid" + border
+                            sticker.style.backgroundColor = background
+                            let stickerText = document.getElementById("stickerText")
+                            stickerText.style.color = title
+                            let stickerSubtext = document.getElementById("stickerSubtext")
+                            stickerSubtext.style.color = subtitle
+                            let stickerQrcode = document.getElementById("stickerQrcode")
+                            let stickerSeparation = document.getElementById("stickerSeparation")
+                            stickerSeparation.style.borderBottom = "4px solid " + separation
+                            let stickerLogo = document.getElementById("stickerLogo")
+                            let stickerSignature = document.getElementById("stickerSignature")
+                            stickerSignature.style.color = signature
+
+                        }
 
                         setTimeout(() => {
                             this.isVisibilityMessageOne = false;
