@@ -51,6 +51,7 @@
                                 </div>
                                 <div class="ContentColonneDeux__label-content">
                                     <div class="ContentColonneDeux__label-visite-total"><b>{{ allVisite.length }}</b> Visite(s) reçu totale(s)</div>
+                                    <div class="ContentColonneDeux__label-visite-totalhier"><b>{{ allVisiteYesterday.length }}</b> Visite(s) totale(s) hier</div>
                                     <div class="ContentColonneDeux__label-qrcode">Etat du QRCODE : 
                                         <span v-if="infoPropriete.status" class="ContentColonneDeux__label-etat-qrcode state-activate">Activé</span>
                                         <span v-else class="ContentColonneDeux__label-etat-qrcode state-desactivate">Désactivé</span>
@@ -118,6 +119,7 @@ export default {
             dataIsOkay: false,
             infoPropriete: {},
             allVisite: {},
+            allVisiteYesterday: {},
             getID: null,
             isVisibilityMessageOne: false,
             isTypeMessageOne: 'danger',
@@ -255,6 +257,25 @@ export default {
                         if(data.result.length != 0){
                             this.dataIsOkay = true
                             this.allVisite = data.result
+
+                            // Récupérez la date d'aujourd'hui
+                            const dateAujourdhui = new Date();
+
+                            // Calculez la date d'aujourd'hui moins un jour
+                            const dateHier = new Date(dateAujourdhui);
+                            dateHier.setDate(dateAujourdhui.getDate() - 1);
+
+                            // Filtrer les dates du tableau qui correspondent à la date d'aujourd'hui moins un jour
+                            const datesCorrespondantes = data.result.filter(objet => {
+                                const dateOrigine = new Date(objet.created_at);
+
+                                // Comparez la date avec la date d'aujourd'hui moins un jour
+                                return dateOrigine.toISOString().slice(0, 10) === dateHier.toISOString().slice(0, 10);
+                            });
+
+                            // datesCorrespondantes contiendra les objets du tableau dont la date correspond à hier
+                            this.allVisiteYesterday = datesCorrespondantes
+
                         } else {
                             // this.dataIsOkay = true
                             this.isVisibilityMessageTwo = true 

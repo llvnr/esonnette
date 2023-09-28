@@ -721,12 +721,16 @@ html, body {
 }
 
 .ContentColonneDeux__label-content {
-    padding-top: 2.5em;
+    padding-top: 2.2em;
     padding-left: 2.5em;
 }
 
 .ContentColonneDeux__label-visite-total {
-    margin-bottom: 1em;
+    margin-bottom: 0.1em;
+}
+
+.ContentColonneDeux__label-visite-totalhier {
+    margin-bottom: 0.5em;
 }
 
 .ContentColonneDeux__label-etat-qrcode {
