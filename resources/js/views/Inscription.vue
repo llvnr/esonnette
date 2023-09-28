@@ -9,7 +9,7 @@
                 <div class="Shellregister">
 
                     <div  class="Shellregister__image">
-                        <img src="/assets/images/logo_color.png" width="350" class="Shellregister__title" />
+                        <img :src="logo" width="350" class="Shellregister__title" />
                     </div>
 
                     <input type="text" class="Shellregister__username" placeholder="Votre nom d'utilisateur...">
@@ -28,8 +28,14 @@
 
 </template>
 
-<script setup>
+<script>
 
-import Header from "../components/Header.vue";
+export default {
+    data() {
+        return {
+            logo: '/assets/images/logo_color.png',
+        }
+    }
+}
 
 </script>

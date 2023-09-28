@@ -9,7 +9,7 @@
                 <div class="Shellogin">
 
                     <div class="Shellogin__image">
-                        <img src="/assets/images/logo_color.png" width="350" class="Shellogin__title" />
+                        <img :src="logo" width="350" class="Shellogin__title" />
                     </div>
 
                     <Message :visibility="isVisibilityMessage" :type="isTypeMessage" :message="isMessage" />
@@ -40,6 +40,7 @@ export default {
     data() {
         return {
             isLoading: true,
+            logo: '/assets/images/logo_color.png',
             email: '',
             isVisibilityMessage: false,
             isTypeMessage: 'success',
