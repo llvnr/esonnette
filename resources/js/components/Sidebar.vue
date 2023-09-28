@@ -3,7 +3,7 @@
     <div class="ShellDashboard__sidebar" id="ShellDashboard__sidebar">
 
         <div class="ShellDashboard__sidebar-header">
-            <img src="/assets/images/logo.png" width="150" class="ShellDashboard__sidebar-header-title" />
+            <img :src="logo" width="150" class="ShellDashboard__sidebar-header-title" />
         </div>
         <div class="ShellDashboard__sidebar-content">
             <ul v-if="isLogging" class="SidebarContent__navigation">
@@ -30,6 +30,7 @@ import { useAuthStore } from '../stores/auth.js';
 export default {
     data() {
         return {
+            logo: '/assets/images/logo.png',
             isLogging: false
         }
     },
