@@ -3,9 +3,9 @@
 
     /* PAGE SCAN */
     
-    /* .ShellScan {
-        height: 95vh;
-    } */
+    .ShellScan {
+        height: 90vh;
+    }
 
     .ShellScan__Body-Content {
         padding-left: 1em;
