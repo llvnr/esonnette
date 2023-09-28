@@ -105,14 +105,13 @@ export default {
             this.etatQrcode = false
             this.textStateQrcode = 'Patientez...'
 
-            const authStore = useAuthStore();
-            const token = authStore.token;
+            // const authStore = useAuthStore();
+            // const token = authStore.token;
 
             fetch('/api/auth/scan', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     id: id,
@@ -155,6 +154,9 @@ export default {
                         }, 3000);
 
                     } else {
+                        this.etatQrcode = true
+                        this.textStateQrcode = 'SONNER'
+
                         this.isVisibilityMessage = true 
                         this.isTypeMessage = "danger"
                         this.isMessage = data.message

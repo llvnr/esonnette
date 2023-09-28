@@ -25,7 +25,7 @@ class ProprieteController extends Controller
      * @return void
     */
     public function __construct() {
-        $this->middleware('auth:api', ['except' => ['showNoLogin']]);
+        $this->middleware('auth:api', ['except' => ['showNoLogin', 'scan']]);
     }
 
     /**
@@ -329,118 +329,80 @@ class ProprieteController extends Controller
             $id = $request->id;
             $denomination = $request->denomination;
             $telephone = $request->telephone;
+            // Récupérez l'adresse IP du visiteur
+            $ip = $request->getClientIp();
 
             $infosCanal = Alerte::where('propriete_id', $id)->where('etat', 2)->first();
 
-            switch ($infosCanal->type) {
-                case 'email':
-                    # code...
+            $date = date('Y-m-d');
 
-                    $date = date('Y-m-d');
+            $checkSecurite = Visite::where('propriete_id', $id)
+            ->where('adresse_ip', $ip)
+            ->where('created_at', 'LIKE', '%'.$date.'%')
+            ->count();
 
-                    $checkSecurite = Visite::where('propriete_id', $id)
-                    ->where(function ($query) use ($denomination, $telephone) {
-                        $query->orWhere('denomination', $denomination)
-                            ->orWhere('telephone', $telephone);
-                    })
-                    ->where('created_at', 'LIKE', '%'.$date.'%')
-                    ->count();
+            if($checkSecurite >= 3){
+                return response()->json([
+                    "status" => false,
+                    "result" => $checkSecurite,
+                    "message" => "Vous avez déjà sonné 3 fois. Revenez demain."
+                ]);
+            } else {
 
-                    if($checkSecurite >= 3){
-                        return response()->json([
-                            "status" => false,
-                            "result" => $checkSecurite,
-                            "message" => "Vous avez déjà sonné 3 fois. Revenez demain."
-                        ]);
-                    } else {
+                $createVisite = Visite::create([
+                    "propriete_id" => $id,
+                    "alerte_id" => $infosCanal->id,
+                    "adresse_ip" => $ip,
+                    "denomination" => $denomination,
+                    "telephone" => $telephone,
+                    "etat" => 1
+                ]);
 
-                        $createVisite = Visite::create([
-                            "propriete_id" => $id,
-                            "alerte_id" => $infosCanal->id,
-                            "denomination" => $denomination,
-                            "telephone" => $telephone,
-                            "etat" => 1
-                        ]);
-
-                        $details = [
-                            'denomination' => $denomination,
-                            'telephone' => $telephone,
-                            'date' => $createVisite->created_at
-                        ];
-                       
-                        Mail::to($infosCanal->informations)->send(new SendSonnetteMail($details));
-
-                        return response()->json([
-                            "status" => true,
-                            "message" => "Le propriétaire a été informé par email de votre visite."
-                        ]); 
-
-                    }
-
-                    break;
-                case 'discord':
+                if($infosCanal->type === "email"){
+                    $details = [
+                        'denomination' => $denomination,
+                        'telephone' => $telephone,
+                        'date' => $createVisite->created_at
+                    ];
                     
-                    $date = date('Y-m-d');
+                    Mail::to($infosCanal->informations)->send(new SendSonnetteMail($details));
 
-                    $checkSecurite = Visite::where('propriete_id', $id)
-                    ->where(function ($query) use ($denomination, $telephone) {
-                        $query->orWhere('denomination', $denomination)
-                            ->orWhere('telephone', $telephone);
-                    })
-                    ->where('created_at', 'LIKE', '%'.$date.'%')
-                    ->count();
-
-                    if($checkSecurite >= 3){
-                        return response()->json([
-                            "status" => false,
-                            "result" => $checkSecurite,
-                            "message" => "Vous avez déjà sonné 3 fois. Revenez demain."
-                        ]);
-                    } else {
-
-                        $createVisite = Visite::create([
-                            "propriete_id" => $id,
-                            "alerte_id" => $infosCanal->id,
-                            "denomination" => $denomination,
-                            "telephone" => $telephone,
-                            "etat" => 1
-                        ]);
-
-                        $curl = curl_init();
-
-                        curl_setopt_array($curl, array(
-                        CURLOPT_URL => $infosCanal->informations,
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING => '',
-                        CURLOPT_MAXREDIRS => 10,
-                        CURLOPT_TIMEOUT => 0,
-                        CURLOPT_FOLLOWLOCATION => true,
-                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => 'POST',
-                        CURLOPT_POSTFIELDS =>'{
-                            "username": "ESONNETTE",
-                            "content": "Quelqu\'un vient de sonner ! ['.$denomination.' / '.$telephone.']"
-                        }',
-                        CURLOPT_HTTPHEADER => array(
-                            'Content-Type: application/json',
-                        ),
-                        ));
-
-                        $response = curl_exec($curl);
-
-                        curl_close($curl);
-
-                        return response()->json([
-                            "status" => true,
-                            "result" => $response
-                        ]);
-
-                    }
-
-                    break;
-                default:
+                    return response()->json([
+                        "status" => true,
+                        "message" => "Le propriétaire a été informé par email de votre visite."
+                    ]); 
+                } elseif ($infosCanal->type === "discord") {
                     # code...
-                    break;
+                    $curl = curl_init();
+
+                    curl_setopt_array($curl, array(
+                    CURLOPT_URL => $infosCanal->informations,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS =>'{
+                        "username": "ESONNETTE",
+                        "content": "Quelqu\'un vient de sonner ! ['.$denomination.' / '.$telephone.']"
+                    }',
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                    ),
+                    ));
+
+                    $response = curl_exec($curl);
+
+                    curl_close($curl);
+
+                    return response()->json([
+                        "status" => true,
+                        "result" => $response
+                    ]);
+                }
+
             }
 
         } catch (\Throwable $th) {

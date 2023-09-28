@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('propriete_id');
             $table->integer('alerte_id');
+            $table->string('adresse_ip');
             $table->string('denomination');
             $table->string('telephone');
             $table->boolean('etat');
