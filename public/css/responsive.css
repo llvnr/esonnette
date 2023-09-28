@@ -2,6 +2,10 @@
     /* Vos styles CSS pour les smartphones en mode portrait */
 
     /* PAGE SCAN */
+    
+    .ShellScan {
+        height: 100%;
+    }
 
     .ShellScan__Body-Content {
         padding-left: 1em;
