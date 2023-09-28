@@ -30,7 +30,7 @@ import Message from '../components/Message.vue'
 export default {
     data() {
         return {
-            textStateQrcode: 'SONNETTE <br>(Désactivé)',
+            textStateQrcode: 'SONNETTE \n\r (Désactivé)',
             etatQrcode: null,
             etatDringDring: true,
             timerDringDring: 0,
@@ -95,15 +95,15 @@ export default {
         },
         dringdring() {
 
-            this.etatQrcode = false
-            this.textStateQrcode = 'SONNETTE <br>(Patientez...)'
-
             let id = this.$route.params.id
             let denomination = this.denomination
             let telephone = this.telephone
 
             if(!this.checkRequiredField("NOM", denomination)) return;
             if(!this.checkRequiredField("TELEPHONE", telephone)) return;
+
+            this.etatQrcode = false
+            this.textStateQrcode = 'Patientez...'
 
             const authStore = useAuthStore();
             const token = authStore.token;
@@ -133,7 +133,7 @@ export default {
                     if(data.status){
 
                         this.etatQrcode = true
-                        this.textStateQrcode = 'SONNETTE <br>(Désactivé)'
+                        this.textStateQrcode = 'Désactivé...'
 
                         this.timerDringDring = 10; // Démarrez le compteur à 10 secondes
                         this.etatDringDring = false;

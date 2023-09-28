@@ -1,0 +1,30 @@
+@media (max-width: 767px) {
+    /* Vos styles CSS pour les smartphones en mode portrait */
+
+    /* PAGE SCAN */
+
+    .ShellScan__Body-Content {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    /* PAGE SCAN */
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    /* Vos styles CSS pour les smartphones en mode paysage */
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Vos styles CSS pour les tablettes en mode portrait */
+}
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+    /* Vos styles CSS pour les tablettes en mode paysage */
+}
+  
+@media (min-width: 1200px) and (max-width: 1439px) {
+    /* Vos styles CSS pour les grandes tablettes et les petits ordinateurs */
+}
+  
