@@ -9,7 +9,7 @@
                 <div class="ShellCode">
 
                     <div class="ShellCode__image">
-                        <img src="assets/images/logo_color.png" width="350" class="ShellCode__title" />
+                        <img src="/assets/images/logo_color.png" width="350" class="ShellCode__title" />
                     </div>
 
                     <Message :visibility="isVisibilityMessage" :type="isTypeMessage" :message="isMessage" />

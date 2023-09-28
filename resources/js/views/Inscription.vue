@@ -9,7 +9,7 @@
                 <div class="Shellregister">
 
                     <div  class="Shellregister__image">
-                        <img src="assets/images/logo_color.png" width="350" class="Shellregister__title" />
+                        <img src="/assets/images/logo_color.png" width="350" class="Shellregister__title" />
                     </div>
 
                     <input type="text" class="Shellregister__username" placeholder="Votre nom d'utilisateur...">
