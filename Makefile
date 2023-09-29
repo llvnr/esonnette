@@ -17,5 +17,4 @@ vendor/autoload.php: composer.lock
 	touch vendor/autoload.php
 
 public/build/manifest.json: package.json 
-	npm i 
-	npm run build
+	npm i
