@@ -349,59 +349,78 @@ class ProprieteController extends Controller
                 ]);
             } else {
 
-                $createVisite = Visite::create([
-                    "propriete_id" => $id,
-                    "alerte_id" => $infosCanal->id,
-                    "adresse_ip" => $ip,
-                    "denomination" => $denomination,
-                    "telephone" => $telephone,
-                    "etat" => 1
-                ]);
+                $getVisite = Visite::where('propriete_id', $id)
+                ->where('adresse_ip', $ip)
+                ->where('created_at', 'LIKE', '%'.$date.'%')
+                ->first();
 
-                if($infosCanal->type === "email"){
-                    $details = [
-                        'denomination' => $denomination,
-                        'telephone' => $telephone,
-                        'date' => $createVisite->created_at
-                    ];
-                    
-                    Mail::to($infosCanal->informations)->send(new SendSonnetteMail($details));
+                $denominationVisite = $denomination;
+                $telephoneVisite = $telephone;
 
+                if($getVisite != null) { $denominationVisite = $getVisite->denomination; $telephoneVisite = $getVisite->telephone; }
+
+                if($denominationVisite != $denomination || $telephoneVisite != $telephone){
                     return response()->json([
-                        "status" => true,
-                        "message" => "Le propriétaire a été informé par email de votre visite."
-                    ]); 
-                } elseif ($infosCanal->type === "discord") {
-                    # code...
-                    $curl = curl_init();
-
-                    curl_setopt_array($curl, array(
-                    CURLOPT_URL => $infosCanal->informations,
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS =>'{
-                        "username": "ESONNETTE",
-                        "content": "Quelqu\'un vient de sonner ! ['.$denomination.' / '.$telephone.']"
-                    }',
-                    CURLOPT_HTTPHEADER => array(
-                        'Content-Type: application/json',
-                    ),
-                    ));
-
-                    $response = curl_exec($curl);
-
-                    curl_close($curl);
-
-                    return response()->json([
-                        "status" => true,
-                        "result" => $response
+                        "status" => false,
+                        "message" => "Les informations ne concordent pas avec votre dernière notification de visite d'aujourd'hui."
                     ]);
-                }
+                } else {
+
+                    $createVisite = Visite::create([
+                        "propriete_id" => $id,
+                        "alerte_id" => $infosCanal->id,
+                        "adresse_ip" => $ip,
+                        "denomination" => $denomination,
+                        "telephone" => $telephone,
+                        "etat" => 1
+                    ]);
+    
+                    if($infosCanal->type === "email"){
+                        $details = [
+                            'denomination' => $denomination,
+                            'telephone' => $telephone,
+                            'date' => $createVisite->created_at
+                        ];
+                        
+                        Mail::to($infosCanal->informations)->send(new SendSonnetteMail($details));
+    
+                        return response()->json([
+                            "status" => true,
+                            "message" => "Le propriétaire a été informé par email de votre visite."
+                        ]); 
+                    } elseif ($infosCanal->type === "discord") {
+                        # code...
+                        $curl = curl_init();
+    
+                        curl_setopt_array($curl, array(
+                        CURLOPT_URL => $infosCanal->informations,
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS =>'{
+                            "username": "ESONNETTE",
+                            "content": "Quelqu\'un vient de sonner ! ['.$denomination.' / '.$telephone.']"
+                        }',
+                        CURLOPT_HTTPHEADER => array(
+                            'Content-Type: application/json',
+                        ),
+                        ));
+    
+                        $response = curl_exec($curl);
+    
+                        curl_close($curl);
+    
+                        return response()->json([
+                            "status" => true,
+                            "result" => $response
+                        ]);
+                    }
+
+                }    
 
             }
 
