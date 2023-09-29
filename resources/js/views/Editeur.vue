@@ -37,7 +37,7 @@
                     <div class="ShellEditeur__right" id="ShellEditeur__right">
 
                         <div class="ShellEditeur__right-labelpropriete">Mes propriétés : </div>
-                        <select v-for="(item, index) in proprietes" v-model="myProperty" class="ShellEditeur__right-selectpropriete">
+                        <select v-for="(item, index) in proprietes" v-model="myPropertyID" class="ShellEditeur__right-selectpropriete">
                             <option :value="item.id">{{ "#" + item.id + ' - ' + item.prenom + ' ' + item.nom + ' (' + item.adresse + ' ' + item.codepostal + ' ' + item.ville + ')' }}</option>
                         </select>
 
@@ -102,6 +102,7 @@ export default {
             loadData: true,
             proprietes: {},
             myProperty: null,
+            myPropertyID: null,
             border: '#000000',
             background: '#FFFFFF',
             title: '#3056D3',
@@ -145,6 +146,7 @@ export default {
                             // this.dataIsOkay = true
                             this.proprietes = data.result
                             this.myProperty = data.result[0]
+                            this.myPropertyID = data.result[0].id
                             this.getSticker()
                             // this.loadData = true
                         } else {
