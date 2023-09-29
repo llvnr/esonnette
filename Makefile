@@ -1,5 +1,8 @@
-deploy:
+deploystaging:
 	ssh o2switch 'cd ~/staging.esonnette.com && git pull origin main && make install'
+
+deployprod:
+	ssh o2switch 'cd ~/app.esonnette.com && git pull origin main && make install'
 
 install: vendor/autoload.php .env public/storage public/build/manifest.json
 	php artisan cache:clear
