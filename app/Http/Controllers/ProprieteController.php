@@ -336,33 +336,33 @@ class ProprieteController extends Controller
 
             $date = date('Y-m-d');
 
-            $checkSecurite = Visite::where('propriete_id', $id)
+            $checkSecuriteAnonymous = Visite::where('propriete_id', $id)
             ->where('adresse_ip', $ip)
+            ->where('denomination', $denomination)
+            ->where('telephone', $telephone)
             ->where('created_at', 'LIKE', '%'.$date.'%')
             ->count();
 
-            if($checkSecurite >= 3){
+            if($checkSecuriteAnonymous >= 3){
                 return response()->json([
                     "status" => false,
-                    "result" => $checkSecurite,
+                    "result" => $checkSecuriteAnonymous,
                     "message" => "Vous avez déjà sonné 3 fois. Revenez demain."
                 ]);
             } else {
 
-                $getVisite = Visite::where('propriete_id', $id)
+                $checkSecurite = Visite::where('propriete_id', $id)
                 ->where('adresse_ip', $ip)
+                ->where('denomination', '!=', "Inconnu")
+                ->where('telephone', '!=', "Inconnu")
                 ->where('created_at', 'LIKE', '%'.$date.'%')
-                ->first();
+                ->count();
 
-                $denominationVisite = $denomination;
-                $telephoneVisite = $telephone;
-
-                if($getVisite != null) { $denominationVisite = $getVisite->denomination; $telephoneVisite = $getVisite->telephone; }
-
-                if($denominationVisite != $denomination || $telephoneVisite != $telephone){
+                if($checkSecurite >= 1){
                     return response()->json([
                         "status" => false,
-                        "message" => "Les informations ne concordent pas avec votre dernière notification de visite d'aujourd'hui."
+                        "result" => $checkSecurite,
+                        "message" => "Vous m'avez déjà informé de votre visite aujourd'hui. Revenez demain."
                     ]);
                 } else {
 
@@ -418,9 +418,9 @@ class ProprieteController extends Controller
                             "status" => true,
                             "result" => $response
                         ]);
-                    }
+                    } 
 
-                }    
+                }  
 
             }
 

@@ -1,14 +1,27 @@
 <template>
     <div class="ShellScan">
-        <div class="ShellScan__Header">Bienvenue chez</div>
+        <div class="ShellScan__Header">
+            <div class="ShellScan__Header-top">Bienvenue chez</div>
+            <div class="ShellScan__Header-bottom">{{ getPropriete.prenom + ' ' + getPropriete.nom }}</div>
+        </div>
         <div class="ShellScan__Body">
-            <div class="ShellScan__Body-Title">{{ getPropriete.prenom + ' ' + getPropriete.nom }}</div>
+            <!-- <div class="ShellScan__Body-Title">{{ getPropriete.prenom + ' ' + getPropriete.nom }}</div> -->
             <Message :visibility="isVisibilityMessage" :type="isTypeMessage" :message="isMessage" />
-            <div class="ShellScan__Body-Content">
+            <div v-if="!checkChoice" class="ShellScan__Body-Content">
+                <button v-if="statusQrcode" class="ShellScan__Body-Content-btn-sonner ShellBody__Body-Content-btn-sonner-disablebtn">Sonnette désactivé</button>
+                <button v-else-if="!statusQrcode && etatQrcodeAnonymous && !etatDringDringAnonymous" class="ShellScan__Body-Content-btn-sonner ShellBody__Body-Content-btn-sonner-disablebtn">SONNER ({{ timerDringDring }}s)</button>
+                <button v-else-if="!statusQrcode && etatQrcodeAnonymous && etatDringDringAnonymous" class="ShellScan__Body-Content-btn-sonner ShellBody__Body-Content-btn-sonner-enablebtn" @click="this.dringdring(true)">SONNER</button>
+                <button class="ShellScan__Body-Content-btn-recontacter" @click="this.bascule(true)">ÊTRE RECONTACTER</button>
+            </div>
+            <div v-else class="ShellScan__Body-Content">
 
                 <div class="ShellScan__Body-Content-label">Qui êtes vous ?</div>
                 <input type="text" class="ShellBody__Body-Content-input-name" v-model="denomination" placeholder="Votre nom ou entreprise" />
                 <input type="text" class="ShellBody__Body-Content-input-telephone" v-model="telephone" placeholder="Votre numéro de téléphone" />
+                <button v-if="statusQrcode" class="ShellScan__Body-Content-btn-sonner ShellBody__Body-Content-btn-sonner-disablebtn">Sonnette désactivé</button>
+                <button v-else-if="!statusQrcode && etatQrcode && !etatDringDring" class="ShellBody__Body-Content-btn-sonner ShellBody__Body-Content-btn-sonner-disablebtn">Patientez...</button>
+                <button v-else-if="!statusQrcode && etatQrcode && etatDringDring" class="ShellBody__Body-Content-btn-sonner ShellBody__Body-Content-btn-sonner-enablebtn" @click="this.dringdring(false)">Prevenir de votre passage</button>
+                <button class="ShellBody__Body-Content-btn-back" @click="this.bascule(false)">Retour</button>
                 <div class="ShellScan__Body-Content-infospub">
                     Besoin d'une sonnette comme ça chez vous ? <br> Rendez-vous sur 
                     <a href="https://esonnette.com" target="_blank">https://esonnette.com</a>
@@ -16,9 +29,6 @@
 
             </div>
         </div>
-        <div class="ShellScan__Footer ShellScan__Footer-desactivatebtn" v-if="!etatQrcode">{{ textStateQrcode }}</div>
-        <div class="ShellScan__Footer ShellScan__Footer-disablebtn" v-else-if="etatQrcode && !etatDringDring">SONNER ({{ timerDringDring }}s)</div>
-        <div class="ShellScan__Footer ShellScan__Footer-enablebtn" v-else-if="etatQrcode && etatDringDring" @click="this.dringdring">SONNER</div>
     </div>
 </template>
 
@@ -30,8 +40,12 @@ import Message from '../components/Message.vue'
 export default {
     data() {
         return {
+            checkChoice: false,
             textStateQrcode: 'SONNETTE \n\r (Désactivé)',
-            etatQrcode: null,
+            statusQrcode: true,
+            etatQrcodeAnonymous: true,
+            etatDringDringAnonymous: true,
+            etatQrcode: true,
             etatDringDring: true,
             timerDringDring: 0,
             denomination: '',
@@ -74,9 +88,9 @@ export default {
                 if(data !== undefined){
                     if(data.status){
                         if(data.result.status == 1){
-                            this.etatQrcode = true
+                            this.statusQrcode = false
                         } else {
-                            this.etatQrcode = false
+                            this.statusQrcode = true
                         }
                         this.getPropriete = data.result
                     } else {
@@ -93,17 +107,40 @@ export default {
             .catch(error => console.log(error));
 
         },
-        dringdring() {
+        bascule(stateBascule) {
+            if(stateBascule && !this.checkChoice){
+                this.checkChoice = true
+            } else if(!stateBascule && this.checkChoice ) {
+                this.checkChoice = false
+            }
+        },  
+        dringdring(anonymous) {
 
             let id = this.$route.params.id
-            let denomination = this.denomination
-            let telephone = this.telephone
+            let denomination
+            let telephone
 
-            if(!this.checkRequiredField("NOM", denomination)) return;
-            if(!this.checkRequiredField("TELEPHONE", telephone)) return;
+            if(anonymous){
 
-            this.etatQrcode = false
-            this.textStateQrcode = 'Patientez...'
+                denomination = "Inconnu"
+                telephone = "Inconnu"
+                // this.etatQrcodeAnonymous = false
+                this.etatQrcodeAnonymous = true
+                this.etatDringDringAnonymous = false;
+
+
+            } else {
+
+                denomination = this.denomination
+                telephone = this.telephone
+
+                if(!this.checkRequiredField("NOM", denomination)) return;
+                if(!this.checkRequiredField("TELEPHONE", telephone)) return;
+                this.etatQrcode = false
+
+            }
+
+            // this.textStateQrcode = 'Patientez...'
 
             // const authStore = useAuthStore();
             // const token = authStore.token;
@@ -131,19 +168,25 @@ export default {
                 if(data !== undefined){
                     if(data.status){
 
-                        this.etatQrcode = true
-                        this.textStateQrcode = 'Désactivé...'
+                        if(anonymous){
+                            // this.etatQrcodeAnonymous = true
 
-                        this.timerDringDring = 10; // Démarrez le compteur à 10 secondes
-                        this.etatDringDring = false;
-                        const intervalId = setInterval(() => {
-                        if (this.timerDringDring === 0) {
-                            clearInterval(intervalId); // Arrêtez le compteur lorsque les 10 secondes sont écoulées
-                            this.etatDringDring = true; // Réactivez le bouton
+                            this.timerDringDring = 10; // Démarrez le compteur à 10 secondes
+                            // this.etatDringDringAnonymous = false;
+                            const intervalId = setInterval(() => {
+                            if (this.timerDringDring === 0) {
+                                clearInterval(intervalId); // Arrêtez le compteur lorsque les 10 secondes sont écoulées
+                                this.etatDringDringAnonymous = true; // Réactivez le bouton
+                            } else {
+                                this.timerDringDring--; // Décrémentez le compteur d'une seconde chaque seconde
+                            }
+                            }, 1000); // Répétez toutes les 1000 ms (1 seconde)
+
                         } else {
-                            this.timerDringDring--; // Décrémentez le compteur d'une seconde chaque seconde
+                            this.etatQrcode = true
                         }
-                        }, 1000); // Répétez toutes les 1000 ms (1 seconde)
+
+                        // this.textStateQrcode = 'Désactivé...'
 
                         this.isVisibilityMessage = true 
                         this.isTypeMessage = "success"
@@ -154,8 +197,11 @@ export default {
                         }, 3000);
 
                     } else {
+                        this.etatQrcodeAnonymous = true
+                        this.etatDringDringAnonymous = true;
                         this.etatQrcode = true
-                        this.textStateQrcode = 'SONNER'
+                        this.etatDringDring = true;
+                        // this.textStateQrcode = 'SONNER'
 
                         this.isVisibilityMessage = true 
                         this.isTypeMessage = "danger"
