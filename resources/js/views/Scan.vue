@@ -12,6 +12,10 @@
                 <button v-else-if="!statusQrcode && etatQrcodeAnonymous && !etatDringDringAnonymous" class="ShellScan__Body-Content-btn-sonner ShellBody__Body-Content-btn-sonner-disablebtn">SONNER ({{ timerDringDring }}s)</button>
                 <button v-else-if="!statusQrcode && etatQrcodeAnonymous && etatDringDringAnonymous" class="ShellScan__Body-Content-btn-sonner ShellBody__Body-Content-btn-sonner-enablebtn" @click="this.dringdring(true)">SONNER</button>
                 <button class="ShellScan__Body-Content-btn-recontacter" @click="this.bascule(true)">ÊTRE RECONTACTER</button>
+                <div class="ShellScan__Body-Content-infospub">
+                    Besoin d'une sonnette comme ça chez vous ? <br> Rendez-vous sur 
+                    <a href="https://esonnette.com" target="_blank">https://esonnette.com</a>
+                </div>
             </div>
             <div v-else class="ShellScan__Body-Content">
 
