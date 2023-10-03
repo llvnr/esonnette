@@ -10,44 +10,41 @@
   <a href="https://docs.esonnette.com" target="_blank">Documentation (Bientôt)</a>
 </p>
 
-## A propos ESonnette
+## About ESonnette
 
-ESonnette a pour objectif de remplacer votre sonnette physique par une sonnette virtuelle et connectée. De nombreux concurrent existe
-sur le marché, c'est pour cela que nous avons décider de vous offrir une solution open source totalement gratuite et respectueux de 
-votre vie privée en vous offrant la possibilité d'héberger la solution vous même. Nous vous offrons également un maximum de fonctionnalité comme : 
+The goal of Esonnette is to replace your physical doorbell with a virtual and connected doorbell. Many competitors exist in the market, which is why we have decided to offer you a completely free and GDPR-friendly open-source solution, allowing you to host the solution yourself. We also provide you with a wide range of features, such as:
 
-- Technologie basé sur les QRCode.
-- Système de gestion de propriété (Maison ou Appartement).
-- Création et gestion d'alerte.
-- Notification par Email / Discord / Slack / SMS.
-- Personnalisation de Sticker.
-- Gestion de l'impression du Sticker.
+- Technology based on QR codes.
+- Property management system (House or Apartment).
+- Creation and management of alerts.
+- Notification via Email / Discord / Slack / SMS.
+- Customization of stickers.
+- Sticker printing management.
 
-L'objectif est de vous offrir une solution complète et simple d'utilisation.
+The goal is to provide you with a comprehensive and user-friendly solution.
 
-## 🚀 Commencer dès maintenant 
+## 🚀 Getting Started
 
-BIENTÔT DISPONIBLE !
+COMING SOON !
 
 ## 📺 Video
 
 [Trailer ESONNETTE](https://youtu.be/Ha8ryB6C31c).
 
-## ❤️ Contribution
+## ❤️ Contributing
 
-Si vous avez des idées pour contribué autour de l'application ESonnette, n'hésitez surtout pas.
+If you have ideas to contribute to the Esonnette application, please do not hesitate.
+**Esonnette needs skilled hands to thrive**, the more of us there are, the more the product will become performant, stable, and reliable.
 
-**ESonnette a besoin de main habile pour vivre**, plus nous sommes nombreux, plus le produit deviendra performant, stable et fiable.
-
-## 🔔 Restez à l'écoute
+## 🔔 Stay Tuned
 
 - [GitHub issues](https://github.com/Equativa/esonnette/issues)
 - [#esonnette](<https://twitter.com/hashtag/esonnette?src=hashtag_click>)
 
-## 👨 Auteur
+## 👨 Author
 
 **Ludovic LEVENEUR** ([@llvnr](https://twitter.com/llvnr))
 
 ## 📄 License
 
-L'application ESonnette est open-source sous licence [MIT license](https://opensource.org/licenses/MIT).
+The ESonnette application is open-source under a license. [MIT license](https://opensource.org/licenses/MIT).
