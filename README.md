@@ -25,6 +25,10 @@ votre vie privée en vous offrant la possibilité d'héberger la solution vous m
 
 L'objectif est de vous offrir une solution complète et simple d'utilisation.
 
+## 🚀 Commencer dès maintenant 
+
+BIENTÔT DISPONIBLE !
+
 ## 📺 Video
 
 [Trailer ESONNETTE](https://youtu.be/Ha8ryB6C31c).
