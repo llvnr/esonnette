@@ -32,6 +32,11 @@ Si vous avez des idées pour contribué autour de l'application ESonnette, n'hé
 
 **ESonnette a besoin de main habile pour vivre**, plus nous sommes nombreux, plus le produit deviendra performant, stable et fiable.
 
+## 🔔 Restez à l'écoute
+
+- [GitHub issues](https://github.com/Equativa/esonnette/issues)
+- [#esonnette](<https://twitter.com/hashtag/esonnette?src=hashtag_click>)
+
 ## 📄 License
 
 L'application ESonnette est open-source sous licence [MIT license](https://opensource.org/licenses/MIT).
