@@ -1,27 +1,26 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://esonnette.com/wp-content/uploads/2023/09/logo-esonnette-white-300x105.png" width="400" alt="Esonnette Logo"></a></p>
+<p align="center"><a href="https://esonnette.com" target="_blank"><img src="https://esonnette.com/wp-content/uploads/2023/10/logo_color.png" width="400" alt="Esonnette Logo"></a></p>
 
 <p align="center">
-  <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/equativa/esonnette" alt="License"></a>
-  <br>
   <a href="https://discord.gg/ywFzd95JGv"><img src="https://svgshare.com/i/V09.svg"/></a>
 </p>
 
 
 </p>
 
-## About Laravel
+## A propos ESonnette
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+ESonnette a pour objectif de remplacer votre sonnette physique par une sonnette virtuelle et connectée. De nombreux concurrent existe
+sur le marché, c'est pour cela que nous avons décider de vous offrir une solution open source totalement gratuite et respectueux de 
+votre vie privée en vous offrant la possibilité d'héberger la solution vous même. Nous vous offrons également un maximum de fonctionnalité comme : 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Technologie basé sur les QRCode.
+- Système de gestion de propriété (Maison ou Appartement).
+- Création et gestion d'alerte.
+- Notification par Email / Discord / Slack / SMS.
+- Personnalisation de Sticker.
+- Gestion de l'impression du Sticker.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+L'objectif est de vous offrir une solution complète et simple d'utilisation.
 
 ## Learning Laravel
 
