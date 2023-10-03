@@ -6,8 +6,8 @@
 </p>
 
 <p align="center">
-  <a href="https://esonnette.com" target="_blank">Site internet</a> ::
-  <a href="https://docs.esonnette.com" target="_blank">Documentation (Bientôt)</a>
+  <a href="https://esonnette.com" target="_blank">Website</a> ::
+  <a href="https://docs.esonnette.com" target="_blank">Documentation (Coming Soon)</a>
 </p>
 
 ## About ESonnette
@@ -33,7 +33,8 @@ COMING SOON !
 
 ## ❤️ Contributing
 
-If you have ideas to contribute to the Esonnette application, please do not hesitate.
+If you have ideas to contribute to the Esonnette application, please do not hesitate.  
+
 **Esonnette needs skilled hands to thrive**, the more of us there are, the more the product will become performant, stable, and reliable.
 
 ## 🔔 Stay Tuned
