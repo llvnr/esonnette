@@ -1,10 +1,13 @@
 <p align="center"><a href="https://esonnette.com" target="_blank"><img src="https://esonnette.com/wp-content/uploads/2023/10/logo_color.png" width="400" alt="Esonnette Logo"></a></p>
 
 <p align="center">
+    <a href="https://github.com/Equativa/esonnette/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg?label=License&style=flat" /></a>
   <a href="https://discord.gg/ywFzd95JGv"><img src="https://svgshare.com/i/V09.svg"/></a>
 </p>
 
-
+<p align="center">
+  <a href="https://esonnette.com" target="_blank">Site internet</a> ::
+  <a href="https://docs.esonnette.com" target="_blank">Documentation (Bientôt)</a>
 </p>
 
 ## A propos ESonnette
