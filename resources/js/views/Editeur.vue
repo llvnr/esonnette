@@ -29,7 +29,7 @@
                             <img class="Sticker__qrcode" id="stickerQrcode" :src="myProperty.qrcode" />
                             <div class="Sticker__separation" id="stickerSeparation"></div>
                             <img class="Sticker__logo" id="stickerLogo" :src="stickerLogo" />
-                            <p class="Sticker__signature" id="stickerSignature">Ce service est proposé par esonnette.com.</p>
+                            <p class="Sticker__signature" id="stickerSignature">Ce service est proposé par esonnette.llvnr.com.</p>
 
                         </div>
 
